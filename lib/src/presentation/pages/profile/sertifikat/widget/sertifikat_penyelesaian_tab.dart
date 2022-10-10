@@ -130,7 +130,8 @@ class SertifikatPenyelesaianTab extends StatelessWidget {
                       (i) => SertifikatCard(
                         sertif: sertif[i],
                         onTapUnduh: () => _sC.fnCheckPermission(i),
-                        onTapShare: () => _sC.fnSharedCertificate(),
+                        onTapShare: () => _sC.fnSharedCertificate(
+                            'Saya telah menyelesaikan kursus ${sertif[i].courseName} yang diselenggarakan oleh Arkademi. Cek link berikut ini: ${sertif[i].certificateUrl}'),
                         onTapShareLinkedin: () async {
                           await AppFirebaseAnalyticsService()
                               .addLog("click_share_linkedin_penyelesaian");
