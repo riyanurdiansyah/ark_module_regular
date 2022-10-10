@@ -1,7 +1,13 @@
-import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
+import 'dart:convert';
 
-class CourseDTO extends CourseEntity {
-  CourseDTO({
+import 'package:ark_module_regular/src/data/dto/instructor_dto.dart';
+import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
+
+List<MyCourseDTO> myCourseEntityFromJson(String str) => List<MyCourseDTO>.from(
+    json.decode(str).map((x) => MyCourseDTO.fromJson(x)));
+
+class MyCourseDTO extends MyCourseEntity {
+  const MyCourseDTO({
     required super.id,
     required super.name,
     required super.courseSlug,
@@ -16,12 +22,12 @@ class CourseDTO extends CourseEntity {
     required super.sesiKonsultasi,
   });
 
-  factory CourseDTO.fromJson(Map<String, dynamic> json) => CourseDTO(
+  factory MyCourseDTO.fromJson(Map<String, dynamic> json) => MyCourseDTO(
         id: json["id"],
         name: json["name"],
         courseSlug: json["course_slug"] ?? "",
         dateCreated: json["date_created"] ?? 0,
-        userProgress: json["user_progress"] ?? '0',
+        userProgress: json["user_progress"] ?? "0",
         userStatus: json["user_status"],
         userExpiry: json["user_expiry"],
         startDate: json["start_date"],
@@ -29,21 +35,5 @@ class CourseDTO extends CourseEntity {
         instructor: InstructorDTO.fromJson(json["instructor"]),
         menuOrder: json["menu_order"],
         sesiKonsultasi: json["sesi_konsultasi"],
-      );
-}
-
-class InstructorDTO extends InstructorEntity {
-  InstructorDTO({
-    required super.id,
-    required super.name,
-    required super.avatar,
-    required super.sub,
-  });
-
-  factory InstructorDTO.fromJson(Map<String, dynamic> json) => InstructorDTO(
-        id: json["id"],
-        name: json["name"],
-        avatar: json["avatar"],
-        sub: json["sub"],
       );
 }

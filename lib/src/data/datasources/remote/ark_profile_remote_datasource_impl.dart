@@ -43,7 +43,7 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
   @override
   Future<List<CourseDTO>> getCourse(String token) async {
     final response = await dio.get(
-      courseUrl,
+      myCourseUrl,
       options: Options(
         headers: {
           "Authorization": token,

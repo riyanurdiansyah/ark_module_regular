@@ -6,7 +6,7 @@ import 'package:ark_module_regular/src/data/repositories/ark_profile_repository_
 import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
-import 'package:ark_module_regular/src/domain/usecases/profile_usecase.dart';
+import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class ArkEditProfileController extends GetxController {
-  final ProfileUseCase _useCase = ProfileUseCase(
+  final ArkProfileUseCase _useCase = ArkProfileUseCase(
       ArkProfileRepositoryImpl(ArkProfileRemoteDataSourceImpl()));
 
   final _pC = Get.find<ArkProfileController>();

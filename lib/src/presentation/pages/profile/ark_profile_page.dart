@@ -1,5 +1,5 @@
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
-import 'package:ark_module_regular/src/presentation/controllers/ark_profile_controller.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class ArkProfilePage extends StatelessWidget {
   }) : super(key: key);
 
   final _pC = Get.find<ArkProfileController>();
+  final _myClassC = Get.find<ArkMyClassController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +135,7 @@ class ArkProfilePage extends StatelessWidget {
                                   child: Center(
                                     child: Obx(
                                       () => Text(
-                                        '${_pC.listCourse.length} kelas diikuti',
+                                        '${_myClassC.listCourse.length} kelas diikuti',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -162,7 +163,7 @@ class ArkProfilePage extends StatelessWidget {
                                   child: Center(
                                     child: Obx(
                                       () => Text(
-                                        '${_pC.jmlKelasSelesai.value} kelas selesai',
+                                        '${_myClassC.listCourseFinished.length} kelas selesai',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,

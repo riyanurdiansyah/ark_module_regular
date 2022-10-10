@@ -9,10 +9,10 @@ import 'package:ark_module_regular/src/domain/repositories/ark_profile_repositor
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:dartz/dartz.dart';
 
-class ProfileUseCase {
+class ArkProfileUseCase {
   final ArkProfileRepository repository;
 
-  ProfileUseCase(this.repository);
+  ArkProfileUseCase(this.repository);
 
   Stream<CoinEntity> getCoin(String userId) => repository.getCoin(userId);
 

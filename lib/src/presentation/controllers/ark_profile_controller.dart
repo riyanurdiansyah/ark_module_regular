@@ -2,10 +2,9 @@ import 'dart:developer';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_profile_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_profile_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
-import 'package:ark_module_regular/src/domain/usecases/profile_usecase.dart';
+import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,7 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkProfileController extends GetxController {
-  final ProfileUseCase _useCase = ProfileUseCase(
+  final ArkProfileUseCase _useCase = ArkProfileUseCase(
       ArkProfileRepositoryImpl(ArkProfileRemoteDataSourceImpl()));
 
   @override
@@ -30,7 +29,7 @@ class ArkProfileController extends GetxController {
     if (_isLogin.value) {
       await fnGetProfile();
       _fnGetFaceRecog();
-      await fnGetCourse();
+      // await fnGetCourse();
     }
     await _fnChangeLoading(false);
     super.onInit();
@@ -98,12 +97,6 @@ class ArkProfileController extends GetxController {
 
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
-
-  final Rx<int> _jmlKelasSelesai = 0.obs;
-  Rx<int> get jmlKelasSelesai => _jmlKelasSelesai;
-
-  final RxList<CourseEntity> _listCourse = <CourseEntity>[].obs;
-  RxList<CourseEntity> get listCourse => _listCourse;
 
   final Rx<ProfileEntity> _profile = ProfileEntity().obs;
   Rx<ProfileEntity> get profile => _profile;
@@ -183,22 +176,20 @@ class ArkProfileController extends GetxController {
     await prefs.setString('user_profesi', _profesi.value);
   }
 
-  Future fnGetCourse() async {
-    _fnChangeLoading(true);
-    final response = await _useCase.getCourse(_token.value);
-    response.fold(
-      ///IF RESPONSE IS ERROR
-      (fail) => ExceptionHandle.execute(fail),
+  // Future fnGetCourse() async {
+  //   _fnChangeLoading(true);
+  //   final response = await _useCase.getCourse(_token.value);
+  //   response.fold(
+  //     ///IF RESPONSE IS ERROR
+  //     (fail) => ExceptionHandle.execute(fail),
 
-      ///IF RESPONSE SUCCESS
-      (data) {
-        _jmlKelasSelesai.value =
-            data.where((e) => e.userStatus == '4').toList().length;
-        _listCourse.value = data;
-      },
-    );
-    await _fnChangeLoading(false);
-  }
+  //     ///IF RESPONSE SUCCESS
+  //     (data) {
+  //       _listCourse.value = data;
+  //     },
+  //   );
+  //   await _fnChangeLoading(false);
+  // }
 
   Stream<CoinEntity> fnGetCoin() {
     return _useCase.getCoin(userId.value).map((event) {

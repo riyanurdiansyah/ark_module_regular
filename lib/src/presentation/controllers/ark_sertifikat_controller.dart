@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_profile_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_profile_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/entities/sertifikat_entitiy.dart';
-import 'package:ark_module_regular/src/domain/usecases/profile_usecase.dart';
+import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -18,7 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArkSertifikatController extends GetxController {
-  final ProfileUseCase _useCase = ProfileUseCase(
+  final ArkProfileUseCase _useCase = ArkProfileUseCase(
       ArkProfileRepositoryImpl(ArkProfileRemoteDataSourceImpl()));
 
   late SharedPreferences prefs;
