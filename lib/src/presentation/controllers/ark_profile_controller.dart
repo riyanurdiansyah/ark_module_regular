@@ -25,10 +25,10 @@ class ArkProfileController extends GetxController {
   @override
   void onInit() async {
     log('ARK PROFILE CONTROLLER INIT');
-    await _fnSetup();
+    await _setup();
     if (_isLogin.value) {
       await getProfile();
-      _fnGetFaceRecog();
+      _getFaceRecog();
       // await fnGetCourse();
     }
     await _changeLoading(false);
@@ -136,7 +136,7 @@ class ArkProfileController extends GetxController {
     _isLoading.value = val;
   }
 
-  Future _fnSetup() async {
+  Future _setup() async {
     prefs = await SharedPreferences.getInstance();
     _isLogin.value = prefs.getBool('user_login') ?? false;
     _token.value = prefs.getString('token_access') ?? '';
@@ -197,7 +197,7 @@ class ArkProfileController extends GetxController {
     });
   }
 
-  void _fnGetFaceRecog() async {
+  void _getFaceRecog() async {
     _isLoadingFaceRecog.value = true;
     final response = await _useCase.getFaceRecog(_tokenWP.value);
     response.fold(
@@ -212,7 +212,7 @@ class ArkProfileController extends GetxController {
     _isLoadingFaceRecog.value = false;
   }
 
-  void fnConfirmLogout() {
+  void confirmLogout() {
     log("LOGOUT FROM ARK");
     AppDialog.dialogWithQuestion(
       'Keluar',
@@ -241,7 +241,7 @@ class ArkProfileController extends GetxController {
     }
   }
 
-  void fnResetPassword() async {
+  void resetPassword() async {
     log('RESET PASSWORD');
     final response = await _useCase.resetPassword(_email.value, _token.value);
     response.fold(

@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -44,40 +45,16 @@ class ArkFinishedCourseCard extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
-                      child: Image.network(
-                        course.featuredImage,
-                        colorBlendMode: BlendMode.color,
-                        color: isExpired == true
-                            ? kNewBlack5a
-                            : Colors.transparent,
+                      child: CachedNetworkImage(
+                        imageUrl: course.featuredImage,
                         height: Get.size.shortestSide < 600 ? 75 : 140,
                         width: Get.size.shortestSide < 600 ? 75 : 140,
+                        color: isExpired ? kNewBlack5a : Colors.transparent,
+                        colorBlendMode: BlendMode.color,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          // return ErrorNetworkImageWidgets(
-                          //   child: Image.asset(
-                          //     'assets/images/logo-arkademi.png',
-                          //     fit: BoxFit.cover,
-                          //     height: Get.size.shortestSide < 600 ? 75 : 140,
-                          //     width: Get.size.shortestSide < 600 ? 75 : 140,
-                          //   ),
-                          // );
-                          return SizedBox(
-                            height: Get.size.shortestSide < 600 ? 75 : 140,
-                            width: Get.size.shortestSide < 600 ? 75 : 140,
-                            child: Image.asset(
-                              'assets/images/logo-arkademi.png',
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                          // return Center(
-                          //   child: Icon(
-                          //     Icons.error,
-                          //     size: 48,
-                          //     color: Colors.grey.shade800,
-                          //   ),
-                          // );
-                        },
+                        errorWidget: (_, __, ___) => const ErrorImageWidget(
+                          isImage: false,
+                        ),
                       ),
                     ),
                   ),

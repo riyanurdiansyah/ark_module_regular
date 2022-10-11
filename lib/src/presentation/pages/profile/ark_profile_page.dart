@@ -681,7 +681,7 @@ class ArkProfilePage extends StatelessWidget {
                         height: 12,
                       ),
                       GestureDetector(
-                        onTap: () => _pC.fnResetPassword(),
+                        onTap: () => _pC.resetPassword(),
                         child: SizedBox(
                           height: 25,
                           child: Row(
@@ -717,7 +717,7 @@ class ArkProfilePage extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                   color: Colors.white,
                   child: GestureDetector(
-                    onTap: () => _pC.fnConfirmLogout(),
+                    onTap: () => _pC.confirmLogout(),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:ark_module_regular/src/data/datasources/remote/ark_my_class_remote_datasource_impl.dart';
+import 'package:ark_module_regular/src/data/dto/my_course_dto.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_my_class_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_my_class_usecase.dart';
@@ -38,7 +37,8 @@ class ArkMyClassController extends GetxController {
   @override
   void onInit() async {
     await _setup();
-    await getMyCourse();
+    getMyCourse();
+    _loadMyCourseFromCache();
     await _fnChangeLoading(false);
     super.onInit();
   }
@@ -58,7 +58,6 @@ class ArkMyClassController extends GetxController {
 
   Future getMyCourse() async {
     _fnChangeLoadingCourse(true);
-
     final response = await _useCase.getMyCourse(_token.value);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -70,30 +69,43 @@ class ArkMyClassController extends GetxController {
         _listCourseFinished.clear();
         _listCourseExpired.clear();
         _listCourse.value = data;
-        _saveMyCourseToCache(json.encode(_listCourse.toJson()));
-        for (int i = 0; i < data.length; i++) {
-          final date = DateTime.fromMicrosecondsSinceEpoch(
-              int.parse(data[i].userExpiry) * 1000000);
-          final expired = date.difference(DateTime.now()).inMicroseconds;
-          if ((data[i].userStatus == "3" || data[i].userStatus == "4") &&
-              expired >= 0) {
-            _listCourseFinished.add(data[i]);
-          } else {
-            if (expired <= 0) {
-              _listCourseExpired.add(data[i]);
-            } else {
-              _listCourseActive.add(data[i]);
-            }
-          }
-        }
+        _saveMyCourseToCache();
+        _setSetCategoryListCourse();
       },
     );
     await _fnChangeLoadingCourse(false);
   }
 
-  void _saveMyCourseToCache(String data) async {
-    await prefs.setString('cache_kelas_saya', data);
+  void _saveMyCourseToCache() async {
+    await prefs.setString(
+        'cache_kelas_saya', myCourseEntityToJson(_listCourse));
   }
 
-  void _loadMyCourseFromCache() {}
+  void _loadMyCourseFromCache() async {
+    final cache = prefs.getString('cache_kelas_saya') ?? '';
+    if (cache.isNotEmpty) {
+      _listCourse.value = myCourseEntityFromJson(cache);
+      _setSetCategoryListCourse();
+      _fnChangeLoadingCourse(false);
+    }
+  }
+
+  void _setSetCategoryListCourse() {
+    for (int i = 0; i < _listCourse.length; i++) {
+      final date = DateTime.fromMicrosecondsSinceEpoch(
+          int.parse(_listCourse[i].userExpiry) * 1000000);
+      final expired = date.difference(DateTime.now()).inMicroseconds;
+      if ((_listCourse[i].userStatus == "3" ||
+              _listCourse[i].userStatus == "4") &&
+          expired >= 0) {
+        _listCourseFinished.add(_listCourse[i]);
+      } else {
+        if (expired <= 0) {
+          _listCourseExpired.add(_listCourse[i]);
+        } else {
+          _listCourseActive.add(_listCourse[i]);
+        }
+      }
+    }
+  }
 }
