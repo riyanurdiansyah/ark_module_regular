@@ -23,17 +23,18 @@ class ArkMyClassRemoteDataSourceImpl implements ArkMyClassRemoteDataSource {
     );
     log("RESPONSE GET MY COURSE : ${response.data}");
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
+    if (code == 200) {
       List<MyCourseDTO> listCourse = [];
       for (var data in response.data) {
         listCourse.add(MyCourseDTO.fromJson(data));
       }
       return listCourse;
     }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get My Course... failed connect to server',
+      'Failed Get My Course... Please try again',
+    );
   }
 }

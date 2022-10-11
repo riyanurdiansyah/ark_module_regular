@@ -29,7 +29,9 @@ class MyCourseDTO extends MyCourseEntity {
         dateCreated: json["date_created"] ?? 0,
         userProgress: json["user_progress"] ?? "0",
         userStatus: json["user_status"],
-        userExpiry: json["user_expiry"],
+        userExpiry: json["user_expiry"] == null || json["user_expiry"] == ""
+            ? "0"
+            : json["user_expiry"],
         startDate: json["start_date"],
         featuredImage: json["featured_image"],
         instructor: InstructorDTO.fromJson(json["instructor"]),

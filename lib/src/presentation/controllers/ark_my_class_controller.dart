@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ark_module_regular/src/data/datasources/remote/ark_my_class_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_my_class_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
@@ -12,6 +14,9 @@ class ArkMyClassController extends GetxController {
 
   final Rx<bool> _isLoading = true.obs;
   Rx<bool> get isLoading => _isLoading;
+
+  final Rx<bool> _isLoadingCourse = true.obs;
+  Rx<bool> get isLoadingCourse => _isLoadingCourse;
 
   late SharedPreferences prefs;
 
@@ -34,11 +39,16 @@ class ArkMyClassController extends GetxController {
   void onInit() async {
     await _setup();
     await getMyCourse();
+    await _fnChangeLoading(false);
     super.onInit();
   }
 
   Future _fnChangeLoading(bool val) async {
     _isLoading.value = val;
+  }
+
+  Future _fnChangeLoadingCourse(bool val) async {
+    _isLoadingCourse.value = val;
   }
 
   Future _setup() async {
@@ -47,15 +57,20 @@ class ArkMyClassController extends GetxController {
   }
 
   Future getMyCourse() async {
-    _fnChangeLoading(true);
+    _fnChangeLoadingCourse(true);
+
     final response = await _useCase.getMyCourse(_token.value);
     response.fold(
       ///IF RESPONSE IS ERROR
       (fail) => ExceptionHandle.execute(fail),
 
       ///IF RESPONSE SUCCESS
-      (data) {
+      (data) async {
+        _listCourseActive.clear();
+        _listCourseFinished.clear();
+        _listCourseExpired.clear();
         _listCourse.value = data;
+        _saveMyCourseToCache(json.encode(_listCourse.toJson()));
         for (int i = 0; i < data.length; i++) {
           final date = DateTime.fromMicrosecondsSinceEpoch(
               int.parse(data[i].userExpiry) * 1000000);
@@ -73,6 +88,12 @@ class ArkMyClassController extends GetxController {
         }
       },
     );
-    await _fnChangeLoading(false);
+    await _fnChangeLoadingCourse(false);
   }
+
+  void _saveMyCourseToCache(String data) async {
+    await prefs.setString('cache_kelas_saya', data);
+  }
+
+  void _loadMyCourseFromCache() {}
 }

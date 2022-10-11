@@ -95,17 +95,15 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
       ),
     );
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(
-          code, 'Error Get Face Recog... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code,
-          response.data['message'] ??
-              'Failed Get Face Recog... Please try again');
-    } else {
+    if (code == 200) {
       return FaceRecogDTO.fromJson(response.data);
     }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get Face Recog... failed connect to server',
+      'Failed Get Face Recog... Please try again',
+    );
   }
 
   @override
@@ -115,14 +113,16 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
         "http://apimember.arkademi.com/api/arkademi/get_user_certificate/291976");
     log("RESPONSE GET ALL CERTIFICATE : ${response.data}");
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
+    if (code == 200) {
       return SertifikatDTO.fromJson(response.data);
     }
+
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get All Certificate... failed connect to server',
+      'Failed Get All Certificate... Please try again',
+    );
   }
 
   @override
@@ -138,14 +138,15 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
     );
     log("RESPONSE RESET PASSWORD : ${response.data}");
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
+    if (code == 200) {
       return response.data['success'];
     }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Reset Password... failed connect to server',
+      'Failed Reset Password... Please try again',
+    );
   }
 
   @override
@@ -153,14 +154,15 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
     final response = await dio.get(provinsiUrl);
     log("RESPONSE GET PROVINSI : ${response.data}");
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
+    if (code == 200) {
       return ProvinsiDTO.fromJson(response.data);
     }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get Provinsi... failed connect to server',
+      'Failed Get Provinsi... Please try again',
+    );
   }
 
   @override
@@ -168,35 +170,15 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
     final response = await dio.get("$cityUrl=$id");
     log("RESPONSE GET CITY : ${response.data}");
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
+    if (code == 200) {
       return CityDTO.fromJson(response.data);
     }
-  }
-
-  @override
-  Future<bool> updateProfile(ProfileDataEntity profile, String token) async {
-    final response = await dio.put(
-      updateProfileUrl,
-      data: profile.toJson(),
-      options: Options(headers: {
-        'Authorization': token,
-      }),
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get Provinsi... failed connect to server',
+      'Failed Get Provinsi... Please try again',
     );
-    log("RESPONSE UPDATE PROFILE : ${response.data}");
-    int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
-      return response.data['success'];
-    }
   }
 
   @override
@@ -211,6 +193,28 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
   }
 
   @override
+  Future<bool> updateProfile(ProfileDataEntity profile, String token) async {
+    final response = await dio.put(
+      updateProfileUrl,
+      data: profile.toJson(),
+      options: Options(headers: {
+        'Authorization': token,
+      }),
+    );
+    log("RESPONSE UPDATE PROFILE : ${response.data}");
+    int code = response.statusCode ?? 500;
+    if (code == 200) {
+      return response.data['success'];
+    }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Update Profile... failed connect to server',
+      'Failed Update Profile... Please try again',
+    );
+  }
+
+  @override
   Future<bool> updateProfilePrakerja(
       String token, Map<String, Map<String, Object>> data) async {
     final response = await dio.post(
@@ -222,13 +226,14 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
     );
     log("RESPONSE UPDATE PROFILE PRAKERJA: ${response.data}");
     int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
+    if (code == 200) {
       return true;
     }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Update Profile Prakerja... failed connect to server',
+      'Failed Update Profile Prakerja... Please try again',
+    );
   }
 }

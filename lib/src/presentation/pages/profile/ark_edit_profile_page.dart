@@ -465,7 +465,7 @@ class ArkEditProfilePage extends StatelessWidget {
                                             );
                                           }).toList(),
                                           onChanged: (value) =>
-                                              _epC.fnOnChangedProvinsi(value),
+                                              _epC.onChangedProvinsi(value),
                                         ),
                                       ),
                                     ),

@@ -22,16 +22,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       return Right(profile);
     } catch (e) {
       log("ERROR PROFILE REPO : ${e.toString()}");
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -42,16 +33,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       return Right(course);
     } catch (e) {
       log("ERROR PROFILE REPO : ${e.toString()}");
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -87,16 +69,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final promo = await dataSource.getAllCertificate(userId);
       return Right(promo);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -107,16 +80,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final reset = await dataSource.resetPassword(email, token);
       return Right(reset);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -126,16 +90,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final provinsi = await dataSource.getProvinsi();
       return Right(provinsi);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -145,16 +100,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final city = await dataSource.getCity(id);
       return Right(city);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -165,16 +111,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final update = await dataSource.updateProfile(profile, token);
       return Right(update);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -185,16 +122,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final update = await dataSource.updateCoin(id, data);
       return Right(update);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 
@@ -205,16 +133,7 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       final update = await dataSource.updateProfilePrakerja(token, data);
       return Right(update);
     } catch (e) {
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 }

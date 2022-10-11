@@ -308,11 +308,6 @@ class ArkProfilePage extends StatelessWidget {
                       const SizedBox(
                         height: 6,
                       ),
-                      Expanded(
-                        child: Container(
-                          color: Colors.white,
-                        ),
-                      ),
                     ],
                   ),
                 );
@@ -323,7 +318,7 @@ class ArkProfilePage extends StatelessWidget {
             () {
               if (_pC.isLogin.value) {
                 return StreamBuilder<CoinEntity>(
-                  stream: _pC.fnGetCoin(),
+                  stream: _pC.getCoin(),
                   builder: (_, snapshot) {
                     if (snapshot.hasData) {
                       return Padding(
@@ -573,190 +568,190 @@ class ArkProfilePage extends StatelessWidget {
             height: 18,
           ),
           if (_pC.isLogin.value)
-            Expanded(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 18),
-                    color: Colors.white,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Akun Saya',
-                          style: AppStyleText.styleMontserrat(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800,
-                          ),
+            Column(
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                  color: Colors.white,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Akun Saya',
+                        style: AppStyleText.styleMontserrat(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800,
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        GestureDetector(
-                          onTap: () => Get.toNamed(
-                            AppRouteName.certificate,
-                            arguments: _pC.userId.value,
-                          ),
-                          child: SizedBox(
-                            height: 25,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Sertifikat Saya',
-                                    style: AppStyleText.styleMontserrat(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 11.5,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 12,
-                                  color: Color(0xFFC0C2C6),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 20),
-                    color: Colors.white,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Pengaturan Akun",
-                          style: AppStyleText.styleMontserrat(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                          onTap: () =>
-                              Get.toNamed(AppRouteName.changeFaceRecog),
-                          child: SizedBox(
-                            height: 25,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Ubah Data Face Recognition",
-                                    style: AppStyleText.styleMontserrat(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 11.5,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 12,
-                                  color: Color(0xFFC0C2C6),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Divider(
-                          height: 1,
-                          color: Colors.grey.shade300,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        GestureDetector(
-                          onTap: () => _pC.fnResetPassword(),
-                          child: SizedBox(
-                            height: 25,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Ubah Password",
-                                    style: AppStyleText.styleMontserrat(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 11.5,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 12,
-                                  color: Color(0xFFC0C2C6),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 20),
-                    color: Colors.white,
-                    child: GestureDetector(
-                      onTap: () => _pC.fnConfirmLogout(),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/svg/keluar.svg',
-                            width: 18,
-                            color: const Color(0xFFFB5C5C),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4),
-                            child: Text(
-                              "Keluar",
-                              style: AppStyleText.styleMontserrat(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                color: const Color(0xFFFB5C5C),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: Get.height / 4,
-                            color: Colors.white,
-                          ),
-                        ],
                       ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () => Get.toNamed(
+                          AppRouteName.certificate,
+                          arguments: _pC.userId.value,
+                        ),
+                        child: SizedBox(
+                          height: 25,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Sertifikat Saya',
+                                  style: AppStyleText.styleMontserrat(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 11.5,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 12,
+                                color: Color(0xFFC0C2C6),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  color: Colors.white,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Pengaturan Akun",
+                        style: AppStyleText.styleMontserrat(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () => Get.toNamed(AppRouteName.changeFaceRecog),
+                        child: SizedBox(
+                          height: 25,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "Ubah Data Face Recognition",
+                                  style: AppStyleText.styleMontserrat(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 11.5,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 12,
+                                color: Color(0xFFC0C2C6),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.shade300,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      GestureDetector(
+                        onTap: () => _pC.fnResetPassword(),
+                        child: SizedBox(
+                          height: 25,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "Ubah Password",
+                                  style: AppStyleText.styleMontserrat(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 11.5,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 12,
+                                color: Color(0xFFC0C2C6),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () => _pC.fnConfirmLogout(),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          'assets/images/keluar.png',
+                          width: 18,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(
+                            "Keluar",
+                            style: AppStyleText.styleMontserrat(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: const Color(0xFFFB5C5C),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: Get.height <= 680
+                              ? Get.height / 12
+                              : Get.height <= 800
+                                  ? Get.height / 8
+                                  : Get.height / 4,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
         ],
       ),

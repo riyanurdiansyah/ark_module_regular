@@ -21,17 +21,17 @@ class ArkEditProfileController extends GetxController {
 
   @override
   void onInit() async {
-    await fnGetProfile();
-    await _fnStoreDataToVar();
-    await fnGetProvinsi();
+    await getProfile();
+    await _storeDataToVar();
+    await getProvinsi();
     if (_userProvinsi.value.isNotEmpty) {
-      await fnGetCity();
+      await getCity();
       _newProvinsi.value =
           _provinsi[_provinsi.indexWhere((e) => e.nama == _userProvinsi.value)];
     } else {
       newProvinsi.value = _provinsi[0];
     }
-    await _fnChangeLoading(false);
+    await _changeLoading(false);
     super.onInit();
   }
 
@@ -84,7 +84,7 @@ class ArkEditProfileController extends GetxController {
   final Rx<JenisKelamin> _selectedGender = JenisKelamin.defaultGender.obs;
   Rx<JenisKelamin> get selectedGender => _selectedGender;
 
-  Future _fnStoreDataToVar() async {
+  Future _storeDataToVar() async {
     _userProvinsi.value = _profile.value.data!.provinsi;
     _tcHp.text = _profile.value.data!.noHp;
     _tcName.text = _profile.value.data!.fullname;
@@ -108,11 +108,11 @@ class ArkEditProfileController extends GetxController {
     }
   }
 
-  Future _fnChangeLoading(bool val) async {
+  Future _changeLoading(bool val) async {
     _isLoading.value = val;
   }
 
-  Future fnGetProfile() async {
+  Future getProfile() async {
     final response = await _useCase.getProfile(_pC.token.value);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -128,7 +128,7 @@ class ArkEditProfileController extends GetxController {
     );
   }
 
-  Future fnGetProvinsi() async {
+  Future getProvinsi() async {
     final response = await _useCase.getProvinsi();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -143,7 +143,7 @@ class ArkEditProfileController extends GetxController {
     );
   }
 
-  Future fnGetCity() async {
+  Future getCity() async {
     final id = _provinsi[_provinsi.indexWhere((e) =>
             e.nama.toLowerCase().contains(_userProvinsi.value.toLowerCase()))]
         .id;
@@ -159,7 +159,7 @@ class ArkEditProfileController extends GetxController {
     );
   }
 
-  void fnGetNewCity() async {
+  void getNewCity() async {
     final response = await _useCase.getCity(_newProvinsi.value.id);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -173,11 +173,11 @@ class ArkEditProfileController extends GetxController {
     );
   }
 
-  void fnOnChangedProvinsi(ProvinsiDataEntity? value) {
+  void onChangedProvinsi(ProvinsiDataEntity? value) {
     _newProvinsi.value = value!;
     _txtCity.value = '';
     if (value.nama != 'Silahkan Pilih Provinsi') {
-      fnGetNewCity();
+      getNewCity();
     }
   }
 
@@ -217,13 +217,13 @@ class ArkEditProfileController extends GetxController {
           noHp: _tcHp.text,
           pendidikanTerakhir: _txtPendidikan.value,
         );
-        await fnUpdateProfile(data);
-        fnUpdateProfilePrakerja();
+        updateProfilePrakerja();
+        await updateProfile(data);
       }
     }
   }
 
-  Future fnUpdateProfile(ProfileDataEntity data) async {
+  Future updateProfile(ProfileDataEntity data) async {
     final response = await _useCase.updateProfile(data, _pC.token.value);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -234,7 +234,7 @@ class ArkEditProfileController extends GetxController {
 
       ///IF RESPONSE SUCCESS
       (data) async {
-        await _pC.fnGetProfile();
+        await _pC.getProfile();
         if (isCompletedForm) {
           log('FORM UPDATE PROFILE LENGKAP');
           await fnUpdateCoin();
@@ -254,7 +254,7 @@ class ArkEditProfileController extends GetxController {
     );
   }
 
-  void fnUpdateProfilePrakerja() async {
+  void updateProfilePrakerja() async {
     final nameJson = {
       "field": {
         "id": 1,
@@ -336,8 +336,7 @@ class ArkEditProfileController extends GetxController {
     }
 
     if (_tcHp.text != _profile.value.data!.noHp) {
-      final response =
-          await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, hpJson);
+      await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, hpJson);
     }
   }
 

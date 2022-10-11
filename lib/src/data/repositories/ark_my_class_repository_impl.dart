@@ -18,16 +18,7 @@ class ArkMyClassRepositoryImpl implements ArkMyClassRepository {
       return Right(profile);
     } catch (e) {
       log("ERROR MY CLASS REPO : ${e.toString()}");
-      if (e is CustomException) {
-        return Left(HttpFailure(e.code, e.message));
-      } else {
-        return const Left(
-          HttpFailure(
-            500,
-            'Error... failed connect to server \nPlease check your connection',
-          ),
-        );
-      }
+      return ExceptionHandleResponse.execute(e);
     }
   }
 }

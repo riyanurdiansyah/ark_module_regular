@@ -8,7 +8,7 @@ class ArkDashboardController extends GetxController {
 
   late SharedPreferences _prefs;
 
-  final Rx<int> _selectedIndex = 0.obs;
+  final Rx<int> _selectedIndex = 1.obs;
   Rx<int> get selectedIndex => _selectedIndex;
 
   @override

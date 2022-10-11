@@ -27,11 +27,11 @@ class ArkProfileController extends GetxController {
     log('ARK PROFILE CONTROLLER INIT');
     await _fnSetup();
     if (_isLogin.value) {
-      await fnGetProfile();
+      await getProfile();
       _fnGetFaceRecog();
       // await fnGetCourse();
     }
-    await _fnChangeLoading(false);
+    await _changeLoading(false);
     super.onInit();
   }
 
@@ -109,7 +109,7 @@ class ArkProfileController extends GetxController {
 
   Rx<FaceRecogEntity> get faceRecog => _faceRecog;
 
-  Future _fnChangeLoading(bool val) async {
+  Future _changeLoading(bool val) async {
     _isLoading.value = val;
   }
 
@@ -132,8 +132,8 @@ class ArkProfileController extends GetxController {
     _city.value = prefs.getString('user_city') ?? '';
   }
 
-  Future fnGetProfile() async {
-    _fnChangeLoading(true);
+  Future getProfile() async {
+    _changeLoading(true);
     final response = await _useCase.getProfile(_token.value);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -151,13 +151,13 @@ class ArkProfileController extends GetxController {
       ///IF RESPONSE SUCCESS
       (data) async {
         _profile.value = data;
-        await fnSetValueToSpf();
+        await setValueToSpf();
       },
     );
-    await _fnChangeLoading(false);
+    await _changeLoading(false);
   }
 
-  Future fnSetValueToSpf() async {
+  Future setValueToSpf() async {
     _name.value = _profile.value.data!.fullname;
     _noHp.value = _profile.value.data!.noHp;
     _tanggalLahir.value = _profile.value.data!.tglLahir;
@@ -176,22 +176,7 @@ class ArkProfileController extends GetxController {
     await prefs.setString('user_profesi', _profesi.value);
   }
 
-  // Future fnGetCourse() async {
-  //   _fnChangeLoading(true);
-  //   final response = await _useCase.getCourse(_token.value);
-  //   response.fold(
-  //     ///IF RESPONSE IS ERROR
-  //     (fail) => ExceptionHandle.execute(fail),
-
-  //     ///IF RESPONSE SUCCESS
-  //     (data) {
-  //       _listCourse.value = data;
-  //     },
-  //   );
-  //   await _fnChangeLoading(false);
-  // }
-
-  Stream<CoinEntity> fnGetCoin() {
+  Stream<CoinEntity> getCoin() {
     return _useCase.getCoin(userId.value).map((event) {
       _coin.value = event;
       return _coin.value;
