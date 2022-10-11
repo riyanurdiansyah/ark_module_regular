@@ -41,7 +41,24 @@ class ArkEditProfileController extends GetxController {
   final String _errorMessage = '';
   String get errorMessage => _errorMessage;
 
-  final Rx<ProfileEntity> _profile = ProfileEntity().obs;
+  final Rx<ProfileEntity> _profile = ProfileEntity(
+    status: false,
+    tab: '',
+    data: ProfileDataEntity(
+      fullname: '',
+      location: '',
+      bio: '',
+      facebook: '',
+      twitter: '',
+      profession: '',
+      tglLahir: '',
+      provinsi: '',
+      kota: '',
+      jenisKelamin: '',
+      noHp: '',
+      pendidikanTerakhir: '',
+    ),
+  ).obs;
   Rx<ProfileEntity> get profile => _profile;
 
   final Rx<String> _userProvinsi = ''.obs;
@@ -85,23 +102,23 @@ class ArkEditProfileController extends GetxController {
   Rx<JenisKelamin> get selectedGender => _selectedGender;
 
   Future _storeDataToVar() async {
-    _userProvinsi.value = _profile.value.data!.provinsi;
-    _tcHp.text = _profile.value.data!.noHp;
-    _tcName.text = _profile.value.data!.fullname;
-    _txtProfesi.value = listProfesi.contains(_profile.value.data!.profession)
-        ? _profile.value.data!.profession
+    _userProvinsi.value = _profile.value.data.provinsi;
+    _tcHp.text = _profile.value.data.noHp;
+    _tcName.text = _profile.value.data.fullname;
+    _txtProfesi.value = listProfesi.contains(_profile.value.data.profession)
+        ? _profile.value.data.profession
         : listProfesi.last;
 
     _tcProfesiLainnya.text =
-        listProfesi.contains(_profile.value.data!.profession)
+        listProfesi.contains(_profile.value.data.profession)
             ? ''
-            : _profile.value.data!.profession;
-    _txtCity.value = _profile.value.data!.kota;
-    _txtTanggalLahir.value = _profile.value.data!.tglLahir;
-    _txtPendidikan.value = _profile.value.data!.pendidikanTerakhir;
-    if (_profile.value.data!.jenisKelamin == 'L') {
+            : _profile.value.data.profession;
+    _txtCity.value = _profile.value.data.kota;
+    _txtTanggalLahir.value = _profile.value.data.tglLahir;
+    _txtPendidikan.value = _profile.value.data.pendidikanTerakhir;
+    if (_profile.value.data.jenisKelamin == 'L') {
       _selectedGender.value = JenisKelamin.pria;
-    } else if (_profile.value.data!.jenisKelamin == 'P') {
+    } else if (_profile.value.data.jenisKelamin == 'P') {
       _selectedGender.value = JenisKelamin.wanita;
     } else {
       _selectedGender.value = JenisKelamin.defaultGender;
@@ -118,7 +135,6 @@ class ArkEditProfileController extends GetxController {
       ///IF RESPONSE IS ERROR
       (fail) {
         ExceptionHandle.execute(fail);
-        _profile.value = ProfileEntity.withError(_errorMessage);
       },
 
       ///IF RESPONSE SUCCESS
@@ -331,11 +347,11 @@ class ArkEditProfileController extends GetxController {
       profesiJson,
     ];
 
-    if (_tcName.text != _profile.value.data!.fullname) {
+    if (_tcName.text != _profile.value.data.fullname) {
       await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, nameJson);
     }
 
-    if (_tcHp.text != _profile.value.data!.noHp) {
+    if (_tcHp.text != _profile.value.data.noHp) {
       await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, hpJson);
     }
   }
@@ -350,10 +366,9 @@ class ArkEditProfileController extends GetxController {
 
   Future fnUpdateCoin() async {
     if (_pC.coin.value.isCompleted == false) {
-      int coinNow = _pC.coin.value.coins ?? 0;
+      int coinNow = _pC.coin.value.coins;
       int coinUpdate = 0;
-      if (_pC.coin.value.isOldUser == null ||
-          _pC.coin.value.isOldUser == true) {
+      if (_pC.coin.value.isOldUser == true) {
         coinUpdate = coinNow + 10000;
       } else {
         coinUpdate = coinNow + 5000;
@@ -361,7 +376,7 @@ class ArkEditProfileController extends GetxController {
       final data = {
         "coins": coinUpdate,
         "isCompleted": true,
-        "updatedAt": Timestamp.fromDate(DateTime.now()),
+        "updatedAt": Timestamp.now(),
       };
 
       final response = await _useCase.updateCoin(_pC.userId.value, data);

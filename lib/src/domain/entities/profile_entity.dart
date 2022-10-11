@@ -1,23 +1,13 @@
 class ProfileEntity {
   ProfileEntity({
-    this.status,
-    this.tab,
-    this.data,
+    required this.status,
+    required this.tab,
+    required this.data,
   });
 
-  bool? status;
-  String? tab;
-  ProfileDataEntity? data;
-  bool error = false;
-  String messageError = '';
-
-  ProfileEntity.withError(
-    String errorMessage,
-  ) {
-    status = false;
-    error = true;
-    messageError = errorMessage;
-  }
+  final bool status;
+  final String tab;
+  final ProfileDataEntity data;
 }
 
 class ProfileDataEntity {
@@ -36,18 +26,18 @@ class ProfileDataEntity {
     required this.pendidikanTerakhir,
   });
 
-  String fullname;
-  String location;
-  String bio;
-  String facebook;
-  String twitter;
-  String profession;
-  String tglLahir;
-  String provinsi;
-  String kota;
-  String jenisKelamin;
-  String noHp;
-  String pendidikanTerakhir;
+  final String fullname;
+  final String location;
+  final String bio;
+  final String facebook;
+  final String twitter;
+  final String profession;
+  final String tglLahir;
+  final String provinsi;
+  final String kota;
+  final String jenisKelamin;
+  final String noHp;
+  final String pendidikanTerakhir;
 
   Map<String, dynamic> toJson() => {
         "nama_lengkap": fullname,

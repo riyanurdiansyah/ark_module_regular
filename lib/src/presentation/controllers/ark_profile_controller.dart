@@ -6,8 +6,8 @@ import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,13 +95,36 @@ class ArkProfileController extends GetxController {
   final Rx<bool> _isLoadingFaceRecog = true.obs;
   Rx<bool> get isLoadingFaceRecog => _isLoadingFaceRecog;
 
-  String _errorMessage = '';
+  final String _errorMessage = '';
   String get errorMessage => _errorMessage;
 
-  final Rx<ProfileEntity> _profile = ProfileEntity().obs;
+  final Rx<ProfileEntity> _profile = ProfileEntity(
+    status: false,
+    tab: '',
+    data: ProfileDataEntity(
+      fullname: '',
+      location: '',
+      bio: '',
+      facebook: '',
+      twitter: '',
+      profession: '',
+      tglLahir: '',
+      provinsi: '',
+      kota: '',
+      jenisKelamin: '',
+      noHp: '',
+      pendidikanTerakhir: '',
+    ),
+  ).obs;
   Rx<ProfileEntity> get profile => _profile;
 
-  final Rx<CoinEntity> _coin = CoinEntity().obs;
+  final Rx<CoinEntity> _coin = CoinEntity(
+    coins: 0,
+    isCompleted: false,
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
+    isOldUser: false,
+  ).obs;
   Rx<CoinEntity> get coin => _coin;
 
   final Rx<FaceRecogEntity> _faceRecog =
@@ -137,16 +160,7 @@ class ArkProfileController extends GetxController {
     final response = await _useCase.getProfile(_token.value);
     response.fold(
       ///IF RESPONSE IS ERROR
-      (fail) {
-        if (fail is HttpFailure) {
-          Fluttertoast.showToast(msg: "Error ${fail.code}x : ${fail.message}");
-          _errorMessage = fail.message;
-        } else {
-          _errorMessage =
-              'Failed connect to server \n Please check your connection';
-        }
-        _profile.value = ProfileEntity.withError(errorMessage);
-      },
+      (fail) => ExceptionHandle.execute(fail),
 
       ///IF RESPONSE SUCCESS
       (data) async {
@@ -158,14 +172,14 @@ class ArkProfileController extends GetxController {
   }
 
   Future setValueToSpf() async {
-    _name.value = _profile.value.data!.fullname;
-    _noHp.value = _profile.value.data!.noHp;
-    _tanggalLahir.value = _profile.value.data!.tglLahir;
-    _gender.value = _profile.value.data!.jenisKelamin;
-    _provinsiName.value = _profile.value.data!.provinsi;
-    _city.value = _profile.value.data!.kota;
-    _pendidikan.value = _profile.value.data!.pendidikanTerakhir;
-    _profesi.value = _profile.value.data!.profession;
+    _name.value = _profile.value.data.fullname;
+    _noHp.value = _profile.value.data.noHp;
+    _tanggalLahir.value = _profile.value.data.tglLahir;
+    _gender.value = _profile.value.data.jenisKelamin;
+    _provinsiName.value = _profile.value.data.provinsi;
+    _city.value = _profile.value.data.kota;
+    _pendidikan.value = _profile.value.data.pendidikanTerakhir;
+    _profesi.value = _profile.value.data.profession;
     await prefs.setString('user_name', _name.value);
     await prefs.setString('user_hp', _noHp.value);
     await prefs.setString('user_birth_date', _tanggalLahir.value);

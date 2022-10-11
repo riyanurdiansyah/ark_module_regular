@@ -499,7 +499,7 @@ class ArkProfilePage extends StatelessWidget {
                                                   children: [
                                                     TextSpan(
                                                       text: snapshot
-                                                              .data!.isOldUser!
+                                                              .data!.isOldUser
                                                           ? "  10.000 koin"
                                                           : "  5.000 koin",
                                                       style: AppStyleText

@@ -1,50 +1,82 @@
-class CourseEntity {
-  CourseEntity({
-    this.id,
-    this.name,
-    this.courseSlug,
-    this.dateCreated,
-    this.userProgress,
-    this.userStatus,
-    this.userExpiry,
-    this.startDate,
-    this.featuredImage,
-    this.instructor,
-    this.menuOrder,
-    this.sesiKonsultasi,
-    this.error,
-    this.errorMsg,
+import 'package:equatable/equatable.dart';
+
+class CourseEntity extends Equatable {
+  const CourseEntity({
+    required this.id,
+    required this.name,
+    required this.courseSlug,
+    required this.dateCreated,
+    required this.userProgress,
+    required this.userStatus,
+    required this.userExpiry,
+    required this.startDate,
+    required this.featuredImage,
+    required this.instructor,
+    required this.menuOrder,
+    required this.sesiKonsultasi,
   });
 
-  int? id;
-  String? name;
-  String? courseSlug;
-  int? dateCreated;
-  String? userProgress;
-  String? userStatus;
-  String? userExpiry;
-  bool? startDate;
-  String? featuredImage;
-  InstructorEntity? instructor;
-  int? menuOrder;
-  String? sesiKonsultasi;
-  bool? error;
-  String? errorMsg;
+  final int id;
+  final String name;
+  final String courseSlug;
+  final int dateCreated;
+  final String userProgress;
+  final String userStatus;
+  final String userExpiry;
+  final bool startDate;
+  final String featuredImage;
+  final InstructorEntity instructor;
+  final int menuOrder;
+  final String sesiKonsultasi;
 
-  CourseEntity errorWith({
-    bool? error,
-    String? errorMessage,
+  CourseEntity copyWith({
+    int? id,
+    String? name,
+    String? courseSlug,
+    int? dateCreated,
+    String? userProgress,
+    String? userStatus,
+    String? userExpiry,
+    bool? startDate,
+    String? featuredImage,
+    InstructorEntity? instructor,
+    int? menuOrder,
+    String? sesiKonsultasi,
   }) =>
       CourseEntity(
-        error: error,
-        errorMsg: errorMessage,
+        id: id ?? this.id,
+        name: name ?? this.name,
+        courseSlug: courseSlug ?? this.courseSlug,
+        dateCreated: dateCreated ?? this.dateCreated,
+        userProgress: userProgress ?? this.userProgress,
+        userStatus: userStatus ?? this.userStatus,
+        userExpiry: userExpiry ?? this.userExpiry,
+        startDate: startDate ?? this.startDate,
+        featuredImage: featuredImage ?? this.featuredImage,
+        instructor: instructor ?? this.instructor,
+        menuOrder: menuOrder ?? this.menuOrder,
+        sesiKonsultasi: sesiKonsultasi ?? this.sesiKonsultasi,
       );
 
-  static fromJson(x) {}
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        courseSlug,
+        dateCreated,
+        userProgress,
+        userStatus,
+        userExpiry,
+        startDate,
+        featuredImage,
+        instructor,
+        menuOrder,
+        sesiKonsultasi,
+      ];
 }
 
-class InstructorEntity {
-  InstructorEntity({
+class InstructorEntity extends Equatable {
+  const InstructorEntity({
     required this.id,
     required this.name,
     required this.avatar,
@@ -68,4 +100,7 @@ class InstructorEntity {
         avatar: avatar,
         sub: sub,
       );
+
+  @override
+  List<Object?> get props => [id, name, avatar, sub];
 }

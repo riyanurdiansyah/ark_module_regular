@@ -75,10 +75,22 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
           if (event.exists) {
             return CoinDTO.fromJson(event.data()!);
           } else {
-            return CoinDTO();
+            return CoinDTO(
+              coins: 0,
+              isCompleted: false,
+              createdAt: Timestamp.now(),
+              updatedAt: Timestamp.now(),
+              isOldUser: false,
+            );
           }
         } else {
-          return CoinDTO();
+          return CoinDTO(
+            coins: 0,
+            isCompleted: false,
+            createdAt: Timestamp.now(),
+            updatedAt: Timestamp.now(),
+            isOldUser: false,
+          );
         }
       },
     );

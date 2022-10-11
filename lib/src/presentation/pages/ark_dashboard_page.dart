@@ -1,4 +1,5 @@
 import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/presentation/pages/home/ark_home_page.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/ark_my_class_page.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
@@ -26,9 +27,7 @@ class ArkDashboardPage extends StatelessWidget {
             () => IndexedStack(
               index: dashboardC.selectedIndex.value,
               children: [
-                Container(
-                  color: Colors.red,
-                ),
+                ArkHomePage(),
                 ArkMyClassPage(),
                 ArkProfilePage(),
               ],

@@ -14,8 +14,8 @@ class ArkMyClassRepositoryImpl implements ArkMyClassRepository {
   Future<Either<Failure, List<MyCourseEntity>>> getMyCourse(
       String token) async {
     try {
-      final profile = await dataSource.getMyCourse(token);
-      return Right(profile);
+      final course = await dataSource.getMyCourse(token);
+      return Right(course);
     } catch (e) {
       log("ERROR MY CLASS REPO : ${e.toString()}");
       return ExceptionHandleResponse.execute(e);
