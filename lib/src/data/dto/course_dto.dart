@@ -1,7 +1,7 @@
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 
 class CourseDTO extends CourseEntity {
-  CourseDTO({
+  const CourseDTO({
     required super.id,
     required super.name,
     required super.courseSlug,
@@ -33,7 +33,7 @@ class CourseDTO extends CourseEntity {
 }
 
 class InstructorDTO extends InstructorEntity {
-  InstructorDTO({
+  const InstructorDTO({
     required super.id,
     required super.name,
     required super.avatar,

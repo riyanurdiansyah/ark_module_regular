@@ -1,7 +1,7 @@
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
 
 class CoinDTO extends CoinEntity {
-  CoinDTO({
+  const CoinDTO({
     required super.coins,
     required super.isCompleted,
     required super.createdAt,

@@ -3,6 +3,8 @@ library ark_module_regular;
 export 'src/presentation/pages/ark_dashboard_page.dart';
 export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';
+export 'src/presentation/pages/home/ark_category_page.dart';
+export 'src/presentation/pages/home/ark_home_page.dart';
 export 'src/presentation/pages/profile/face_recog/change_face_recognition_page.dart';
 
 export 'src/presentation/controllers/ark_dashboard_controller.dart';
@@ -10,6 +12,7 @@ export 'src/presentation/controllers/ark_edit_profile_controller.dart';
 export 'src/presentation/controllers/ark_profile_controller.dart';
 export 'src/presentation/controllers/ark_sertifikat_controller.dart';
 export 'src/presentation/controllers/ark_my_class_controller.dart';
+export 'src/presentation/controllers/ark_home_controller.dart';
 
 export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';

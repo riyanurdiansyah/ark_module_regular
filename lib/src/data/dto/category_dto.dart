@@ -5,7 +5,7 @@ CategoryDTO categoryEntityFromJson(String str) =>
     CategoryDTO.fromJson(json.decode(str));
 
 class CategoryDTO extends CategoryEntity {
-  CategoryDTO({
+  const CategoryDTO({
     required super.status,
     required super.data,
   });
@@ -17,7 +17,7 @@ class CategoryDTO extends CategoryEntity {
 }
 
 class DataCategoryDTO extends DataCategoryEntity {
-  DataCategoryDTO({
+  const DataCategoryDTO({
     required super.id,
     required super.name,
     required super.slugName,

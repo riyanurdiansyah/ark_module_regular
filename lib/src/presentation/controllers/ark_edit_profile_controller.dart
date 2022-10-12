@@ -271,6 +271,11 @@ class ArkEditProfileController extends GetxController {
   }
 
   void updateProfilePrakerja() async {
+    final jk = _selectedGender.value == JenisKelamin.pria
+        ? "L"
+        : _selectedGender.value == JenisKelamin.wanita
+            ? "P"
+            : "";
     final nameJson = {
       "field": {
         "id": 1,
@@ -297,11 +302,7 @@ class ArkEditProfileController extends GetxController {
     final genderPrakerjaJson = {
       "field": {
         "id": 95,
-        "value": _selectedGender.value == JenisKelamin.pria
-            ? "L"
-            : _selectedGender.value == JenisKelamin.wanita
-                ? "P"
-                : "",
+        "value": jk,
       }
     };
 
@@ -336,23 +337,40 @@ class ArkEditProfileController extends GetxController {
       }
     };
 
-    List<Map<String, Map<String, Object>>> listJson = [
-      nameJson,
-      hpJson,
-      birthDateJson,
-      genderPrakerjaJson,
-      provinceJson,
-      cityJson,
-      degreeJson,
-      profesiJson,
-    ];
-
     if (_tcName.text != _profile.value.data.fullname) {
       await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, nameJson);
     }
 
     if (_tcHp.text != _profile.value.data.noHp) {
       await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, hpJson);
+    }
+
+    if (_txtPendidikan.value != _profile.value.data.pendidikanTerakhir) {
+      await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, degreeJson);
+    }
+
+    if (_txtCity.value != _profile.value.data.kota) {
+      await _useCase.updateProfilePrakerja(_pC.tokenPrakerja.value, cityJson);
+    }
+
+    if (_newProvinsi.value.nama != _profile.value.data.provinsi) {
+      await _useCase.updateProfilePrakerja(
+          _pC.tokenPrakerja.value, provinceJson);
+    }
+
+    if (_txtTanggalLahir.value != _profile.value.data.tglLahir) {
+      await _useCase.updateProfilePrakerja(
+          _pC.tokenPrakerja.value, birthDateJson);
+    }
+
+    if (jk != _profile.value.data.jenisKelamin) {
+      await _useCase.updateProfilePrakerja(
+          _pC.tokenPrakerja.value, genderPrakerjaJson);
+    }
+
+    if (_txtProfesi.value != _profile.value.data.profession) {
+      await _useCase.updateProfilePrakerja(
+          _pC.tokenPrakerja.value, profesiJson);
     }
   }
 
