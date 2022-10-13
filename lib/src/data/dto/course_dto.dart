@@ -44,6 +44,7 @@ class CourseDataDTO extends CourseDataEntity {
     required super.totalStudents,
     required super.instructor,
     required super.coinCashback,
+    required super.discount,
   });
 
   factory CourseDataDTO.fromJson(Map<String, dynamic> json) => CourseDataDTO(
@@ -79,5 +80,15 @@ class CourseDataDTO extends CourseDataEntity {
                 .floor()
                 .toString()
             : (int.parse(json['sale_price']) * 0.05).floor().toString(),
+        discount: json["sale_price"] == null ||
+                json["sale_price"] == false ||
+                json['sale_price'] == "0"
+            ? 0.0
+            : ((double.parse(json['regular_price']) -
+                    double.parse(json['sale_price'])) /
+                double.parse(
+                  json['regular_price'],
+                ) *
+                100.0),
       );
 }

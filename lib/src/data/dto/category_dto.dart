@@ -11,13 +11,13 @@ class CategoryDTO extends CategoryEntity {
   });
   factory CategoryDTO.fromJson(Map<String, dynamic> json) => CategoryDTO(
         status: json["status"],
-        data: List<DataCategoryDTO>.from(
-            json["data"].map((x) => DataCategoryDTO.fromJson(x))),
+        data: List<CategoryDataDTO>.from(
+            json["data"].map((x) => CategoryDataDTO.fromJson(x))),
       );
 }
 
-class DataCategoryDTO extends DataCategoryEntity {
-  const DataCategoryDTO({
+class CategoryDataDTO extends CategoryDataEntity {
+  const CategoryDataDTO({
     required super.id,
     required super.name,
     required super.slugName,
@@ -26,8 +26,8 @@ class DataCategoryDTO extends DataCategoryEntity {
     required super.count,
   });
 
-  factory DataCategoryDTO.fromJson(Map<String, dynamic> json) =>
-      DataCategoryDTO(
+  factory CategoryDataDTO.fromJson(Map<String, dynamic> json) =>
+      CategoryDataDTO(
         id: json["id"],
         name: json["name"],
         slugName: json["slug_name"],

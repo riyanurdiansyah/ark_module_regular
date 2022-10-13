@@ -42,6 +42,7 @@ class CourseDataEntity extends Equatable {
     required this.totalStudents,
     required this.instructor,
     required this.coinCashback,
+    required this.discount,
   });
 
   final String averageRating;
@@ -59,6 +60,7 @@ class CourseDataEntity extends Equatable {
   final int totalStudents;
   final InstructorEntity instructor;
   final String coinCashback;
+  final double discount;
 
   CourseDataEntity copyWith({
     String? averageRating,
@@ -76,6 +78,7 @@ class CourseDataEntity extends Equatable {
     int? totalStudents,
     InstructorEntity? instructor,
     String? coinCashback,
+    double? discount,
   }) =>
       CourseDataEntity(
         averageRating: averageRating ?? this.averageRating,
@@ -94,6 +97,7 @@ class CourseDataEntity extends Equatable {
         totalStudents: totalStudents ?? this.totalStudents,
         instructor: instructor ?? this.instructor,
         coinCashback: coinCashback ?? this.coinCashback,
+        discount: discount ?? this.discount,
       );
 
   @override

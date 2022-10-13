@@ -18,4 +18,11 @@ class ArkHomeUseCase {
 
   Future<Either<Failure, CourseEntity>> getCourseJRC() async =>
       await repository.getCourseJRC();
+
+  Future<Either<Failure, List<String>>> getListIdTrendingCourse() async =>
+      await repository.getListIdTrendingCourse();
+
+  Future<Either<Failure, List<CourseParseEntity>>> getTrendingCourse(
+          List<String> listId) async =>
+      await repository.getTrendingCourse(listId);
 }

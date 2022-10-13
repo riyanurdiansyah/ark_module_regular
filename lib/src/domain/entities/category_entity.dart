@@ -11,11 +11,11 @@ class CategoryEntity extends Equatable {
   });
 
   final bool status;
-  final List<DataCategoryEntity> data;
+  final List<CategoryDataEntity> data;
 
   CategoryEntity copyWith({
     bool? status,
-    List<DataCategoryEntity>? data,
+    List<CategoryDataEntity>? data,
   }) =>
       CategoryEntity(
         status: status ?? this.status,
@@ -31,8 +31,8 @@ class CategoryEntity extends Equatable {
   List<Object?> get props => [status, data];
 }
 
-class DataCategoryEntity extends Equatable {
-  const DataCategoryEntity({
+class CategoryDataEntity extends Equatable {
+  const CategoryDataEntity({
     required this.id,
     required this.name,
     required this.slugName,
@@ -48,7 +48,7 @@ class DataCategoryEntity extends Equatable {
   final String img;
   final int count;
 
-  DataCategoryEntity copyWith({
+  CategoryDataEntity copyWith({
     int? id,
     String? name,
     String? slugName,
@@ -56,7 +56,7 @@ class DataCategoryEntity extends Equatable {
     String? img,
     int? count,
   }) =>
-      DataCategoryEntity(
+      CategoryDataEntity(
         id: id ?? this.id,
         name: name ?? this.name,
         slugName: slugName ?? this.slugName,

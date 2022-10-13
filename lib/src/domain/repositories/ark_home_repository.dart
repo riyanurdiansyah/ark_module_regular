@@ -10,4 +10,9 @@ abstract class ArkHomeRepository {
   Future<Either<Failure, SliderEntity>> getImageSlider();
 
   Future<Either<Failure, CourseEntity>> getCourseJRC();
+
+  Future<Either<Failure, List<String>>> getListIdTrendingCourse();
+
+  Future<Either<Failure, List<CourseParseEntity>>> getTrendingCourse(
+      List<String> listId);
 }

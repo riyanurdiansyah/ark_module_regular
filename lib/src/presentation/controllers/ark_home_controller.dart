@@ -43,32 +43,47 @@ class ArkHomeController extends GetxController {
 
   final Rx<CourseEntity> _courseJRC =
       const CourseEntity(status: false, data: []).obs;
-
   Rx<CourseEntity> get courseJRC => _courseJRC;
+
+  final RxList<CourseParseEntity> _trendingCourse = <CourseParseEntity>[].obs;
+  RxList<CourseParseEntity> get trendingCourse => _trendingCourse;
 
   @override
   void onInit() async {
     _getCategory();
     _getImageSlider();
     _getCourseJRC();
+    _getListIdTrendingCourse();
     await _changeLoading(false);
     super.onInit();
   }
 
-  Future _changeLoading(bool val) async {
-    _isLoading.value = val;
+  void _getListIdTrendingCourse() async {
+    final response = await _useCase.getListIdTrendingCourse();
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getTrendingCourse(data),
+    );
   }
 
-  Future _changeLoadingCategory(bool val) async {
-    _isLoadingCategory.value = val;
+  void _getTrendingCourse(List<String> listId) async {
+    final response = await _useCase.getTrendingCourse(listId);
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _trendingCourse.value = data;
+    });
   }
 
-  Future _changeLoadingImageSlider(bool val) async {
-    _isLoadingImageSlider.value = val;
-  }
-
-  Future _changeLoadingCourseJRC(bool val) async {
-    _isLoadingCourseJRC.value = val;
+  void onSliderChange(int i, CarouselPageChangedReason r) {
+    _indexSlider.value = i;
   }
 
   void _getCourseJRC() async {
@@ -117,7 +132,19 @@ class ArkHomeController extends GetxController {
     await _changeLoadingImageSlider(false);
   }
 
-  void onSliderChange(int i, CarouselPageChangedReason r) {
-    _indexSlider.value = i;
+  Future _changeLoading(bool val) async {
+    _isLoading.value = val;
+  }
+
+  Future _changeLoadingCategory(bool val) async {
+    _isLoadingCategory.value = val;
+  }
+
+  Future _changeLoadingImageSlider(bool val) async {
+    _isLoadingImageSlider.value = val;
+  }
+
+  Future _changeLoadingCourseJRC(bool val) async {
+    _isLoadingCourseJRC.value = val;
   }
 }

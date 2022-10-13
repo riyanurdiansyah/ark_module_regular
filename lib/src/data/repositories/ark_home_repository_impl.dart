@@ -44,4 +44,27 @@ class ArkHomeRepositoryImpl implements ArkHomeRepository {
       return ExceptionHandleResponse.execute(e);
     }
   }
+
+  @override
+  Future<Either<Failure, List<String>>> getListIdTrendingCourse() async {
+    try {
+      final listId = await dataSource.getListIdTrendingCourse();
+      return Right(listId);
+    } catch (e) {
+      log("ERROR HOME REPO GET LIST ID TRENDING COURSE: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CourseParseEntity>>> getTrendingCourse(
+      List<String> listId) async {
+    try {
+      final course = await dataSource.getTrendingCourse(listId);
+      return Right(course);
+    } catch (e) {
+      log("ERROR HOME REPO GET TRENDING COURSE: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
 }

@@ -19,7 +19,7 @@ class ClassCard extends StatelessWidget {
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: SizedBox(
-        width: Get.width * 0.48,
+        width: Get.size.width * 0.44,
         child: Column(
           children: [
             ClipRRect(
@@ -151,9 +151,9 @@ class ClassCard extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       color: kPrimaryRed4,
                                       borderRadius: BorderRadius.circular(4)),
-                                  child: const Text(
-                                    '${0000}%',
-                                    style: TextStyle(
+                                  child: Text(
+                                    '${course.discount.floor()}%',
+                                    style: const TextStyle(
                                         color: kPrimaryRed2,
                                         fontSize: 10.5,
                                         fontWeight: FontWeight.w800),
@@ -171,45 +171,45 @@ class ClassCard extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 3),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                            //     Text(
-                            //       currencyFormatter
-                            //           .format(int.parse(course.salePrice)),
-                            //       style: const TextStyle(
-                            //           color: kNewBlack2a,
-                            //           fontWeight: FontWeight.w800,
-                            //           fontSize: 13),
-                            //     ),
-                            //     Container(
-                            //       padding: const EdgeInsets.symmetric(
-                            //           horizontal: 4, vertical: 4),
-                            //       decoration: BoxDecoration(
-                            //         borderRadius: BorderRadius.circular(16),
-                            //         color: const Color(0xFFF1F2F4),
-                            //       ),
-                            //       child: Row(
-                            //         children: [
-                            //           Image.asset(
-                            //             "assets/images/coins.png",
-                            //             width: 10,
-                            //           ),
-                            //           Text(
-                            //             ' +${numberFormat.format(int.parse(course.coinCashback))}',
-                            //             style: const TextStyle(
-                            //               fontWeight: FontWeight.w500,
-                            //               color: Color(
-                            //                 0xFF838589,
-                            //               ),
-                            //               fontSize: 8,
-                            //             ),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     )
-                            //   ],
-                            // ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  currencyFormatter
+                                      .format(int.parse(course.salePrice)),
+                                  style: const TextStyle(
+                                      color: kNewBlack2a,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 13),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: const Color(0xFFF1F2F4),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/coins.png",
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        ' +${numberFormat.format(int.parse(course.coinCashback))}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(
+                                            0xFF838589,
+                                          ),
+                                          fontSize: 8,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ],
                         ),
                   const SizedBox(height: 8),

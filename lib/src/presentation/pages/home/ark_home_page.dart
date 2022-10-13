@@ -1,5 +1,7 @@
 import 'package:ark_module_regular/src/presentation/controllers/ark_home_controller.dart';
+import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_category.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_jrc.dart';
+import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_minicourse.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_prakerja.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_preparation_test.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_text_with_class.dart';
@@ -298,10 +300,20 @@ class ArkHomePage extends StatelessWidget {
               ArkBannerTextWithClass(
                 title: "Trending",
                 imageTitle: "trending.png",
-                listCourse: _homeC.courseJRC.value.data,
+                listCourse: _homeC.trendingCourse,
               ),
               const SizedBox(
-                height: 16,
+                height: 25,
+              ),
+              const ArkMiniCourse(),
+              const SizedBox(
+                height: 20,
+              ),
+              ArkBannerCategory(
+                listCategory: _homeC.category.value.data,
+              ),
+              const SizedBox(
+                height: 35,
               ),
             ],
           ),
