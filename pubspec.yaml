@@ -12,6 +12,7 @@ dependencies:
     path: ../ark_module_setup
 
   cached_network_image: ^3.1.0
+  carousel_slider: ^4.0.0
   cloud_firestore: 3.1.2
   connectivity_wrapper:
     git:

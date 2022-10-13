@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/presentation/controllers/ark_home_controller.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_category_widget.dart';
+import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_slider_home.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +94,8 @@ class ArkHomePage extends StatelessWidget {
                           // _dC.firstInit.value = true;
                           // Get.to(() => SearchPage(),
                           //     transition: Transition.downToUp);
+
+                          Get.toNamed(AppRouteName.search);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -282,6 +285,7 @@ class ArkHomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              ArkSliderHome(),
             ],
           ),
         ),
