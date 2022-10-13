@@ -1,6 +1,7 @@
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/slider_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
@@ -20,6 +21,9 @@ class ArkHomeController extends GetxController {
   final Rx<bool> _isLoadingImageSlider = true.obs;
   Rx<bool> get isLoadingImageSlider => _isLoadingImageSlider;
 
+  final Rx<bool> _isLoadingCourseJRC = true.obs;
+  Rx<bool> get isLoadingCourseJRC => _isLoadingCourseJRC;
+
   final Rx<int> _selectedCategoryIndex = 0.obs;
   Rx<int> get selectedCategoryIndex => _selectedCategoryIndex;
 
@@ -37,10 +41,16 @@ class ArkHomeController extends GetxController {
 
   Rx<SliderEntity> get sliderImage => _sliderImage;
 
+  final Rx<CourseEntity> _courseJRC =
+      const CourseEntity(status: false, data: []).obs;
+
+  Rx<CourseEntity> get courseJRC => _courseJRC;
+
   @override
   void onInit() async {
     _getCategory();
     _getImageSlider();
+    _getCourseJRC();
     await _changeLoading(false);
     super.onInit();
   }
@@ -57,13 +67,36 @@ class ArkHomeController extends GetxController {
     _isLoadingImageSlider.value = val;
   }
 
+  Future _changeLoadingCourseJRC(bool val) async {
+    _isLoadingCourseJRC.value = val;
+  }
+
+  void _getCourseJRC() async {
+    _changeLoadingCourseJRC(true);
+
+    final response = await _useCase.getCourseJRC();
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _courseJRC.value = data;
+    });
+    await _changeLoadingCourseJRC(false);
+  }
+
   void _getCategory() async {
     _changeLoadingCategory(true);
     final response = await _useCase.getCategory();
     response.fold(
 
         ///IF RESPONSE IS ERROR
-        (fail) => ExceptionHandle.execute(fail), (data) {
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
       _category.value = data;
     });
     await _changeLoadingCategory(false);

@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_profile_remote_datasource.dart';
 import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
@@ -20,17 +19,6 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
     try {
       final profile = await dataSource.getProfile(token);
       return Right(profile);
-    } catch (e) {
-      log("ERROR PROFILE REPO : ${e.toString()}");
-      return ExceptionHandleResponse.execute(e);
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<CourseEntity>>> getCourse(String token) async {
-    try {
-      final course = await dataSource.getCourse(token);
-      return Right(course);
     } catch (e) {
       log("ERROR PROFILE REPO : ${e.toString()}");
       return ExceptionHandleResponse.execute(e);

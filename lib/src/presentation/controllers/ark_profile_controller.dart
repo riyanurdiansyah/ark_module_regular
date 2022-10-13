@@ -29,7 +29,6 @@ class ArkProfileController extends GetxController {
     if (_isLogin.value) {
       await getProfile();
       _getFaceRecog();
-      // await fnGetCourse();
     }
     await _changeLoading(false);
     super.onInit();

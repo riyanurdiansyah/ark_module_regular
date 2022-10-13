@@ -44,7 +44,6 @@ class SertifikatCard extends StatelessWidget {
               width: Get.width / 1.3,
               child: CachedNetworkImage(
                 imageUrl: sertif.certificateUrl,
-                useOldImageOnUrlChange: true,
                 placeholder: (_, __) => Shimmer.fromColors(
                   baseColor: Colors.grey[300]!,
                   highlightColor: Colors.grey[100]!,

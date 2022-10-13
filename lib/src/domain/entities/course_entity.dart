@@ -1,106 +1,115 @@
+import 'package:ark_module_regular/src/domain/entities/instructor_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class CourseEntity extends Equatable {
   const CourseEntity({
-    required this.id,
-    required this.name,
-    required this.courseSlug,
-    required this.dateCreated,
-    required this.userProgress,
-    required this.userStatus,
-    required this.userExpiry,
-    required this.startDate,
-    required this.featuredImage,
-    required this.instructor,
-    required this.menuOrder,
-    required this.sesiKonsultasi,
+    required this.status,
+    required this.data,
   });
 
-  final int id;
-  final String name;
-  final String courseSlug;
-  final int dateCreated;
-  final String userProgress;
-  final String userStatus;
-  final String userExpiry;
-  final bool startDate;
-  final String featuredImage;
-  final InstructorEntity instructor;
-  final int menuOrder;
-  final String sesiKonsultasi;
+  final bool status;
+  final List<CourseParseEntity> data;
 
-  CourseEntity copyWith({
-    int? id,
-    String? name,
+  @override
+  List<Object?> get props => [status, data];
+}
+
+class CourseParseEntity extends Equatable {
+  const CourseParseEntity({
+    required this.course,
+  });
+
+  final CourseDataEntity course;
+
+  @override
+  List<Object?> get props => [course];
+}
+
+class CourseDataEntity extends Equatable {
+  const CourseDataEntity({
+    required this.averageRating,
+    required this.courseSlug,
+    required this.description,
+    required this.descriptionInstruktur,
+    required this.enableFaceRecog,
+    required this.featuredImage,
+    required this.id,
+    required this.iosPrice,
+    required this.name,
+    required this.price,
+    required this.regularPrice,
+    required this.salePrice,
+    required this.totalStudents,
+    required this.instructor,
+    required this.coinCashback,
+  });
+
+  final String averageRating;
+  final String courseSlug;
+  final String description;
+  final String descriptionInstruktur;
+  final int enableFaceRecog;
+  final String featuredImage;
+  final int id;
+  final String iosPrice;
+  final String name;
+  final String price;
+  final String regularPrice;
+  final String salePrice;
+  final int totalStudents;
+  final InstructorEntity instructor;
+  final String coinCashback;
+
+  CourseDataEntity copyWith({
+    String? averageRating,
     String? courseSlug,
-    int? dateCreated,
-    String? userProgress,
-    String? userStatus,
-    String? userExpiry,
-    bool? startDate,
+    String? description,
+    String? descriptionInstruktur,
+    int? enableFaceRecog,
+    int? id,
     String? featuredImage,
+    String? iosPrice,
+    String? name,
+    String? price,
+    String? regularPrice,
+    String? salePrice,
+    int? totalStudents,
     InstructorEntity? instructor,
-    int? menuOrder,
-    String? sesiKonsultasi,
+    String? coinCashback,
   }) =>
-      CourseEntity(
-        id: id ?? this.id,
-        name: name ?? this.name,
+      CourseDataEntity(
+        averageRating: averageRating ?? this.averageRating,
         courseSlug: courseSlug ?? this.courseSlug,
-        dateCreated: dateCreated ?? this.dateCreated,
-        userProgress: userProgress ?? this.userProgress,
-        userStatus: userStatus ?? this.userStatus,
-        userExpiry: userExpiry ?? this.userExpiry,
-        startDate: startDate ?? this.startDate,
+        description: description ?? this.description,
+        descriptionInstruktur:
+            descriptionInstruktur ?? this.descriptionInstruktur,
+        enableFaceRecog: enableFaceRecog ?? this.enableFaceRecog,
         featuredImage: featuredImage ?? this.featuredImage,
+        id: id ?? this.id,
+        iosPrice: iosPrice ?? this.iosPrice,
+        name: name ?? this.name,
+        price: price ?? this.price,
+        regularPrice: regularPrice ?? this.regularPrice,
+        salePrice: salePrice ?? this.salePrice,
+        totalStudents: totalStudents ?? this.totalStudents,
         instructor: instructor ?? this.instructor,
-        menuOrder: menuOrder ?? this.menuOrder,
-        sesiKonsultasi: sesiKonsultasi ?? this.sesiKonsultasi,
+        coinCashback: coinCashback ?? this.coinCashback,
       );
 
   @override
   List<Object?> get props => [
-        id,
-        name,
+        averageRating,
         courseSlug,
-        dateCreated,
-        userProgress,
-        userStatus,
-        userExpiry,
-        startDate,
+        description,
+        descriptionInstruktur,
+        enableFaceRecog,
         featuredImage,
-        instructor,
-        menuOrder,
-        sesiKonsultasi,
+        id,
+        iosPrice,
+        name,
+        price,
+        regularPrice,
+        salePrice,
+        totalStudents,
       ];
-}
-
-class InstructorEntity extends Equatable {
-  const InstructorEntity({
-    required this.id,
-    required this.name,
-    required this.avatar,
-    required this.sub,
-  });
-
-  final String id;
-  final String name;
-  final String avatar;
-  final String sub;
-
-  InstructorEntity errorWith({
-    required String id,
-    required String name,
-    required String avatar,
-    required String sub,
-  }) =>
-      InstructorEntity(
-        id: id,
-        name: name,
-        avatar: avatar,
-        sub: sub,
-      );
-
-  @override
-  List<Object?> get props => [id, name, avatar, sub];
 }

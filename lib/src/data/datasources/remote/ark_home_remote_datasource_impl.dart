@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ark_module_regular/src/data/dto/category_dto.dart';
+import 'package:ark_module_regular/src/data/dto/course_dto.dart';
 import 'package:ark_module_regular/src/data/dto/slider_dto.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:dio/dio.dart';
@@ -42,6 +43,22 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       response,
       'Error Get Image Slider... failed connect to server',
       'Failed Get Image Slider... Please try again',
+    );
+  }
+
+  @override
+  Future<CourseDTO> getCourseJRC() async {
+    final response = await dio.get(listCourseJRC);
+    log("RESPONSE GET COURSE JRC : ${response.data}");
+    int code = response.statusCode ?? 500;
+    if (code == 200) {
+      return CourseDTO.fromJson(response.data);
+    }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get Course JRC... failed connect to server',
+      'Failed Get Course JRC... Please try again',
     );
   }
 }

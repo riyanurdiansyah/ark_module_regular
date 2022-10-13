@@ -1,6 +1,5 @@
 import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
@@ -18,9 +17,6 @@ class ArkProfileUseCase {
 
   Future<Either<Failure, ProfileEntity>> getProfile(String token) async =>
       await repository.getProfile(token);
-
-  Future<Either<Failure, List<CourseEntity>>> getCourse(String token) async =>
-      await repository.getCourse(token);
 
   Future<Either<Failure, FaceRecogEntity>> getFaceRecog(String token) async =>
       await repository.getFaceRecog(token);

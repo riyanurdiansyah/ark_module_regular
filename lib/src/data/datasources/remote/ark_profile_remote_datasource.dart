@@ -1,6 +1,5 @@
 import 'package:ark_module_regular/src/data/dto/city_dto.dart';
 import 'package:ark_module_regular/src/data/dto/coin_dto.dart';
-import 'package:ark_module_regular/src/data/dto/course_dto.dart';
 import 'package:ark_module_regular/src/data/dto/face_recog_dto.dart';
 import 'package:ark_module_regular/src/data/dto/profile_dto.dart';
 import 'package:ark_module_regular/src/data/dto/provinsi_dto.dart';
@@ -9,8 +8,6 @@ import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 
 abstract class ArkProfileRemoteDataSource {
   Future<ProfileDTO> getProfile(String token);
-
-  Future<List<CourseDTO>> getCourse(String token);
 
   Stream<CoinDTO> getCoin(String userId);
 

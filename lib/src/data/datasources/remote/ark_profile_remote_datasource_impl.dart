@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:ark_module_regular/src/data/dto/city_dto.dart';
 import 'package:ark_module_regular/src/data/dto/coin_dto.dart';
-import 'package:ark_module_regular/src/data/dto/course_dto.dart';
 import 'package:ark_module_regular/src/data/dto/face_recog_dto.dart';
 import 'package:ark_module_regular/src/data/dto/profile_dto.dart';
 import 'package:ark_module_regular/src/data/dto/provinsi_dto.dart';
@@ -37,31 +36,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
           code, response.data['message'] ?? 'Failed... Please try again');
     } else {
       return ProfileDTO.fromJson(response.data);
-    }
-  }
-
-  @override
-  Future<List<CourseDTO>> getCourse(String token) async {
-    final response = await dio.get(
-      myCourseUrl,
-      options: Options(
-        headers: {
-          "Authorization": token,
-        },
-      ),
-    );
-    int code = response.statusCode ?? 500;
-    if (code >= 500) {
-      throw CustomException(code, 'Error... failed connect to server');
-    } else if (code != 200) {
-      throw CustomException(
-          code, response.data['message'] ?? 'Failed... Please try again');
-    } else {
-      List<CourseDTO> listCourse = [];
-      for (var data in response.data) {
-        listCourse.add(CourseDTO.fromJson(data));
-      }
-      return listCourse;
     }
   }
 

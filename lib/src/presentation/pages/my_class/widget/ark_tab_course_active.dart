@@ -87,6 +87,7 @@ class ArkTabCourseActive extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: () {
+                        Get.toNamed(AppRouteName.mainPrakerja);
                         // _spfC.isLogin.value == true
                         //     ? Get.toNamed(AppRouteName.mainPrakerja,
                         //         preventDuplicates: false)

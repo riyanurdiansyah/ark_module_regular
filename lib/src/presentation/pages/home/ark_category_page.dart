@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,11 @@ class ArkCategoryPage extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 15, top: 8, right: 15, bottom: 8),
                   child: Row(children: [
-                    Image.network(category.data[i].img, width: 22, height: 22),
+                    CachedNetworkImage(
+                      imageUrl: category.data[i].img,
+                      width: 22,
+                      height: 22,
+                    ),
                     const SizedBox(width: 15),
                     Text(category.data[i].name),
                     if (category.data[i].id == 2778)

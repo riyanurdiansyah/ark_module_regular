@@ -1,4 +1,5 @@
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/slider_entity.dart';
 import 'package:ark_module_regular/src/domain/repositories/ark_home_repository.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
@@ -14,4 +15,7 @@ class ArkHomeUseCase {
 
   Future<Either<Failure, SliderEntity>> getImageSlider() async =>
       await repository.getImageSlider();
+
+  Future<Either<Failure, CourseEntity>> getCourseJRC() async =>
+      await repository.getCourseJRC();
 }

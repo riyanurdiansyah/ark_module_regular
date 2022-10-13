@@ -7,6 +7,7 @@ import 'package:ark_module_regular/src/data/repositories/ark_profile_repository_
 import 'package:ark_module_regular/src/domain/entities/sertifikat_entitiy.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,10 @@ class ArkSertifikatController extends GetxController {
       ArkProfileRepositoryImpl(ArkProfileRemoteDataSourceImpl()));
 
   late SharedPreferences prefs;
+
+  RxList<bool> listExpanded = <bool>[].obs;
+
+  late ExpandableController expandableController;
 
   @override
   void onInit() async {
@@ -89,8 +94,12 @@ class ArkSertifikatController extends GetxController {
   String get userId => _userId;
 
   Future _fnSetup() async {
+    expandableController = ExpandableController();
     prefs = await SharedPreferences.getInstance();
     _userId = prefs.getString('user_id')!;
+    expandableController.addListener(() {
+      log("CEK EXPANDED");
+    });
   }
 
   ///LISTEN PORT IF HAVE A DOWNLOAD ACTION
