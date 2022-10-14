@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'instructor_entity.dart';
 

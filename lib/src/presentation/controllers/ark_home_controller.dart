@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
+import 'package:ark_module_regular/src/data/dto/blog_dto.dart';
+import 'package:ark_module_regular/src/data/dto/course_dto.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
@@ -9,6 +14,7 @@ import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkHomeController extends GetxController {
   final ArkHomeUseCase _useCase =
@@ -31,7 +37,7 @@ class ArkHomeController extends GetxController {
   Rx<SliderEntity> get sliderImage => _sliderImage;
 
   final Rx<CourseEntity> _courseJRC =
-      const CourseEntity(status: false, data: []).obs;
+      const CourseEntity(success: false, data: []).obs;
   Rx<CourseEntity> get courseJRC => _courseJRC;
 
   final RxList<CourseParseEntity> _trendingCourse = <CourseParseEntity>[].obs;
@@ -89,8 +95,11 @@ class ArkHomeController extends GetxController {
   final Rx<bool> _isLoadingBlog = true.obs;
   Rx<bool> get isLoadingBlog => _isLoadingBlog;
 
+  late SharedPreferences _prefs;
+
   @override
   void onInit() async {
+    _prefs = await SharedPreferences.getInstance();
     _getVersion();
     _getCategory();
     _getImageSlider();
@@ -130,6 +139,7 @@ class ArkHomeController extends GetxController {
   }
 
   Future _changeLoadingPengembanganKarirCourse(bool val) async {
+    log("CHECK WUY");
     _isLoadingPengembanganKarirCourse.value = val;
   }
 
@@ -152,6 +162,7 @@ class ArkHomeController extends GetxController {
 
   void _getBlogs() async {
     _changeLoadingBLog(true);
+    _setBlogsFromCache();
     final response = await _useCase.getBlogs(100);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -160,13 +171,48 @@ class ArkHomeController extends GetxController {
       ///IF RESPONSE SUCCESS
       (data) {
         _blogs.value = data;
+        _setBlogsToCache("cache_home_blog", data);
       },
     );
     await _changeLoadingBLog(false);
   }
 
+  void _setBlogsFromCache() async {
+    final dataJson = _prefs.getString("cache_home_blog");
+    if (dataJson != null) {
+      final dataDecode = json.decode(dataJson);
+      for (var data in dataDecode) {
+        _blogs.add(BlogDTO.fromJson(data));
+        await _changeLoadingBLog(false);
+      }
+    }
+  }
+
+  void _setCourseFromCache(List<CourseParseEntity> course, String dataCache,
+      Future<void> changeLoading) async {
+    final dataJson = _prefs.getString(dataCache);
+    if (dataJson != null) {
+      final dataDecode = json.decode(dataJson);
+      for (var data in dataDecode) {
+        course.add(CourseParseDTO.fromJson(data));
+        await changeLoading;
+      }
+    }
+  }
+
+  void _setBlogsToCache(String cacheName, List<BlogEntity> blogs) async {
+    await _prefs.setString(cacheName, blogEntityToJson(blogs));
+  }
+
+  void _setCourseToCache(
+      String cacheName, List<CourseParseEntity> cacheCourse) async {
+    await _prefs.setString(cacheName, courseParseEntityToJson(cacheCourse));
+  }
+
   void _getRecomendationCourse() async {
     _changeLoadingRecomendationCourse(true);
+    _setCourseFromCache(_recomendationCourse, "recomendation_classes",
+        _changeLoadingRecomendationCourse(false));
     final response =
         await _useCase.getListIdCourseByKategori(listIdRecomendationCourseUrl);
     response.fold(
@@ -180,8 +226,10 @@ class ArkHomeController extends GetxController {
 
   void _getPengembanganKarirCourse() async {
     _changeLoadingPengembanganKarirCourse(true);
-    final response =
-        await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
+    _setCourseFromCache(_pengembanganKarirCourse, "pengembangan_classes",
+        _changeLoadingPengembanganKarirCourse(false));
+    final response = await _useCase
+        .getListIdCourseByKategori(listIdPengembanganKarirCourseUrl);
     response.fold(
       ///IF RESPONSE IS ERROR
       (fail) => ExceptionHandle.execute(fail),
@@ -193,6 +241,8 @@ class ArkHomeController extends GetxController {
 
   void _getBusinessCourse() async {
     _changeLoadingBusinessCourse(true);
+    _setCourseFromCache(_businessCourse, "business_classes",
+        _changeLoadingBusinessCourse(false));
     final response =
         await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
     response.fold(
@@ -206,6 +256,8 @@ class ArkHomeController extends GetxController {
 
   void _getNewestCourse() async {
     _changeLoadingNewestCourse(true);
+    _setCourseFromCache(
+        _newestCourse, "newest_classes", _changeLoadingNewestCourse(false));
     final response = await _useCase.getListIdNewestCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -218,6 +270,8 @@ class ArkHomeController extends GetxController {
 
   void _getTrendingCourse() async {
     _changeLoadingTrendingCourse(true);
+    _setCourseFromCache(_trendingCourse, "trending_classes",
+        _changeLoadingTrendingCourse(false));
     final response = await _useCase.getListIdTrendingCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -236,8 +290,9 @@ class ArkHomeController extends GetxController {
         (fail) => ExceptionHandle.execute(fail),
 
         ///IF RESPONSE SUCCESS
-        (data) {
+        (data) async {
       _recomendationCourse.value = data;
+      _setCourseToCache("recomendation_classes", data);
     });
     await _changeLoadingRecomendationCourse(false);
   }
@@ -252,6 +307,7 @@ class ArkHomeController extends GetxController {
         ///IF RESPONSE SUCCESS
         (data) {
       _pengembanganKarirCourse.value = data;
+      _setCourseToCache("pengembangan_classes", data);
     });
     await _changeLoadingPengembanganKarirCourse(false);
   }
@@ -266,6 +322,7 @@ class ArkHomeController extends GetxController {
         ///IF RESPONSE SUCCESS
         (data) {
       _businessCourse.value = data;
+      _setCourseToCache("business_classes", data);
     });
     await _changeLoadingBusinessCourse(false);
   }
@@ -280,6 +337,7 @@ class ArkHomeController extends GetxController {
         ///IF RESPONSE SUCCESS
         (data) {
       _newestCourse.value = data;
+      _setCourseToCache("newest_classes", data);
     });
     await _changeLoadingNewestCourse(false);
   }
@@ -294,6 +352,7 @@ class ArkHomeController extends GetxController {
         ///IF RESPONSE SUCCESS
         (data) {
       _trendingCourse.value = data;
+      _setCourseToCache("trending_classes", data);
     });
     await _changeLoadingTrendingCourse(false);
   }

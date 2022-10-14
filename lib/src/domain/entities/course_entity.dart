@@ -1,17 +1,27 @@
+import 'dart:convert';
+
 import 'package:ark_module_regular/src/domain/entities/instructor_entity.dart';
 import 'package:equatable/equatable.dart';
 
+String courseParseEntityToJson(List<CourseParseEntity> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class CourseEntity extends Equatable {
   const CourseEntity({
-    required this.status,
+    required this.success,
     required this.data,
   });
 
-  final bool status;
+  final bool success;
   final List<CourseParseEntity> data;
 
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
+
   @override
-  List<Object?> get props => [status, data];
+  List<Object?> get props => [success, data];
 }
 
 class CourseParseEntity extends Equatable {
@@ -20,6 +30,10 @@ class CourseParseEntity extends Equatable {
   });
 
   final CourseDataEntity course;
+
+  Map<String, dynamic> toJson() => {
+        "course": course.toJson(),
+      };
 
   @override
   List<Object?> get props => [course];
@@ -100,6 +114,22 @@ class CourseDataEntity extends Equatable {
         discount: discount ?? this.discount,
       );
 
+  Map<String, dynamic> toJson() => {
+        "average_rating": averageRating,
+        "course_slug": courseSlug,
+        "description": description,
+        "description_instruktur": descriptionInstruktur,
+        "enable_face_recog": enableFaceRecog,
+        "featured_image": featuredImage,
+        "id": id,
+        "ios_price": iosPrice,
+        "name": name,
+        "price": price,
+        "regular_price": regularPrice,
+        "sale_price": salePrice,
+        "total_students": totalStudents,
+        "instructor": instructor.toJson(),
+      };
   @override
   List<Object?> get props => [
         averageRating,

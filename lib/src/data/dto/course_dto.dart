@@ -1,14 +1,18 @@
+import 'dart:convert';
+
 import 'package:ark_module_regular/src/data/dto/instructor_dto.dart';
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 
+CourseDTO courseEntity(String str) => CourseDTO.fromJson(json.decode(str));
+
 class CourseDTO extends CourseEntity {
   const CourseDTO({
-    required super.status,
+    required super.success,
     required super.data,
   });
 
   factory CourseDTO.fromJson(Map<String, dynamic> json) => CourseDTO(
-        status: json["success"],
+        success: json["success"],
         data: List<CourseParseDTO>.from(
           json["data"].map(
             (e) => CourseParseDTO.fromJson(e),
