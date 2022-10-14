@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:ark_module_regular/src/data/dto/city_dto.dart';
 import 'package:ark_module_regular/src/data/dto/coin_dto.dart';
 import 'package:ark_module_regular/src/data/dto/face_recog_dto.dart';
@@ -27,7 +26,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
         },
       ),
     );
-    log("RESPONSE GET PROFILE : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code >= 500) {
       throw CustomException(code, 'Error... failed connect to server');
@@ -94,9 +92,7 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
 
   @override
   Future<SertifikatDTO> getAllCertificate(String userId) async {
-    // final response = await dio.get("$sertifUrl/$userId");
     final response = await dio.get("$listCertificateUrl/$userId");
-    log("RESPONSE GET ALL CERTIFICATE : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return SertifikatDTO.fromJson(response.data);
@@ -121,7 +117,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
         'Authorization': token,
       }),
     );
-    log("RESPONSE RESET PASSWORD : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return response.data['success'];
@@ -137,7 +132,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
   @override
   Future<ProvinsiDTO> getProvinsi() async {
     final response = await dio.get(provinsiUrl);
-    log("RESPONSE GET PROVINSI : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return ProvinsiDTO.fromJson(response.data);
@@ -153,7 +147,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
   @override
   Future<CityDTO> getCity(int id) async {
     final response = await dio.get("$cityUrl=$id");
-    log("RESPONSE GET CITY : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return CityDTO.fromJson(response.data);
@@ -186,7 +179,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
         'Authorization': token,
       }),
     );
-    log("RESPONSE UPDATE PROFILE : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return response.data['success'];
@@ -209,7 +201,6 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
         'Authorization': token,
       }),
     );
-    log("RESPONSE UPDATE PROFILE PRAKERJA: ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return true;

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ark_module_regular/src/data/datasources/remote/ark_my_class_remote_datasource.dart';
 import 'package:ark_module_regular/src/data/dto/my_course_dto.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
@@ -21,7 +19,6 @@ class ArkMyClassRemoteDataSourceImpl implements ArkMyClassRemoteDataSource {
         },
       ),
     );
-    log("RESPONSE GET MY COURSE : ${response.data}");
     int code = response.statusCode ?? 500;
     if (code == 200) {
       List<MyCourseDTO> listCourse = [];

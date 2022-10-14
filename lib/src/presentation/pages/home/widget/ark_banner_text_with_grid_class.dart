@@ -4,8 +4,8 @@ import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ArkBannerTextWithClass extends StatelessWidget {
-  const ArkBannerTextWithClass({
+class ArkBannerTextWithGridClass extends StatelessWidget {
+  const ArkBannerTextWithGridClass({
     Key? key,
     required this.title,
     this.imageTitle,
@@ -69,16 +69,15 @@ class ArkBannerTextWithClass extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            child: Row(
-              children: List.generate(
-                listCourse.length < 6 ? listCourse.length : 6,
-                (index) => ClassCard(
-                  course: listCourse[index].course,
-                ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Wrap(
+            spacing: 3,
+            runSpacing: 4,
+            children: List.generate(
+              listCourse.length < 6 ? listCourse.length : 6,
+              (index) => ClassCard(
+                course: listCourse[index].course,
               ),
             ),
           ),

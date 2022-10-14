@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
+import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/slider_entity.dart';
@@ -7,6 +8,7 @@ import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:get/get.dart';
+import 'package:package_info/package_info.dart';
 
 class ArkHomeController extends GetxController {
   final ArkHomeUseCase _useCase =
@@ -30,6 +32,9 @@ class ArkHomeController extends GetxController {
   final Rx<int> _indexSlider = 0.obs;
   Rx<int> get indexSlider => _indexSlider;
 
+  final Rx<String> _version = "".obs;
+  Rx<String> get version => _version;
+
   final Rx<CategoryEntity> _category = const CategoryEntity(
     status: false,
     data: [],
@@ -38,7 +43,6 @@ class ArkHomeController extends GetxController {
 
   final Rx<SliderEntity> _sliderImage =
       SliderEntity(success: false, data: []).obs;
-
   Rx<SliderEntity> get sliderImage => _sliderImage;
 
   final Rx<CourseEntity> _courseJRC =
@@ -48,29 +52,170 @@ class ArkHomeController extends GetxController {
   final RxList<CourseParseEntity> _trendingCourse = <CourseParseEntity>[].obs;
   RxList<CourseParseEntity> get trendingCourse => _trendingCourse;
 
+  final RxList<CourseParseEntity> _newestCourse = <CourseParseEntity>[].obs;
+  RxList<CourseParseEntity> get newestCourse => _newestCourse;
+
+  final RxList<CourseParseEntity> _businessCourse = <CourseParseEntity>[].obs;
+  RxList<CourseParseEntity> get businessCourse => _businessCourse;
+
+  final RxList<CourseParseEntity> _recomendationCourse =
+      <CourseParseEntity>[].obs;
+  RxList<CourseParseEntity> get recomendationCourse => _recomendationCourse;
+
+  final RxList<CourseParseEntity> _pengembanganKarirCourse =
+      <CourseParseEntity>[].obs;
+  RxList<CourseParseEntity> get pengembanganKarirCourse =>
+      _pengembanganKarirCourse;
+
+  final RxList<BlogEntity> _blogs = <BlogEntity>[].obs;
+  RxList<BlogEntity> get blogs => _blogs;
+
   @override
   void onInit() async {
+    _getVersion();
     _getCategory();
     _getImageSlider();
     _getCourseJRC();
-    _getListIdTrendingCourse();
+    _getTrendingCourse();
+    _getNewestCourse();
+    _getBusinessCourse();
+    _getPengembanganKarirCourse();
+    _getRecomendationCourse();
+    _getBlogs();
     await _changeLoading(false);
     super.onInit();
   }
 
-  void _getListIdTrendingCourse() async {
+  void _getVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    _version.value = packageInfo.version;
+  }
+
+  void _getBlogs() async {
+    final response = await _useCase.getBlogs(100);
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) {
+        _blogs.value = data;
+      },
+    );
+  }
+
+  void _getRecomendationCourse() async {
+    final response =
+        await _useCase.getListIdCourseByKategori(listIdRecomendationCourseUrl);
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getRecomendationDataCourse(data),
+    );
+  }
+
+  void _getPengembanganKarirCourse() async {
+    final response =
+        await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getPengembanganKarirDataCourse(data),
+    );
+  }
+
+  void _getBusinessCourse() async {
+    final response =
+        await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getBusinessDataCourse(data),
+    );
+  }
+
+  void _getNewestCourse() async {
+    final response = await _useCase.getListIdNewestCourse();
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getNewestDataCourse(data),
+    );
+  }
+
+  void _getTrendingCourse() async {
     final response = await _useCase.getListIdTrendingCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
       (fail) => ExceptionHandle.execute(fail),
 
       ///IF RESPONSE SUCCESS
-      (data) => _getTrendingCourse(data),
+      (data) => _getTrendingDataCourse(data),
     );
   }
 
-  void _getTrendingCourse(List<String> listId) async {
-    final response = await _useCase.getTrendingCourse(listId);
+  void _getRecomendationDataCourse(List<String> listId) async {
+    final response = await _useCase.getCourseFromListId(listId);
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _recomendationCourse.value = data;
+    });
+  }
+
+  void _getPengembanganKarirDataCourse(List<String> listId) async {
+    final response = await _useCase.getCourseFromListId(listId);
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _pengembanganKarirCourse.value = data;
+    });
+  }
+
+  void _getBusinessDataCourse(List<String> listId) async {
+    final response = await _useCase.getCourseFromListId(listId);
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _businessCourse.value = data;
+    });
+  }
+
+  void _getNewestDataCourse(List<String> listId) async {
+    final response = await _useCase.getCourseFromListId(listId);
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _newestCourse.value = data;
+    });
+  }
+
+  void _getTrendingDataCourse(List<String> listId) async {
+    final response = await _useCase.getCourseFromListId(listId);
     response.fold(
 
         ///IF RESPONSE IS ERROR

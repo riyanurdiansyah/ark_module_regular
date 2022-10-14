@@ -1,3 +1,4 @@
+import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/slider_entity.dart';
@@ -22,7 +23,17 @@ class ArkHomeUseCase {
   Future<Either<Failure, List<String>>> getListIdTrendingCourse() async =>
       await repository.getListIdTrendingCourse();
 
-  Future<Either<Failure, List<CourseParseEntity>>> getTrendingCourse(
+  Future<Either<Failure, List<CourseParseEntity>>> getCourseFromListId(
           List<String> listId) async =>
-      await repository.getTrendingCourse(listId);
+      await repository.getCourseFromListId(listId);
+
+  Future<Either<Failure, List<String>>> getListIdNewestCourse() async =>
+      await repository.getListIdNewestCourse();
+
+  Future<Either<Failure, List<String>>> getListIdCourseByKategori(
+          String urlKategori) async =>
+      await repository.getListIdCourseByKategori(urlKategori);
+
+  Future<Either<Failure, List<BlogEntity>>> getBlogs(int page) async =>
+      await repository.getBlogs(page);
 }

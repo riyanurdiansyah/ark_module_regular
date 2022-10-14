@@ -125,8 +125,7 @@ class ClassCard extends StatelessWidget {
                                     width: 10,
                                   ),
                                   Text(
-                                    currencyFormatter
-                                        .format(int.parse(course.coinCashback)),
+                                    ' +${numberFormat.format(int.parse(course.coinCashback))}',
                                     style: const TextStyle(
                                         color: Color(
                                           0xFF838589,

@@ -60,9 +60,16 @@ class CourseDataDTO extends CourseDataEntity {
         id: json["id"] ?? 0,
         iosPrice: json["ios_price"] ?? "0",
         name: json["name"] ?? "",
-        price: json["price"] ?? "0",
-        regularPrice: json["regular_price"] ?? "0",
-        salePrice: json["sale_price"] ?? "",
+        price: json["price"] == null || json["price"] == false
+            ? "0"
+            : json["price"],
+        regularPrice:
+            json["regular_price"] == null || json["regular_price"] == false
+                ? "0"
+                : json["regular_price"],
+        salePrice: json["sale_price"] == null || json["sale_price"] == false
+            ? "0"
+            : json["sale_price"],
         totalStudents: json["total_students"] ?? 0,
         instructor: json["instructor"] == null
             ? const InstructorDTO(id: "", name: "name", avatar: "", sub: "")
@@ -90,5 +97,35 @@ class CourseDataDTO extends CourseDataEntity {
                   json['regular_price'],
                 ) *
                 100.0),
+
+        // regularPrice: json["regular_price"] ?? "0",
+        // salePrice: json["sale_price"] ?? "",
+        // totalStudents: json["total_students"] ?? 0,
+        // instructor: json["instructor"] == null
+        //     ? const InstructorDTO(id: "", name: "name", avatar: "", sub: "")
+        //     : InstructorDTO.fromJson(
+        //         json["instructor"],
+        //       ),
+        // coinCashback: json["sale_price"] == null ||
+        //         json["sale_price"] == false ||
+        //         json['sale_price'] == "0"
+        //     ? (int.parse(json['regular_price'] == null ||
+        //                     json['regular_price'] == false
+        //                 ? "0"
+        //                 : json['regular_price']) *
+        //             0.05)
+        //         .floor()
+        //         .toString()
+        //     : (int.parse(json['sale_price']) * 0.05).floor().toString(),
+        // discount: json["sale_price"] == null ||
+        //         json["sale_price"] == false ||
+        //         json['sale_price'] == "0"
+        //     ? 0.0
+        //     : ((double.parse(json['regular_price']) -
+        //             double.parse(json['sale_price'])) /
+        //         double.parse(
+        //           json['regular_price'],
+        //         ) *
+        //         100.0),
       );
 }

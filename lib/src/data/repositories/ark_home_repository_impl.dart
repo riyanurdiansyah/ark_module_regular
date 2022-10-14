@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource.dart';
+import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/slider_entity.dart';
@@ -57,13 +58,47 @@ class ArkHomeRepositoryImpl implements ArkHomeRepository {
   }
 
   @override
-  Future<Either<Failure, List<CourseParseEntity>>> getTrendingCourse(
+  Future<Either<Failure, List<CourseParseEntity>>> getCourseFromListId(
       List<String> listId) async {
     try {
-      final course = await dataSource.getTrendingCourse(listId);
+      final course = await dataSource.getCourseFromListId(listId);
       return Right(course);
     } catch (e) {
-      log("ERROR HOME REPO GET TRENDING COURSE: ${e.toString()}");
+      log("ERROR HOME REPO GET COURSE FROM LIST: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getListIdNewestCourse() async {
+    try {
+      final listId = await dataSource.getListIdNewestCourse();
+      return Right(listId);
+    } catch (e) {
+      log("ERROR HOME REPO GET LIST ID NEWEST COURSE: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getListIdCourseByKategori(
+      String urlKategori) async {
+    try {
+      final listId = await dataSource.getListIdCourseByKategori(urlKategori);
+      return Right(listId);
+    } catch (e) {
+      log("ERROR HOME REPO GET LIST ID COURSE BY KATEGORI: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BlogEntity>>> getBlogs(int page) async {
+    try {
+      final blogs = await dataSource.getBlogs(page);
+      return Right(blogs);
+    } catch (e) {
+      log("ERROR HOME REPO GET BLOGS: ${e.toString()}");
       return ExceptionHandleResponse.execute(e);
     }
   }
