@@ -14,21 +14,6 @@ class ArkHomeController extends GetxController {
   final ArkHomeUseCase _useCase =
       ArkHomeUseCase(ArkHomeRepositoryImpl(ArkHomeRemoteDataSourceImpl()));
 
-  final Rx<bool> _isLoading = true.obs;
-  Rx<bool> get isLoading => _isLoading;
-
-  final Rx<bool> _isLoadingCategory = true.obs;
-  Rx<bool> get isLoadingCategory => _isLoadingCategory;
-
-  final Rx<bool> _isLoadingImageSlider = true.obs;
-  Rx<bool> get isLoadingImageSlider => _isLoadingImageSlider;
-
-  final Rx<bool> _isLoadingCourseJRC = true.obs;
-  Rx<bool> get isLoadingCourseJRC => _isLoadingCourseJRC;
-
-  final Rx<int> _selectedCategoryIndex = 0.obs;
-  Rx<int> get selectedCategoryIndex => _selectedCategoryIndex;
-
   final Rx<int> _indexSlider = 0.obs;
   Rx<int> get indexSlider => _indexSlider;
 
@@ -70,6 +55,40 @@ class ArkHomeController extends GetxController {
   final RxList<BlogEntity> _blogs = <BlogEntity>[].obs;
   RxList<BlogEntity> get blogs => _blogs;
 
+  final Rx<int> _selectedCategoryIndex = 0.obs;
+  Rx<int> get selectedCategoryIndex => _selectedCategoryIndex;
+
+  final Rx<bool> _isLoading = true.obs;
+  Rx<bool> get isLoading => _isLoading;
+
+  final Rx<bool> _isLoadingCategory = true.obs;
+  Rx<bool> get isLoadingCategory => _isLoadingCategory;
+
+  final Rx<bool> _isLoadingImageSlider = true.obs;
+  Rx<bool> get isLoadingImageSlider => _isLoadingImageSlider;
+
+  final Rx<bool> _isLoadingCourseJRC = true.obs;
+  Rx<bool> get isLoadingCourseJRC => _isLoadingCourseJRC;
+
+  final Rx<bool> _isLoadingTrendingCourse = true.obs;
+  Rx<bool> get isLoadingTrendingCourse => _isLoadingTrendingCourse;
+
+  final Rx<bool> _isLoadingNewestCourse = true.obs;
+  Rx<bool> get isLoadingNewestCourse => _isLoadingNewestCourse;
+
+  final Rx<bool> _isLoadingBusinessCourse = true.obs;
+  Rx<bool> get isLoadingBusinessCourse => _isLoadingBusinessCourse;
+
+  final Rx<bool> _isLoadingPengembanganKarirCourse = true.obs;
+  Rx<bool> get isLoadingPengembanganKarirCourse =>
+      _isLoadingPengembanganKarirCourse;
+
+  final Rx<bool> _isLoadingRecomendationCourse = true.obs;
+  Rx<bool> get isLoadingRecomendationCourse => _isLoadingRecomendationCourse;
+
+  final Rx<bool> _isLoadingBlog = true.obs;
+  Rx<bool> get isLoadingBlog => _isLoadingBlog;
+
   @override
   void onInit() async {
     _getVersion();
@@ -86,12 +105,53 @@ class ArkHomeController extends GetxController {
     super.onInit();
   }
 
+  Future _changeLoading(bool val) async {
+    _isLoading.value = val;
+  }
+
+  Future _changeLoadingCategory(bool val) async {
+    _isLoadingCategory.value = val;
+  }
+
+  Future _changeLoadingImageSlider(bool val) async {
+    _isLoadingImageSlider.value = val;
+  }
+
+  Future _changeLoadingCourseJRC(bool val) async {
+    _isLoadingCourseJRC.value = val;
+  }
+
+  Future _changeLoadingTrendingCourse(bool val) async {
+    _isLoadingTrendingCourse.value = val;
+  }
+
+  Future _changeLoadingNewestCourse(bool val) async {
+    _isLoadingNewestCourse.value = val;
+  }
+
+  Future _changeLoadingPengembanganKarirCourse(bool val) async {
+    _isLoadingPengembanganKarirCourse.value = val;
+  }
+
+  Future _changeLoadingRecomendationCourse(bool val) async {
+    _isLoadingRecomendationCourse.value = val;
+  }
+
+  Future _changeLoadingBusinessCourse(bool val) async {
+    _isLoadingBusinessCourse.value = val;
+  }
+
+  Future _changeLoadingBLog(bool val) async {
+    _isLoadingBlog.value = val;
+  }
+
   void _getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     _version.value = packageInfo.version;
   }
 
   void _getBlogs() async {
+    _changeLoadingBLog(true);
     final response = await _useCase.getBlogs(100);
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -102,9 +162,11 @@ class ArkHomeController extends GetxController {
         _blogs.value = data;
       },
     );
+    await _changeLoadingBLog(false);
   }
 
   void _getRecomendationCourse() async {
+    _changeLoadingRecomendationCourse(true);
     final response =
         await _useCase.getListIdCourseByKategori(listIdRecomendationCourseUrl);
     response.fold(
@@ -117,6 +179,7 @@ class ArkHomeController extends GetxController {
   }
 
   void _getPengembanganKarirCourse() async {
+    _changeLoadingPengembanganKarirCourse(true);
     final response =
         await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
     response.fold(
@@ -129,6 +192,7 @@ class ArkHomeController extends GetxController {
   }
 
   void _getBusinessCourse() async {
+    _changeLoadingBusinessCourse(true);
     final response =
         await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
     response.fold(
@@ -141,6 +205,7 @@ class ArkHomeController extends GetxController {
   }
 
   void _getNewestCourse() async {
+    _changeLoadingNewestCourse(true);
     final response = await _useCase.getListIdNewestCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -152,6 +217,7 @@ class ArkHomeController extends GetxController {
   }
 
   void _getTrendingCourse() async {
+    _changeLoadingTrendingCourse(true);
     final response = await _useCase.getListIdTrendingCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -173,6 +239,7 @@ class ArkHomeController extends GetxController {
         (data) {
       _recomendationCourse.value = data;
     });
+    await _changeLoadingRecomendationCourse(false);
   }
 
   void _getPengembanganKarirDataCourse(List<String> listId) async {
@@ -186,6 +253,7 @@ class ArkHomeController extends GetxController {
         (data) {
       _pengembanganKarirCourse.value = data;
     });
+    await _changeLoadingPengembanganKarirCourse(false);
   }
 
   void _getBusinessDataCourse(List<String> listId) async {
@@ -199,6 +267,7 @@ class ArkHomeController extends GetxController {
         (data) {
       _businessCourse.value = data;
     });
+    await _changeLoadingBusinessCourse(false);
   }
 
   void _getNewestDataCourse(List<String> listId) async {
@@ -212,6 +281,7 @@ class ArkHomeController extends GetxController {
         (data) {
       _newestCourse.value = data;
     });
+    await _changeLoadingNewestCourse(false);
   }
 
   void _getTrendingDataCourse(List<String> listId) async {
@@ -225,6 +295,7 @@ class ArkHomeController extends GetxController {
         (data) {
       _trendingCourse.value = data;
     });
+    await _changeLoadingTrendingCourse(false);
   }
 
   void onSliderChange(int i, CarouselPageChangedReason r) {
@@ -277,19 +348,15 @@ class ArkHomeController extends GetxController {
     await _changeLoadingImageSlider(false);
   }
 
-  Future _changeLoading(bool val) async {
-    _isLoading.value = val;
-  }
-
-  Future _changeLoadingCategory(bool val) async {
-    _isLoadingCategory.value = val;
-  }
-
-  Future _changeLoadingImageSlider(bool val) async {
-    _isLoadingImageSlider.value = val;
-  }
-
-  Future _changeLoadingCourseJRC(bool val) async {
-    _isLoadingCourseJRC.value = val;
+  void onRefresh() {
+    _getCategory();
+    _getImageSlider();
+    _getCourseJRC();
+    _getTrendingCourse();
+    _getNewestCourse();
+    _getBusinessCourse();
+    _getPengembanganKarirCourse();
+    _getRecomendationCourse();
+    _getBlogs();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
-import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_class_jrc_card.dart';
+import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_class_card.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class ArkBannerTextWithClass extends StatelessWidget {
     this.isMore = false,
     this.more,
     required this.listCourse,
+    required this.isLoading,
   }) : super(key: key);
 
   final String? imageTitle;
@@ -21,6 +23,7 @@ class ArkBannerTextWithClass extends StatelessWidget {
   final VoidCallback? more;
   final String title;
   final List<CourseParseEntity> listCourse;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -69,20 +72,29 @@ class ArkBannerTextWithClass extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            child: Row(
-              children: List.generate(
-                listCourse.length < 6 ? listCourse.length : 6,
-                (index) => ClassCard(
-                  course: listCourse[index].course,
+        if (isLoading)
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: AppShimmer.loadHorizontalClass(),
+            ),
+          ),
+        if (!isLoading)
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Row(
+                children: List.generate(
+                  listCourse.length < 6 ? listCourse.length : 6,
+                  (index) => ClassCard(
+                    course: listCourse[index].course,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

@@ -1,8 +1,10 @@
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
-import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_class_jrc_card.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'ark_class_card.dart';
 
 class ArkBannerTextWithGridClass extends StatelessWidget {
   const ArkBannerTextWithGridClass({
@@ -13,6 +15,7 @@ class ArkBannerTextWithGridClass extends StatelessWidget {
     this.isMore = false,
     this.more,
     required this.listCourse,
+    required this.isLoading,
   }) : super(key: key);
 
   final String? imageTitle;
@@ -21,6 +24,7 @@ class ArkBannerTextWithGridClass extends StatelessWidget {
   final VoidCallback? more;
   final String title;
   final List<CourseParseEntity> listCourse;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +73,25 @@ class ArkBannerTextWithGridClass extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: Wrap(
-            spacing: 3,
-            runSpacing: 4,
-            children: List.generate(
-              listCourse.length < 6 ? listCourse.length : 6,
-              (index) => ClassCard(
-                course: listCourse[index].course,
+        if (isLoading)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: AppShimmer.loadGridClass(),
+          ),
+        if (!isLoading)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: Wrap(
+              spacing: 3,
+              runSpacing: 4,
+              children: List.generate(
+                listCourse.length < 6 ? listCourse.length : 6,
+                (index) => ClassCard(
+                  course: listCourse[index].course,
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

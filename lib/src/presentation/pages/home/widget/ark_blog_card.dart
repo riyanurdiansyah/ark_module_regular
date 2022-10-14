@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -25,14 +26,14 @@ class ArkBlogCard extends StatelessWidget {
             ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: blogs.featuredImg.isNotEmpty
-                    ? Image.network(
-                        blogs.featuredImgApp == ''
+                    ? CachedNetworkImage(
+                        imageUrl: blogs.featuredImgApp == ''
                             ? blogs.featuredImg
                             : blogs.featuredImgApp,
                         fit: BoxFit.cover,
                         width: 85,
                         height: 85,
-                        errorBuilder: (_, __, ___) {
+                        errorWidget: (_, __, ___) {
                           return Container(
                             width: 85,
                             height: 85,

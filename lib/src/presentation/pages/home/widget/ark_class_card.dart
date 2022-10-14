@@ -40,7 +40,7 @@ class ClassCard extends StatelessWidget {
                 },
                 fit: BoxFit.fill,
                 height: 100,
-                width: Get.size.width * 0.48,
+                width: Get.size.width * 0.44,
                 imageUrl: course.featuredImage,
               ),
             ),

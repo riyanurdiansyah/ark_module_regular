@@ -28,7 +28,10 @@ class ArkHomePage extends StatelessWidget {
     const double barHeight = 113.0;
     final double statusbarHeight = MediaQuery.of(context).padding.top;
     return RefreshIndicator(
-      onRefresh: () async => false,
+      onRefresh: () async {
+        _homeC.onRefresh();
+        await Future.delayed(const Duration(seconds: 1));
+      },
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(
@@ -306,10 +309,13 @@ class ArkHomePage extends StatelessWidget {
               ),
               const ArkBannerPreparationTest(),
               const SizedBox(height: 14),
-              ArkBannerTextWithClass(
-                title: "Trending",
-                imageTitle: "trending.png",
-                listCourse: _homeC.trendingCourse,
+              Obx(
+                () => ArkBannerTextWithClass(
+                  title: "Trending",
+                  imageTitle: "trending.png",
+                  listCourse: _homeC.trendingCourse,
+                  isLoading: _homeC.isLoadingTrendingCourse.value,
+                ),
               ),
               const SizedBox(height: 25),
               const ArkMiniCourse(),
@@ -320,30 +326,45 @@ class ArkHomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              ArkBannerTextWithClass(
-                title: "Kelas Terbaru",
-                listCourse: _homeC.newestCourse,
+              Obx(
+                () => ArkBannerTextWithClass(
+                  title: "Kelas Terbaru",
+                  listCourse: _homeC.newestCourse,
+                  isLoading: _homeC.isLoadingNewestCourse.value,
+                ),
               ),
               const SizedBox(height: 20),
-              ArkBannerTextWithClass(
-                title: "Bisnis",
-                listCourse: _homeC.businessCourse,
+              Obx(
+                () => ArkBannerTextWithClass(
+                  title: "Bisnis",
+                  listCourse: _homeC.businessCourse,
+                  isLoading: _homeC.isLoadingBusinessCourse.value,
+                ),
               ),
               const SizedBox(height: 20),
-              ArkBannerTextWithClass(
-                title: "Pengembangan Diri",
-                listCourse: _homeC.pengembanganKarirCourse,
+              Obx(
+                () => ArkBannerTextWithClass(
+                  title: "Pengembangan Diri",
+                  listCourse: _homeC.pengembanganKarirCourse,
+                  isLoading: _homeC.isLoadingPengembanganKarirCourse.value,
+                ),
               ),
               const SizedBox(height: 26),
-              ArkBannerTextWithGridClass(
-                title: "Rekomendasi",
-                isMore: true,
-                more: () {},
-                listCourse: _homeC.recomendationCourse,
+              Obx(
+                () => ArkBannerTextWithGridClass(
+                  title: "Rekomendasi",
+                  isMore: true,
+                  more: () {},
+                  listCourse: _homeC.recomendationCourse,
+                  isLoading: _homeC.isLoadingRecomendationCourse.value,
+                ),
               ),
               const SizedBox(height: 26),
-              ArkBannerBlog(
-                blogs: _homeC.blogs,
+              Obx(
+                () => ArkBannerBlog(
+                  blogs: _homeC.blogs,
+                  isLoading: _homeC.isLoadingBlog.value,
+                ),
               ),
               ArkBannerVersion(
                 version: _homeC.version.value,
