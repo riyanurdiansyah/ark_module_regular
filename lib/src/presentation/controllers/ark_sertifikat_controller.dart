@@ -41,6 +41,7 @@ class ArkSertifikatController extends GetxController {
   void onClose() {
     IsolateNameServer.removePortNameMapping('downloader_cert');
     _port.close();
+    _txSearch.dispose();
     super.onClose();
   }
 

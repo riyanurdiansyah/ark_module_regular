@@ -55,6 +55,14 @@ class ArkFinishedCourseCard extends StatelessWidget {
                         errorWidget: (_, __, ___) => const ErrorImageWidget(
                           isImage: false,
                         ),
+                        placeholder: (_, __) => Container(
+                          height: Get.size.shortestSide < 600 ? 75 : 140,
+                          width: Get.size.shortestSide < 600 ? 75 : 140,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                        ),
                       ),
                     ),
                   ),

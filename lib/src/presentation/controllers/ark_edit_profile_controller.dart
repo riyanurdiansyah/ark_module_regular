@@ -35,6 +35,23 @@ class ArkEditProfileController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    _tcName.dispose();
+    _tcHp.dispose();
+    _tcProfesiLainnya.dispose();
+    super.onClose();
+  }
+
+  final TextEditingController _tcName = TextEditingController();
+  TextEditingController get tcName => _tcName;
+
+  final TextEditingController _tcHp = TextEditingController();
+  TextEditingController get tcHp => _tcHp;
+
+  final TextEditingController _tcProfesiLainnya = TextEditingController();
+  TextEditingController get tcProfesiLainnya => _tcProfesiLainnya;
+
   final Rx<bool> _isLoading = true.obs;
   Rx<bool> get isLoading => _isLoading;
 
@@ -73,15 +90,6 @@ class ArkEditProfileController extends GetxController {
 
   final Rx<CityEntity> _city = const CityEntity(kotaKabupaten: []).obs;
   Rx<CityEntity> get city => _city;
-
-  final TextEditingController _tcName = TextEditingController();
-  TextEditingController get tcName => _tcName;
-
-  final TextEditingController _tcHp = TextEditingController();
-  TextEditingController get tcHp => _tcHp;
-
-  final TextEditingController _tcProfesiLainnya = TextEditingController();
-  TextEditingController get tcProfesiLainnya => _tcProfesiLainnya;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;

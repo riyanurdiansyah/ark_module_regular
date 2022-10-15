@@ -20,6 +20,12 @@ class ArkBlogController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    _txSearchBlog.dispose();
+    super.onClose();
+  }
+
   void onSearch(String query) {
     for (var e in blogs) {
       if (e.title.rendered.contains(query)) {

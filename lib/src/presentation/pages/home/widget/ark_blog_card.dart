@@ -44,6 +44,14 @@ class ArkBlogCard extends StatelessWidget {
                           ),
                         );
                       },
+                      placeholder: (_, __) => Container(
+                        width: 85,
+                        height: 85,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
                     )
                   : Container(
                       height: 85,

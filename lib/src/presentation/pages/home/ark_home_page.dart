@@ -108,7 +108,13 @@ class ArkHomePage extends StatelessWidget {
                           // Get.to(() => SearchPage(),
                           //     transition: Transition.downToUp);
 
-                          Get.toNamed(AppRouteName.search);
+                          Get.toNamed(
+                            AppRouteName.search,
+                            arguments: [
+                              _homeC.category.value.data,
+                              _homeC.recomendationCourse,
+                            ],
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -326,6 +332,7 @@ class ArkHomePage extends StatelessWidget {
               Obx(
                 () => ArkBannerCategory(
                   listCategory: _homeC.category.value.data,
+                  isLoading: _homeC.isLoadingCategory.value,
                 ),
               ),
               const SizedBox(height: 20),
