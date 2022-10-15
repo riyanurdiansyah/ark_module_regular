@@ -29,6 +29,7 @@ class ArkSliderHome extends StatelessWidget {
           children: [
             CarouselSlider(
               options: CarouselOptions(
+                reverse: true,
                 height: 150,
                 autoPlayInterval: const Duration(seconds: 8),
                 viewportFraction: 1,

@@ -8,13 +8,13 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  # ark_module_setup:
-  #   path: ../ark_module_setup
-
   ark_module_setup:
-    git:
-      url: https://github.com/riyanurdiansyah/ark_module_setup.git
-      ref: master
+    path: ../ark_module_setup
+
+  # ark_module_setup:
+  #   git:
+  #     url: https://github.com/riyanurdiansyah/ark_module_setup.git
+  #     ref: master
 
   cached_network_image: ^3.1.0
   carousel_slider: ^4.0.0

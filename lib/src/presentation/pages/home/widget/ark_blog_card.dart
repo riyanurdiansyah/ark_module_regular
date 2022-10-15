@@ -20,38 +20,41 @@ class ArkBlogCard extends StatelessWidget {
       width: double.infinity,
       height: Get.size.shortestSide < 600 ? 85 : 140,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () => Get.toNamed(AppRouteName.blogDetail, arguments: blogs),
         child: Row(
           children: [
             ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: blogs.featuredImg.isNotEmpty
-                    ? CachedNetworkImage(
-                        imageUrl: blogs.featuredImgApp == ''
-                            ? blogs.featuredImg
-                            : blogs.featuredImgApp,
-                        fit: BoxFit.cover,
-                        width: 85,
-                        height: 85,
-                        errorWidget: (_, __, ___) {
-                          return Container(
-                            width: 85,
-                            height: 85,
-                            color: kPrimaryColorNew,
-                            child: Image.asset(
-                              'assets/images/logo-arkademi.png',
-                              fit: BoxFit.fill,
-                            ),
-                          );
-                        },
-                      )
-                    : Container(
-                        height: 85,
-                        width: 85,
-                        color: kPrimaryColorNew,
-                        child: Image.asset('assets/images/logo-arkademi.png',
-                            fit: BoxFit.fill),
-                      )),
+              borderRadius: BorderRadius.circular(8),
+              child: blogs.featuredImg.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: blogs.featuredImgApp == ''
+                          ? blogs.featuredImg
+                          : blogs.featuredImgApp,
+                      fit: BoxFit.cover,
+                      width: 85,
+                      height: 85,
+                      errorWidget: (_, __, ___) {
+                        return Container(
+                          width: 85,
+                          height: 85,
+                          color: kPrimaryColorNew,
+                          child: Image.asset(
+                            'assets/images/logo-arkademi.png',
+                            fit: BoxFit.fill,
+                          ),
+                        );
+                      },
+                    )
+                  : Container(
+                      height: 85,
+                      width: 85,
+                      color: kPrimaryColorNew,
+                      child: Image.asset(
+                        'assets/images/logo-arkademi.png',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+            ),
             const SizedBox(
               width: 10,
             ),

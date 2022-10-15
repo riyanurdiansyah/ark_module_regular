@@ -33,9 +33,8 @@ class ArkBannerBlog extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () async {
-                  // Get.to(() => BlogSearchPage());
-                },
+                onTap: () =>
+                    Get.toNamed(AppRouteName.blogAll, arguments: blogs),
                 child: Text(
                   'Lihat Semua',
                   style: TextStyle(

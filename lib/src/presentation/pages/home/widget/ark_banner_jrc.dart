@@ -9,11 +9,13 @@ class ArkBannerJRC extends StatelessWidget {
     required this.onTapShowAll,
     required this.onTapClass,
     required this.listCourseJRC,
+    required this.isLoading,
   }) : super(key: key);
 
   final VoidCallback onTapShowAll;
   final VoidCallback onTapClass;
   final List<CourseParseEntity> listCourseJRC;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -127,32 +129,33 @@ class ArkBannerJRC extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
-              child: Row(
-                children: List.generate(
-                  listCourseJRC.length,
-                  (index) => InkWell(
-                    onTap: () {
-                      // AppFirebaseAnalyticsService().addLog('mbl_prj_jrc_p4_card');
-                      // _lCC.fetchDetailClass(
-                      //     _hC.jrcList.value.data![index].course!.id!);
-                      // Get.to(
-                      //   () => const ClassPage(),
-                      // );
-                    },
-                    child: ClassCard(
-                      course: listCourseJRC[index].course,
+          if (!isLoading)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: Row(
+                  children: List.generate(
+                    listCourseJRC.length,
+                    (index) => InkWell(
+                      onTap: () {
+                        // AppFirebaseAnalyticsService().addLog('mbl_prj_jrc_p4_card');
+                        // _lCC.fetchDetailClass(
+                        //     _hC.jrcList.value.data![index].course!.id!);
+                        // Get.to(
+                        //   () => const ClassPage(),
+                        // );
+                      },
+                      child: ClassCard(
+                        course: listCourseJRC[index].course,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
+            )
         ],
       ),
     );

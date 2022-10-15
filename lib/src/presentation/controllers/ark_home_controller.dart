@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/dto/blog_dto.dart';
@@ -114,6 +113,18 @@ class ArkHomeController extends GetxController {
     super.onInit();
   }
 
+  void onRefresh() {
+    _getCategory();
+    _getImageSlider();
+    _getCourseJRC();
+    _getTrendingCourse();
+    _getNewestCourse();
+    _getBusinessCourse();
+    _getPengembanganKarirCourse();
+    _getRecomendationCourse();
+    _getBlogs();
+  }
+
   Future _changeLoading(bool val) async {
     _isLoading.value = val;
   }
@@ -139,7 +150,6 @@ class ArkHomeController extends GetxController {
   }
 
   Future _changeLoadingPengembanganKarirCourse(bool val) async {
-    log("CHECK WUY");
     _isLoadingPengembanganKarirCourse.value = val;
   }
 
@@ -405,17 +415,5 @@ class ArkHomeController extends GetxController {
       },
     );
     await _changeLoadingImageSlider(false);
-  }
-
-  void onRefresh() {
-    _getCategory();
-    _getImageSlider();
-    _getCourseJRC();
-    _getTrendingCourse();
-    _getNewestCourse();
-    _getBusinessCourse();
-    _getPengembanganKarirCourse();
-    _getRecomendationCourse();
-    _getBlogs();
   }
 }

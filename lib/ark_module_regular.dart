@@ -5,6 +5,8 @@ export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';
 export 'src/presentation/pages/home/ark_category_page.dart';
 export 'src/presentation/pages/home/ark_home_page.dart';
+export 'src/presentation/pages/blog/ark_blog_all_page.dart';
+export 'src/presentation/pages/blog/ark_blog_detail_page.dart';
 export 'src/presentation/pages/profile/face_recog/change_face_recognition_page.dart';
 
 export 'src/presentation/controllers/ark_dashboard_controller.dart';
@@ -13,6 +15,7 @@ export 'src/presentation/controllers/ark_profile_controller.dart';
 export 'src/presentation/controllers/ark_sertifikat_controller.dart';
 export 'src/presentation/controllers/ark_my_class_controller.dart';
 export 'src/presentation/controllers/ark_home_controller.dart';
+export 'src/presentation/controllers/ark_blog_controller.dart';
 
 export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';

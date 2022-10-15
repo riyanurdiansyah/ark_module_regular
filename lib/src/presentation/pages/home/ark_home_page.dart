@@ -302,10 +302,13 @@ class ArkHomePage extends StatelessWidget {
               ArkBannerPrakerja(
                 onTapBanner: () {},
               ),
-              ArkBannerJRC(
-                onTapShowAll: () {},
-                onTapClass: () {},
-                listCourseJRC: _homeC.courseJRC.value.data,
+              Obx(
+                () => ArkBannerJRC(
+                  onTapShowAll: () {},
+                  onTapClass: () {},
+                  listCourseJRC: _homeC.courseJRC.value.data,
+                  isLoading: _homeC.isLoadingCourseJRC.value,
+                ),
               ),
               const ArkBannerPreparationTest(),
               const SizedBox(height: 14),
