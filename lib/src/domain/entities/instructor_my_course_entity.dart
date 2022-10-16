@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class InstructorEntity extends Equatable {
-  const InstructorEntity({
+class InstructorMyCourseEntity extends Equatable {
+  const InstructorMyCourseEntity({
     required this.id,
     required this.name,
     required this.avatar,
@@ -10,16 +10,16 @@ class InstructorEntity extends Equatable {
 
   final String id;
   final String name;
-  final AvatarEntity avatar;
+  final String avatar;
   final String sub;
 
-  InstructorEntity copyWith({
+  InstructorMyCourseEntity copyWith({
     String? id,
     String? name,
-    AvatarEntity? avatar,
+    String? avatar,
     String? sub,
   }) =>
-      InstructorEntity(
+      InstructorMyCourseEntity(
         id: id ?? this.id,
         name: name ?? this.name,
         avatar: avatar ?? this.avatar,
@@ -35,26 +35,4 @@ class InstructorEntity extends Equatable {
 
   @override
   List<Object?> get props => [id, name, avatar, sub];
-}
-
-class AvatarEntity extends Equatable {
-  const AvatarEntity({
-    required this.url,
-  });
-
-  final String url;
-
-  AvatarEntity copyWith({
-    String? url,
-  }) =>
-      AvatarEntity(
-        url: url ?? this.url,
-      );
-
-  Map<String, dynamic> toJson() => {
-        "url": url,
-      };
-
-  @override
-  List<Object?> get props => [url];
 }

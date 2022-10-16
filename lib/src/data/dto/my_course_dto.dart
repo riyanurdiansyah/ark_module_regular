@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ark_module_regular/src/data/dto/instructor_dto.dart';
+import 'package:ark_module_regular/src/data/dto/instructor_my_course_dto.dart';
 import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
 
 List<MyCourseDTO> myCourseEntityFromJson(String str) => List<MyCourseDTO>.from(
@@ -34,7 +34,7 @@ class MyCourseDTO extends MyCourseEntity {
             : json["user_expiry"],
         startDate: json["start_date"],
         featuredImage: json["featured_image"],
-        instructor: InstructorDTO.fromJson(json["instructor"]),
+        instructor: InstructorMyCourseDTO.fromJson(json["instructor"]),
         menuOrder: json["menu_order"],
         sesiKonsultasi: json["sesi_konsultasi"],
       );

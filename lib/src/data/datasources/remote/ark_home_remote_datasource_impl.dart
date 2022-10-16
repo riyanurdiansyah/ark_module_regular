@@ -82,7 +82,7 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
   Future<List<CourseParseDTO>> getCourseFromListId(List<String> listId) async {
     final List<CourseParseDTO> listCourse = [];
     for (int i = 0; i < listId.length; i++) {
-      final response = await dio.get("$trendingCourseUrl/${listId[i]}");
+      final response = await dio.get("$courseUrl/${listId[i]}");
       int code = response.statusCode ?? 500;
       if (code == 200) {
         for (var data in response.data['data']) {

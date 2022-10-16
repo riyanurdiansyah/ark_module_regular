@@ -14,7 +14,7 @@ class ArkProfilePage extends StatelessWidget {
   }) : super(key: key);
 
   final _pC = Get.find<ArkProfileController>();
-  final _myClassC = Get.find<ArkMyClassController>();
+  final _myClassC = Get.find<ArkMyCourseController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

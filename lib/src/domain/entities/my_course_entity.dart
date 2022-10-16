@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
-import 'instructor_entity.dart';
+import 'instructor_my_course_entity.dart';
 
 String myCourseEntityToJson(List<MyCourseEntity> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -30,7 +30,7 @@ class MyCourseEntity extends Equatable {
   final String userExpiry;
   final bool startDate;
   final String featuredImage;
-  final InstructorEntity instructor;
+  final InstructorMyCourseEntity instructor;
   final int menuOrder;
   final String sesiKonsultasi;
 
@@ -44,7 +44,7 @@ class MyCourseEntity extends Equatable {
     String? userExpiry,
     bool? startDate,
     String? featuredImage,
-    InstructorEntity? instructor,
+    InstructorMyCourseEntity? instructor,
     int? menuOrder,
     String? sesiKonsultasi,
   }) =>

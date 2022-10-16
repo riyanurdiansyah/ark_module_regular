@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 
 import 'widget/ark_tab_course_active.dart';
 
-class ArkMyClassPage extends StatelessWidget {
-  ArkMyClassPage({Key? key}) : super(key: key);
+class ArkMyCoursePage extends StatelessWidget {
+  ArkMyCoursePage({Key? key}) : super(key: key);
 
-  final _myClassC = Get.find<ArkMyClassController>();
+  final _myClassC = Get.find<ArkMyCourseController>();
   final _dashboardC = Get.find<ArkDashboardController>();
 
   @override

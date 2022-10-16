@@ -7,7 +7,7 @@ import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ArkMyClassController extends GetxController {
+class ArkMyCourseController extends GetxController {
   final ArkMyClassUseCase _useCase = ArkMyClassUseCase(
       ArkMyClassRepositoryImpl(ArkMyClassRemoteDataSourceImpl()));
 
