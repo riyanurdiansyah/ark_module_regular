@@ -87,11 +87,13 @@ class ArkMyClassPage extends StatelessWidget {
                       listCourseExpired: _myClassC.listCourseExpired,
                       isLoading: _myClassC.isLoadingCourse.value,
                       onRefresh: () => _myClassC.getMyCourse(),
+                      isLogin: _myClassC.isLogin.value,
                     ),
                     ArkTabCourseFinished(
                       listCourse: _myClassC.listCourseFinished,
                       onRefresh: () => _myClassC.getMyCourse(),
                       isLoading: _myClassC.isLoadingCourse.value,
+                      isLogin: _myClassC.isLogin.value,
                     ),
                   ],
                 ),

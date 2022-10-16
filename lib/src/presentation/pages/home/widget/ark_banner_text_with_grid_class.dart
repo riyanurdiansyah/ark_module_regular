@@ -75,12 +75,12 @@ class ArkBannerTextWithGridClass extends StatelessWidget {
         ),
         if (isLoading)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AppShimmer.loadGridClass(),
           ),
         if (!isLoading)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Wrap(
               spacing: 3,
               runSpacing: 4,

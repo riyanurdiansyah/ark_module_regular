@@ -301,31 +301,6 @@ class ArkSearchPage extends StatelessWidget {
                 }),
               ],
             ),
-
-            // Obx(
-            //   () => _searchC.txSearch.text.isEmpty ||
-            //           _searchC.searched.value == true ||
-            //           _searchC.listOfName.value.data == null
-            //       ? const SizedBox()
-            //       : Container(
-            //           width: Get.size.width,
-            //           color: Colors.white,
-            //           child: Column(
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               if (_dC.listOfName.value.data!.isNotEmpty)
-            //                 for (int i = 0;
-            //                     i < _dC.listOfName.value.data!.length;
-            //                     i++)
-            //                   if (_dC.listOfName.value.data![i].name!
-            //                       .toLowerCase()
-            //                       .startsWith(
-            //                           _dC.txControl.value.text.toLowerCase()))
-            //                     SearchTile(i)
-            //             ],
-            //           ),
-            //         ),
-            // )
           );
         }
       })),

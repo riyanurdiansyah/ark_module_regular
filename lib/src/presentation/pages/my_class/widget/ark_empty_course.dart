@@ -12,6 +12,7 @@ class ArkEmptyCourse extends StatelessWidget {
       // padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
       child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // const SizedBox(height: 30),
             Image.asset('assets/images/empty_state.png',

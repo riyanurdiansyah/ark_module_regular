@@ -65,25 +65,32 @@ class ArkSliderHome extends StatelessWidget {
             Obx(
               () => Positioned(
                 bottom: 10,
-                left: 0,
+                left: 1,
                 right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    _homeC.sliderImage.value.data.length,
-                    (index) => Container(
-                      width: 8.0,
-                      height: 8.0,
-                      margin:
-                          const EdgeInsets.only(top: 10.0, left: 2.0, right: 2),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: _homeC.indexSlider.value == index
-                            ? Border.all(width: 0.2, color: kNewBlack2b)
-                            : Border.all(width: 0.6, color: kNewBlack2b),
-                        color: _homeC.indexSlider.value == index
-                            ? const Color.fromRGBO(255, 255, 255, 1)
-                            : const Color.fromRGBO(0, 0, 0, 0.3),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 20,
+                  width: Get.width,
+                  child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    children: List.generate(
+                      _homeC.sliderImage.value.data.length,
+                      (index) => Container(
+                        width: 8.0,
+                        height: 8.0,
+                        margin: const EdgeInsets.only(
+                            top: 10.0, left: 2.0, right: 2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: _homeC.indexSlider.value == index
+                              ? Border.all(width: 0.2, color: kNewBlack2b)
+                              : Border.all(width: 0.6, color: kNewBlack2b),
+                          color: _homeC.indexSlider.value == index
+                              ? const Color.fromRGBO(255, 255, 255, 1)
+                              : const Color.fromRGBO(0, 0, 0, 0.3),
+                        ),
                       ),
                     ),
                   ),

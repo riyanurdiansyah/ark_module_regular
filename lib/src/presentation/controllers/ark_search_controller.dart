@@ -98,12 +98,13 @@ class ArkSearchController extends GetxController {
     }
 
     for (var e in _listNameSearch) {
-      if (e.course.name.toLowerCase().contains(txSearch.text)) {
+      if (e.course.name.toLowerCase().contains(txSearch.text.toLowerCase())) {
         _listNameSearchResult.add(e);
       }
     }
     _listNameSearch.value = _listNameSearchResult
-        .where((e) => e.course.name.toLowerCase().contains(txSearch.text))
+        .where((e) =>
+            e.course.name.toLowerCase().contains(txSearch.text.toLowerCase()))
         .toSet()
         .toList();
   }
@@ -117,6 +118,7 @@ class ArkSearchController extends GetxController {
   void onTapNameSearch(CourseDataEntity course) async {
     _isSearched.value = true;
     _tcSearch.text = course.name;
+    onChangeSeacrh(course.name);
     _histories.insert(0, _tcSearch.text);
     if (_histories.length > 4) {
       _histories.removeLast();

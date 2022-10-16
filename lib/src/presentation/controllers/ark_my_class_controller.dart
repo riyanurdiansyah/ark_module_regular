@@ -34,11 +34,16 @@ class ArkMyClassController extends GetxController {
   final RxList<MyCourseEntity> _listCourseExpired = <MyCourseEntity>[].obs;
   RxList<MyCourseEntity> get listCourseExpired => _listCourseExpired;
 
+  final Rx<bool> _isLogin = false.obs;
+  Rx<bool> get isLogin => _isLogin;
+
   @override
   void onInit() async {
     await _setup();
-    getMyCourse();
-    _loadMyCourseFromCache();
+    if (_isLogin.value) {
+      getMyCourse();
+      _loadMyCourseFromCache();
+    }
     await _fnChangeLoading(false);
     super.onInit();
   }
@@ -54,6 +59,7 @@ class ArkMyClassController extends GetxController {
   Future _setup() async {
     prefs = await SharedPreferences.getInstance();
     _token.value = prefs.getString('token_access') ?? '';
+    _isLogin.value = prefs.getBool('user_login') ?? false;
   }
 
   Future getMyCourse() async {

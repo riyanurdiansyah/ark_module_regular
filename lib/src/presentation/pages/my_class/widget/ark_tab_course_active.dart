@@ -1,4 +1,5 @@
 import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
+import 'package:ark_module_regular/src/presentation/pages/my_class/widget/ark_empty_course.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +14,14 @@ class ArkTabCourseActive extends StatelessWidget {
     required this.listCourseExpired,
     required this.isLoading,
     required this.onRefresh,
+    required this.isLogin,
   }) : super(key: key);
 
   final List<MyCourseEntity> listCourseActive;
   final List<MyCourseEntity> listCourseExpired;
   final bool isLoading;
   final VoidCallback onRefresh;
+  final bool isLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +109,12 @@ class ArkTabCourseActive extends StatelessWidget {
                   ],
                 ),
               ),
-              if (isLoading)
+              if (!isLogin)
+                SizedBox(
+                    height: Get.height / 2,
+                    width: double.infinity,
+                    child: ArkEmptyCourse(onTap: () {})),
+              if (isLoading && isLogin)
                 SingleChildScrollView(
                   child: Column(
                     children: List.generate(
@@ -127,7 +135,7 @@ class ArkTabCourseActive extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (!isLoading)
+              if (!isLoading && isLogin)
                 Column(
                   children: [
                     const SizedBox(
