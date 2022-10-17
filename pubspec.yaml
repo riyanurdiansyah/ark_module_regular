@@ -51,7 +51,7 @@ dependencies:
   package_info: ^2.0.2
   path_provider: ^2.0.10
   percent_indicator: ^4.2.2
-  permission_handler: ^9.2.0
+  permission_handler: ^10.0.0
   pinch_zoom: ^1.0.0
   share: ^2.0.4
   shared_preferences: ^2.0.8

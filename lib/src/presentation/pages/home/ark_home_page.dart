@@ -159,7 +159,7 @@ class ArkHomePage extends StatelessWidget {
               ),
               ArkSliderHome(),
               ArkBannerPrakerja(
-                onTapBanner: () {},
+                onTapBanner: () => Get.toNamed(AppRouteName.mainPrakerja),
               ),
               Obx(
                 () => ArkBannerJRC(

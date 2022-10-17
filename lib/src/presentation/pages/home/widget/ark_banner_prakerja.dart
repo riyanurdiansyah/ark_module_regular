@@ -70,7 +70,7 @@ class ArkBannerPrakerja extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
               ),
-              onPressed: () async {},
+              onPressed: () => onTapBanner(),
               child: FittedBox(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
