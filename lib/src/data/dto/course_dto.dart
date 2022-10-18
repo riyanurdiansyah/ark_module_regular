@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ark_module_regular/src/data/dto/course_flag_dto.dart';
 import 'package:ark_module_regular/src/data/dto/instructor_dto.dart';
+import 'package:ark_module_regular/src/data/dto/mplink_dto.dart';
 import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 
 CourseDTO courseEntity(String str) => CourseDTO.fromJson(json.decode(str));
@@ -52,6 +53,7 @@ class CourseDataDTO extends CourseDataEntity {
     required super.discount,
     required super.courseFlag,
     required super.peluangKarir,
+    required super.mpLinks,
   });
 
   factory CourseDataDTO.fromJson(Map<String, dynamic> json) => CourseDataDTO(
@@ -105,7 +107,6 @@ class CourseDataDTO extends CourseDataEntity {
                   json['regular_price'],
                 ) *
                 100.0),
-
         courseFlag: json["course_flag"] == null
             ? CourseFlagDTO(
                 whatsapp: "", prakerja: "", revamp: "", jrc: "", group: "")
@@ -116,35 +117,9 @@ class CourseDataDTO extends CourseDataEntity {
             json["peluang_karir"] == false || json["peluang_karir"] == null
                 ? []
                 : List<String>.from(json["peluang_karir"].map((x) => x)),
-
-        // regularPrice: json["regular_price"] ?? "0",
-        // salePrice: json["sale_price"] ?? "",
-        // totalStudents: json["total_students"] ?? 0,
-        // instructor: json["instructor"] == null
-        //     ? const InstructorDTO(id: "", name: "name", avatar: "", sub: "")
-        //     : InstructorDTO.fromJson(
-        //         json["instructor"],
-        //       ),
-        // coinCashback: json["sale_price"] == null ||
-        //         json["sale_price"] == false ||
-        //         json['sale_price'] == "0"
-        //     ? (int.parse(json['regular_price'] == null ||
-        //                     json['regular_price'] == false
-        //                 ? "0"
-        //                 : json['regular_price']) *
-        //             0.05)
-        //         .floor()
-        //         .toString()
-        //     : (int.parse(json['sale_price']) * 0.05).floor().toString(),
-        // discount: json["sale_price"] == null ||
-        //         json["sale_price"] == false ||
-        //         json['sale_price'] == "0"
-        //     ? 0.0
-        //     : ((double.parse(json['regular_price']) -
-        //             double.parse(json['sale_price'])) /
-        //         double.parse(
-        //           json['regular_price'],
-        //         ) *
-        //         100.0),
+        mpLinks: json["mp_links"] == null
+            ? []
+            : List<MpLinkDTO>.from(
+                json["mp_links"].map((x) => MpLinkDTO.fromJson(x))),
       );
 }

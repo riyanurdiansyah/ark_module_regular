@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
+import 'package:ark_module_regular/src/domain/entities/course_jrc_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
@@ -46,4 +47,7 @@ class ArkProfileUseCase {
   Future<Either<Failure, bool>> updateProfilePrakerja(
           String id, Map<String, Map<String, Object>> data) async =>
       await repository.updateProfilePrakerja(id, data);
+
+  Future<Either<Failure, CourseJrcEntity>> getCoba(String id, token) async =>
+      await repository.getCoba(id, token);
 }

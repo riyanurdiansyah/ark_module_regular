@@ -8,7 +8,6 @@ import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-
 import 'ark_profile_remote_datasource.dart';
 
 class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
@@ -16,6 +15,7 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
   ArkProfileRemoteDataSourceImpl({Dio? dio}) {
     this.dio = dio ?? Dio();
   }
+
   @override
   Future<ProfileDTO> getProfile(String token) async {
     final response = await dio.get(

@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
+import 'package:ark_module_regular/src/domain/entities/course_jrc_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
@@ -30,4 +31,6 @@ abstract class ArkProfileRepository {
 
   Future<Either<Failure, bool>> updateProfilePrakerja(
       String token, Map<String, Map<String, Object>> data);
+
+  Future<Either<Failure, CourseJrcEntity>> getCoba(String id, String token);
 }

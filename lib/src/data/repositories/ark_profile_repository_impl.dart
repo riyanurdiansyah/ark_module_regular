@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_profile_remote_datasource.dart';
 import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/coin_entity.dart';
+import 'package:ark_module_regular/src/domain/entities/course_jrc_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/face_recog_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
@@ -123,5 +124,11 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
     } catch (e) {
       return ExceptionHandleResponse.execute(e);
     }
+  }
+
+  @override
+  Future<Either<Failure, CourseJrcEntity>> getCoba(String id, String token) {
+    // TODO: implement getCoba
+    throw UnimplementedError();
   }
 }

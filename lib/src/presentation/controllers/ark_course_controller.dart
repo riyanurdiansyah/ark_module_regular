@@ -8,6 +8,7 @@ import 'package:ark_module_regular/src/domain/entities/instructor_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_course_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class ArkCourseController extends GetxController {
@@ -38,6 +39,7 @@ class ArkCourseController extends GetxController {
       jrc: "",
       group: "",
     ),
+    mpLinks: const [],
     peluangKarir: const [],
   ).obs;
   Rx<CourseDataEntity> get detailCourse => _detailCourse;
@@ -87,9 +89,17 @@ class ArkCourseController extends GetxController {
   @override
   void onInit() async {
     _setup();
-    _getCourseDetailJRC();
+    if (_detailCourse.value.courseFlag.jrc == "1") {
+      _getCourseDetailJRC();
+    }
     await _changeLoading(false);
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    ytController.close();
+    super.onClose();
   }
 
   Future _getCourseDetailJRC() async {
@@ -155,5 +165,15 @@ class ArkCourseController extends GetxController {
       return true;
     }
     return false;
+  }
+
+  void onTapMplinks(int i) {
+    launchUrl(
+      Uri.parse(detailCourse.value.mpLinks[i - 1].mpProdukLink),
+      mode: LaunchMode.externalApplication,
+      webViewConfiguration: const WebViewConfiguration(enableJavaScript: true),
+    );
+    AppFirebaseAnalyticsService().addLog(
+        'reguler_marketplace_${_detailCourse.value.mpLinks[i - 1].mpName}');
   }
 }

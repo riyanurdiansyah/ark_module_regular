@@ -19,12 +19,13 @@ class ClassCard extends StatelessWidget {
       onTap: () {
         if (course.courseFlag.jrc == "1") {
           Get.toNamed(
-            AppRouteName.arkCourse,
+            AppRouteName.arkCourseJrc,
             arguments: course,
           );
         } else {
           Get.toNamed(
-            AppRouteName.signin,
+            AppRouteName.arkCourse,
+            arguments: course,
           );
         }
       },

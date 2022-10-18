@@ -257,4 +257,8 @@ class ArkProfileController extends GetxController {
       },
     );
   }
+
+  void getCOba() async {
+    final response = await _useCase.getCoba("id", "token");
+  }
 }

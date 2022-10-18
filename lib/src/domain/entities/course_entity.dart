@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ark_module_regular/src/domain/entities/course_flag_entity.dart';
 import 'package:ark_module_regular/src/domain/entities/instructor_entity.dart';
+import 'package:ark_module_regular/src/domain/entities/mplink_entity.dart';
 import 'package:equatable/equatable.dart';
 
 String courseParseEntityToJson(List<CourseParseEntity> data) =>
@@ -60,6 +61,7 @@ class CourseDataEntity extends Equatable {
     required this.discount,
     required this.courseFlag,
     required this.peluangKarir,
+    required this.mpLinks,
   });
 
   final String averageRating;
@@ -80,6 +82,7 @@ class CourseDataEntity extends Equatable {
   final double discount;
   final CourseFlagEntity courseFlag;
   final List<String> peluangKarir;
+  final List<MpLinkEntity> mpLinks;
 
   CourseDataEntity copyWith({
     String? averageRating,
@@ -100,6 +103,7 @@ class CourseDataEntity extends Equatable {
     double? discount,
     CourseFlagEntity? courseFlag,
     List<String>? peluangKarir,
+    List<MpLinkEntity>? mpLinks,
   }) =>
       CourseDataEntity(
         averageRating: averageRating ?? this.averageRating,
@@ -121,6 +125,7 @@ class CourseDataEntity extends Equatable {
         discount: discount ?? this.discount,
         courseFlag: courseFlag ?? this.courseFlag,
         peluangKarir: peluangKarir ?? this.peluangKarir,
+        mpLinks: mpLinks ?? this.mpLinks,
       );
 
   Map<String, dynamic> toJson() => {
