@@ -221,8 +221,8 @@ class ArkHomeController extends GetxController {
 
   void _getRecomendationCourse() async {
     _changeLoadingRecomendationCourse(true);
-    _setCourseFromCache(_recomendationCourse, "recomendation_classes",
-        _changeLoadingRecomendationCourse(false));
+    // _setCourseFromCache(_recomendationCourse, "recomendation_classes",
+    //     _changeLoadingRecomendationCourse(false));
     final response =
         await _useCase.getListIdCourseByKategori(listIdRecomendationCourseUrl);
     response.fold(
@@ -236,8 +236,8 @@ class ArkHomeController extends GetxController {
 
   void _getPengembanganKarirCourse() async {
     _changeLoadingPengembanganKarirCourse(true);
-    _setCourseFromCache(_pengembanganKarirCourse, "pengembangan_classes",
-        _changeLoadingPengembanganKarirCourse(false));
+    // _setCourseFromCache(_pengembanganKarirCourse, "pengembangan_classes",
+    //     _changeLoadingPengembanganKarirCourse(false));
     final response = await _useCase
         .getListIdCourseByKategori(listIdPengembanganKarirCourseUrl);
     response.fold(
@@ -251,8 +251,8 @@ class ArkHomeController extends GetxController {
 
   void _getBusinessCourse() async {
     _changeLoadingBusinessCourse(true);
-    _setCourseFromCache(_businessCourse, "business_classes",
-        _changeLoadingBusinessCourse(false));
+    // _setCourseFromCache(_businessCourse, "business_classes",
+    //     _changeLoadingBusinessCourse(false));
     final response =
         await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
     response.fold(
@@ -266,8 +266,8 @@ class ArkHomeController extends GetxController {
 
   void _getNewestCourse() async {
     _changeLoadingNewestCourse(true);
-    _setCourseFromCache(
-        _newestCourse, "newest_classes", _changeLoadingNewestCourse(false));
+    // _setCourseFromCache(
+    //     _newestCourse, "newest_classes", _changeLoadingNewestCourse(false));
     final response = await _useCase.getListIdNewestCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -280,8 +280,8 @@ class ArkHomeController extends GetxController {
 
   void _getTrendingCourse() async {
     _changeLoadingTrendingCourse(true);
-    _setCourseFromCache(_trendingCourse, "trending_classes",
-        _changeLoadingTrendingCourse(false));
+    // _setCourseFromCache(_trendingCourse, "trending_classes",
+    //     _changeLoadingTrendingCourse(false));
     final response = await _useCase.getListIdTrendingCourse();
     response.fold(
       ///IF RESPONSE IS ERROR

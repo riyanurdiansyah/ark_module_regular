@@ -75,13 +75,13 @@ class ArkBlogAllPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0),
-              child: Obx(
-                () => ListView(
-                  children: List.generate(
-                    _blogC.blogs.length,
-                    (i) => ArkBlogCard(
+            child: Obx(
+              () => ListView(
+                children: List.generate(
+                  _blogC.blogs.length,
+                  (i) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    child: ArkBlogCard(
                       blogs: _blogC.blogs[i],
                     ),
                   ),

@@ -16,10 +16,18 @@ class ClassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.toNamed(
-        "/ark-course",
-        arguments: course,
-      ),
+      onTap: () {
+        if (course.courseFlag.jrc == "1") {
+          Get.toNamed(
+            AppRouteName.arkCourse,
+            arguments: course,
+          );
+        } else {
+          Get.toNamed(
+            AppRouteName.signin,
+          );
+        }
+      },
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

@@ -51,6 +51,7 @@ class CourseDataDTO extends CourseDataEntity {
     required super.coinCashback,
     required super.discount,
     required super.courseFlag,
+    required super.peluangKarir,
   });
 
   factory CourseDataDTO.fromJson(Map<String, dynamic> json) => CourseDataDTO(
@@ -79,7 +80,7 @@ class CourseDataDTO extends CourseDataEntity {
         totalStudents: json["total_students"] ?? 0,
         instructor: json["instructor"] == null
             ? const InstructorDTO(
-                id: "", name: "name", avatar: AvatarDTO(url: ""), sub: "")
+                id: "", name: "", avatar: AvatarDTO(url: ""), sub: "")
             : InstructorDTO.fromJson(
                 json["instructor"],
               ),
@@ -111,6 +112,10 @@ class CourseDataDTO extends CourseDataEntity {
             : CourseFlagDTO.fromJson(
                 json["course_flag"],
               ),
+        peluangKarir:
+            json["peluang_karir"] == false || json["peluang_karir"] == null
+                ? []
+                : List<String>.from(json["peluang_karir"].map((x) => x)),
 
         // regularPrice: json["regular_price"] ?? "0",
         // salePrice: json["sale_price"] ?? "",

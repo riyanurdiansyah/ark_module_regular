@@ -10,8 +10,8 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'widget/ark_row_with_two_widget.dart';
 
-class ArkCoursePage extends StatelessWidget {
-  ArkCoursePage({Key? key}) : super(key: key);
+class ArkCourseJrcPage extends StatelessWidget {
+  ArkCourseJrcPage({Key? key}) : super(key: key);
 
   final _courseC = Get.find<ArkCourseController>();
 
@@ -293,7 +293,7 @@ class ArkCoursePage extends StatelessWidget {
 
                                       ///TODO: BELUM DI HANDLE
                                       // if (_courseC.detailCourse.value
-                                      //     .peluangKarir!.isNotEmpty)
+                                      //     .peluangKarir.isNotEmpty)
                                       //   PeluangKarirJrc(
                                       //     listUsed: _lcC.detailClass.value
                                       //         .data![0].course!.peluangKarir!,

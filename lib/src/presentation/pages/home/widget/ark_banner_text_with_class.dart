@@ -77,7 +77,18 @@ class ArkBannerTextWithClass extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: AppShimmer.loadHorizontalClass(),
+              child: Row(
+                children: List.generate(
+                  5,
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: AppShimmer.loadImage(
+                      Get.size.width * 0.44,
+                      200,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         if (!isLoading)

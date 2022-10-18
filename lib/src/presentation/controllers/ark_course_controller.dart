@@ -38,6 +38,7 @@ class ArkCourseController extends GetxController {
       jrc: "",
       group: "",
     ),
+    peluangKarir: const [],
   ).obs;
   Rx<CourseDataEntity> get detailCourse => _detailCourse;
 

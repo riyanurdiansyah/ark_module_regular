@@ -11,7 +11,9 @@ class InstructorDTO extends InstructorEntity {
   factory InstructorDTO.fromJson(Map<String, dynamic> json) => InstructorDTO(
         id: json["id"] ?? "",
         name: json["name"] ?? "",
-        avatar: AvatarDTO.fromJson(json["avatar"]),
+        avatar: json["avatar"].runtimeType == String || json["avatar"] == null
+            ? const AvatarDTO(url: "")
+            : AvatarDTO.fromJson(json["avatar"]),
         sub: json["sub"] ?? "",
       );
 }
