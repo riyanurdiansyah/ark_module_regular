@@ -1,4 +1,3 @@
-import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_blog_card.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:ark_module_setup/utils/app_shimmer.dart';

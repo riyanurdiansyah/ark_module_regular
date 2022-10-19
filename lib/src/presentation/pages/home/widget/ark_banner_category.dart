@@ -1,4 +1,3 @@
-import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';

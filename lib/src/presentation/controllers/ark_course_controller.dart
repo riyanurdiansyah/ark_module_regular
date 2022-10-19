@@ -1,10 +1,5 @@
 import 'package:ark_module_regular/src/data/datasources/remote/ark_course_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_course_repository_impl.dart';
-import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/course_flag_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/course_jrc_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/fasilitator_jrc_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/instructor_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_course_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:get/get.dart';

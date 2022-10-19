@@ -4,7 +4,6 @@ import 'dart:isolate';
 import 'dart:ui';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_profile_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_profile_repository_impl.dart';
-import 'package:ark_module_regular/src/domain/entities/sertifikat_entitiy.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:expandable/expandable.dart';

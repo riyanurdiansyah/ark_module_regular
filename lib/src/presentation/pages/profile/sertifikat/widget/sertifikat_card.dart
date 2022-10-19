@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:ark_module_regular/src/domain/entities/sertifikat_entitiy.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';

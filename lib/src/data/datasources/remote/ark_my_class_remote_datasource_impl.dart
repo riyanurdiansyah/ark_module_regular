@@ -1,5 +1,4 @@
 import 'package:ark_module_regular/src/data/datasources/remote/ark_my_class_remote_datasource.dart';
-import 'package:ark_module_regular/src/data/dto/my_course_dto.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:dio/dio.dart';
 

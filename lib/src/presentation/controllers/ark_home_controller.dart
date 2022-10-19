@@ -1,13 +1,6 @@
 import 'dart:convert';
-
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
-import 'package:ark_module_regular/src/data/dto/blog_dto.dart';
-import 'package:ark_module_regular/src/data/dto/course_dto.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
-import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/category_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/slider_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:carousel_slider/carousel_options.dart';
@@ -221,8 +214,8 @@ class ArkHomeController extends GetxController {
 
   void _getRecomendationCourse() async {
     _changeLoadingRecomendationCourse(true);
-    // _setCourseFromCache(_recomendationCourse, "recomendation_classes",
-    //     _changeLoadingRecomendationCourse(false));
+    _setCourseFromCache(_recomendationCourse, "recomendation_classes",
+        _changeLoadingRecomendationCourse(false));
     final response =
         await _useCase.getListIdCourseByKategori(listIdRecomendationCourseUrl);
     response.fold(
@@ -236,8 +229,8 @@ class ArkHomeController extends GetxController {
 
   void _getPengembanganKarirCourse() async {
     _changeLoadingPengembanganKarirCourse(true);
-    // _setCourseFromCache(_pengembanganKarirCourse, "pengembangan_classes",
-    //     _changeLoadingPengembanganKarirCourse(false));
+    _setCourseFromCache(_pengembanganKarirCourse, "pengembangan_classes",
+        _changeLoadingPengembanganKarirCourse(false));
     final response = await _useCase
         .getListIdCourseByKategori(listIdPengembanganKarirCourseUrl);
     response.fold(
@@ -251,8 +244,8 @@ class ArkHomeController extends GetxController {
 
   void _getBusinessCourse() async {
     _changeLoadingBusinessCourse(true);
-    // _setCourseFromCache(_businessCourse, "business_classes",
-    //     _changeLoadingBusinessCourse(false));
+    _setCourseFromCache(_businessCourse, "business_classes",
+        _changeLoadingBusinessCourse(false));
     final response =
         await _useCase.getListIdCourseByKategori(listIdBusinessCourseUrl);
     response.fold(
@@ -266,8 +259,8 @@ class ArkHomeController extends GetxController {
 
   void _getNewestCourse() async {
     _changeLoadingNewestCourse(true);
-    // _setCourseFromCache(
-    //     _newestCourse, "newest_classes", _changeLoadingNewestCourse(false));
+    _setCourseFromCache(
+        _newestCourse, "newest_classes", _changeLoadingNewestCourse(false));
     final response = await _useCase.getListIdNewestCourse();
     response.fold(
       ///IF RESPONSE IS ERROR
@@ -280,8 +273,10 @@ class ArkHomeController extends GetxController {
 
   void _getTrendingCourse() async {
     _changeLoadingTrendingCourse(true);
-    // _setCourseFromCache(_trendingCourse, "trending_classes",
-    //     _changeLoadingTrendingCourse(false));
+
+    ///LOAD DATA FROM CACHE
+    _setCourseFromCache(_trendingCourse, "trending_classes",
+        _changeLoadingTrendingCourse(false));
     final response = await _useCase.getListIdTrendingCourse();
     response.fold(
       ///IF RESPONSE IS ERROR

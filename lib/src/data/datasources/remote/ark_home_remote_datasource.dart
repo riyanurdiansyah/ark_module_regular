@@ -1,7 +1,4 @@
-import 'package:ark_module_regular/src/data/dto/blog_dto.dart';
-import 'package:ark_module_regular/src/data/dto/category_dto.dart';
-import 'package:ark_module_regular/src/data/dto/course_dto.dart';
-import 'package:ark_module_regular/src/data/dto/slider_dto.dart';
+import 'package:ark_module_setup/ark_module_setup.dart';
 
 abstract class ArkHomeRemoteDataSource {
   Future<CategoryDTO> getCategory();

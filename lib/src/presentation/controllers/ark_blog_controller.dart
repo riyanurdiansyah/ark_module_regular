@@ -1,4 +1,4 @@
-import 'package:ark_module_regular/src/domain/entities/blog_entity.dart';
+import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

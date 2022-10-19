@@ -1,11 +1,7 @@
 import 'dart:developer';
 import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_profile_remote_datasource_impl.dart';
-import 'package:ark_module_regular/src/data/dto/provinsi_dto.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_profile_repository_impl.dart';
-import 'package:ark_module_regular/src/domain/entities/city_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
-import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_profile_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

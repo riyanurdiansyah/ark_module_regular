@@ -1,4 +1,3 @@
-import 'package:ark_module_regular/src/domain/entities/provinsi_entity.dart';
 import 'package:ark_module_regular/src/presentation/controllers/ark_edit_profile_controller.dart';
 import 'package:ark_module_regular/src/presentation/controllers/ark_profile_controller.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';

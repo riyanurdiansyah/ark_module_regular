@@ -1,4 +1,3 @@
-import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/widget/ark_empty_course.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';

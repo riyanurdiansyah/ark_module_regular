@@ -1,10 +1,3 @@
-import 'package:ark_module_regular/src/data/dto/city_dto.dart';
-import 'package:ark_module_regular/src/data/dto/coin_dto.dart';
-import 'package:ark_module_regular/src/data/dto/face_recog_dto.dart';
-import 'package:ark_module_regular/src/data/dto/profile_dto.dart';
-import 'package:ark_module_regular/src/data/dto/provinsi_dto.dart';
-import 'package:ark_module_regular/src/data/dto/sertifikat_dto.dart';
-import 'package:ark_module_regular/src/domain/entities/profile_entity.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
