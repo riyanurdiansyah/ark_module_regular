@@ -10,14 +10,8 @@ class ArkMyClassRemoteDataSourceImpl implements ArkMyClassRemoteDataSource {
 
   @override
   Future<List<MyCourseDTO>> getMyCourse(String token) async {
-    final response = await dio.get(
-      myCourseUrl,
-      options: Options(
-        headers: {
-          "Authorization": token,
-        },
-      ),
-    );
+    await dioInterceptor(dio, token);
+    final response = await dio.get(myCourseUrl);
     int code = response.statusCode ?? 500;
     if (code == 200) {
       List<MyCourseDTO> listCourse = [];

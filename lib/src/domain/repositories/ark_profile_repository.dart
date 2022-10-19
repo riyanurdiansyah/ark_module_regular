@@ -24,6 +24,4 @@ abstract class ArkProfileRepository {
 
   Future<Either<Failure, bool>> updateProfilePrakerja(
       String token, Map<String, Map<String, Object>> data);
-
-  Future<Either<Failure, CourseJrcEntity>> getCoba(String id, String token);
 }

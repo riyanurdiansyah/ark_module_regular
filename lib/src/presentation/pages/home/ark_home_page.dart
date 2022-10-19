@@ -85,7 +85,8 @@ class ArkHomePage extends StatelessWidget {
                                 width: 10,
                               ),
                               GestureDetector(
-                                onTap: () => Get.toNamed(AppRouteName.wishlist),
+                                onTap: () =>
+                                    Get.toNamed(AppRouteName.arkWishlist),
                                 child: const Icon(
                                   CupertinoIcons.heart,
                                   color: Colors.white,

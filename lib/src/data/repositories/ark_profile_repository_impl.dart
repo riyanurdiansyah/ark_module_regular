@@ -118,10 +118,4 @@ class ArkProfileRepositoryImpl implements ArkProfileRepository {
       return ExceptionHandleResponse.execute(e);
     }
   }
-
-  @override
-  Future<Either<Failure, CourseJrcEntity>> getCoba(String id, String token) {
-    // TODO: implement getCoba
-    throw UnimplementedError();
-  }
 }

@@ -1,5 +1,6 @@
 import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -257,18 +258,22 @@ class ArkSearchPage extends StatelessWidget {
                               fontWeight: FontWeight.w800, fontSize: 15),
                         ),
                       ),
-                      Obx(
-                        () => Column(
-                          children: List.generate(
-                            _searchC.recomendations.length > 3
-                                ? 3
-                                : _searchC.recomendations.length,
-                            (i) => ArkClassSearchCard(
-                              course: _searchC.recomendations[i],
+                      Obx(() {
+                        if (_searchC.recomendations.isEmpty) {
+                          return AppShimmer.loadBannerBlog();
+                        } else {
+                          return Column(
+                            children: List.generate(
+                              _searchC.recomendations.length > 3
+                                  ? 3
+                                  : _searchC.recomendations.length,
+                              (i) => ArkClassSearchCard(
+                                course: _searchC.recomendations[i],
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                          );
+                        }
+                      }),
                     ],
                   ),
                 ),

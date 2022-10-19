@@ -40,7 +40,4 @@ class ArkProfileUseCase {
   Future<Either<Failure, bool>> updateProfilePrakerja(
           String id, Map<String, Map<String, Object>> data) async =>
       await repository.updateProfilePrakerja(id, data);
-
-  Future<Either<Failure, CourseJrcEntity>> getCoba(String id, token) async =>
-      await repository.getCoba(id, token);
 }

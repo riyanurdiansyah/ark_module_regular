@@ -11,14 +11,8 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
 
   @override
   Future<ProfileDTO> getProfile(String token) async {
-    final response = await dio.get(
-      profileUrl,
-      options: Options(
-        headers: {
-          "Authorization": token,
-        },
-      ),
-    );
+    await dioInterceptor(dio, token);
+    final response = await dio.get(profileUrl);
     int code = response.statusCode ?? 500;
     if (code >= 500) {
       throw CustomException(code, 'Error... failed connect to server');
@@ -63,14 +57,8 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
 
   @override
   Future<FaceRecogDTO> getFaceRecog(String token) async {
-    final response = await dio.get(
-      faceRecogUrl,
-      options: Options(
-        headers: {
-          "Authorization": token,
-        },
-      ),
-    );
+    await dioInterceptor(dio, token);
+    final response = await dio.get(faceRecogUrl);
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return FaceRecogDTO.fromJson(response.data);
@@ -101,15 +89,10 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
 
   @override
   Future<bool> resetPassword(String email, String token) async {
-    final response = await dio.post(
-      resetPasswordUrl,
-      data: {
-        "email": email,
-      },
-      options: Options(headers: {
-        'Authorization': token,
-      }),
-    );
+    await dioInterceptor(dio, token);
+    final response = await dio.post(resetPasswordUrl, data: {
+      "email": email,
+    });
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return response.data['success'];
@@ -165,13 +148,8 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
 
   @override
   Future<bool> updateProfile(ProfileDataEntity profile, String token) async {
-    final response = await dio.put(
-      updateProfileUrl,
-      data: profile.toJson(),
-      options: Options(headers: {
-        'Authorization': token,
-      }),
-    );
+    await dioInterceptor(dio, token);
+    final response = await dio.put(updateProfileUrl, data: profile.toJson());
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return response.data['success'];
@@ -187,13 +165,8 @@ class ArkProfileRemoteDataSourceImpl implements ArkProfileRemoteDataSource {
   @override
   Future<bool> updateProfilePrakerja(
       String token, Map<String, Map<String, Object>> data) async {
-    final response = await dio.post(
-      updateProfileUrl,
-      data: data,
-      options: Options(headers: {
-        'Authorization': token,
-      }),
-    );
+    await dioInterceptor(dio, token);
+    final response = await dio.post(updateProfileUrl, data: data);
     int code = response.statusCode ?? 500;
     if (code == 200) {
       return true;

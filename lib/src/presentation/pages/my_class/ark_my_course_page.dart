@@ -10,7 +10,6 @@ class ArkMyCoursePage extends StatelessWidget {
   ArkMyCoursePage({Key? key}) : super(key: key);
 
   final _myClassC = Get.find<ArkMyCourseController>();
-  final _dashboardC = Get.find<ArkDashboardController>();
 
   @override
   Widget build(BuildContext context) {

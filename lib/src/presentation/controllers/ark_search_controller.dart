@@ -1,9 +1,17 @@
+import 'dart:convert';
+
+import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
+import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
+import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkSearchController extends GetxController {
+  final ArkHomeUseCase _useCase =
+      ArkHomeUseCase(ArkHomeRepositoryImpl(ArkHomeRemoteDataSourceImpl()));
+
   final RxList<CategoryDataEntity> _categories = <CategoryDataEntity>[].obs;
   RxList<CategoryDataEntity> get categories => _categories;
 
@@ -52,14 +60,73 @@ class ArkSearchController extends GetxController {
     _prefs = await SharedPreferences.getInstance();
 
     ///ADDED LIST FROM BEFORE PAGE
+    ///IF BEFORE PAGE SEND DATA
     if (Get.arguments != null) {
       _categories.value = Get.arguments[0] ?? [];
       _recomendations.value = Get.arguments[1] ?? [];
       _listNameSearch.value = Get.arguments[1] ?? [];
     }
 
+    ///ADDED LIST FROM BEFORE PAGE
+    ///IF BEFORE PAGE NOT SEND DATA
+    if (Get.arguments == null) {
+      _getCategory();
+      _getCourse();
+    }
+
     ///ADDED LIST HISTORY
     _histories.value = _prefs.getStringList('history') ?? [];
+  }
+
+  void _getCourse() async {
+    _setCourseFromCache();
+    final response =
+        await _useCase.getListIdCourseByKategori(listIdRecomendationCourseUrl);
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getRecomendationDataCourse(data),
+    );
+  }
+
+  void _setCourseFromCache() {
+    final dataJson = _prefs.getString("recomendation_classes");
+    if (dataJson != null) {
+      final dataDecode = json.decode(dataJson);
+      for (var data in dataDecode) {
+        _recomendations.add(CourseParseDTO.fromJson(data));
+        _listNameSearch.add(CourseParseDTO.fromJson(data));
+      }
+    }
+  }
+
+  void _getRecomendationDataCourse(List<String> listId) async {
+    final response = await _useCase.getCourseFromListId(listId);
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _recomendations.value = data;
+      _listNameSearch.value = data;
+    });
+  }
+
+  void _getCategory() async {
+    final response = await _useCase.getCategory();
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _categories.value = data.data;
+    });
   }
 
   void _scrollListener() {

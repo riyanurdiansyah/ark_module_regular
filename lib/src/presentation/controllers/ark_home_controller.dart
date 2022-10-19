@@ -198,8 +198,8 @@ class ArkHomeController extends GetxController {
       final dataDecode = json.decode(dataJson);
       for (var data in dataDecode) {
         course.add(CourseParseDTO.fromJson(data));
-        await changeLoading;
       }
+      await changeLoading;
     }
   }
 
@@ -274,7 +274,7 @@ class ArkHomeController extends GetxController {
   void _getTrendingCourse() async {
     _changeLoadingTrendingCourse(true);
 
-    ///LOAD DATA FROM CACHE
+    ///LOAD DATA FROM
     _setCourseFromCache(_trendingCourse, "trending_classes",
         _changeLoadingTrendingCourse(false));
     final response = await _useCase.getListIdTrendingCourse();
