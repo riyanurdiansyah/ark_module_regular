@@ -57,13 +57,16 @@ class ArkWishlistController extends GetxController {
 
   void deleteWishlist(int courseId) async {
     final response = await _useCase.deleteWishlist(courseId, _token.value);
-    response.fold((fail) => ExceptionHandle.execute(fail), (data) {
-      if (data) {
-        _wishlist.removeWhere((e) => e.course.id == courseId);
-      } else {
-        Fluttertoast.showToast(msg: "Gagal menghapus wishlist... coba lagi");
-      }
-    });
+    response.fold(
+      (fail) => ExceptionHandle.execute(fail),
+      (data) {
+        if (data) {
+          _wishlist.removeWhere((e) => e.course.id == courseId);
+        } else {
+          Fluttertoast.showToast(msg: "Gagal menghapus wishlist... coba lagi");
+        }
+      },
+    );
   }
 
   Future _changeLoading(bool val) async {

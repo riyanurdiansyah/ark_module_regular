@@ -4,6 +4,7 @@ export 'src/presentation/pages/ark_dashboard_page.dart';
 export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';
 export 'src/presentation/pages/home/ark_category_page.dart';
+export 'src/presentation/pages/home/ark_category_result_page.dart';
 export 'src/presentation/pages/home/ark_home_page.dart';
 export 'src/presentation/pages/blog/ark_blog_all_page.dart';
 export 'src/presentation/pages/blog/ark_blog_detail_page.dart';
@@ -23,6 +24,7 @@ export 'src/presentation/controllers/ark_blog_controller.dart';
 export 'src/presentation/controllers/ark_search_controller.dart';
 export 'src/presentation/controllers/ark_course_controller.dart';
 export 'src/presentation/controllers/ark_wishlist_controller.dart';
+export 'src/presentation/controllers/ark_category_controller.dart';
 
 export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';

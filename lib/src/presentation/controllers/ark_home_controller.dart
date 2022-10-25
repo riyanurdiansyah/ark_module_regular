@@ -89,9 +89,12 @@ class ArkHomeController extends GetxController {
 
   late SharedPreferences _prefs;
 
+  final Rx<bool> _isLogin = false.obs;
+  Rx<bool> get isLogin => _isLogin;
+
   @override
   void onInit() async {
-    _prefs = await SharedPreferences.getInstance();
+    await _setup();
     _getVersion();
     _getCategory();
     _getImageSlider();
@@ -107,6 +110,7 @@ class ArkHomeController extends GetxController {
   }
 
   void onRefresh() {
+    _setup();
     _getCategory();
     _getImageSlider();
     _getCourseJRC();
@@ -116,6 +120,11 @@ class ArkHomeController extends GetxController {
     _getPengembanganKarirCourse();
     _getRecomendationCourse();
     _getBlogs();
+  }
+
+  Future _setup() async {
+    _prefs = await SharedPreferences.getInstance();
+    _isLogin.value = _prefs.getBool('user_login') ?? false;
   }
 
   Future _changeLoading(bool val) async {

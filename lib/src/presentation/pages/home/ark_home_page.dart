@@ -1,4 +1,4 @@
-import 'package:ark_module_regular/src/presentation/controllers/ark_home_controller.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_blog.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_category.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_category_top.dart';
@@ -156,6 +156,7 @@ class ArkHomePage extends StatelessWidget {
                   categories: _homeC.category.value.data,
                   selectedCategory: _homeC.selectedCategoryIndex.value,
                   isLoading: _homeC.isLoadingCategory.value,
+                  isHome: true,
                 ),
               ),
               ArkSliderHome(),
