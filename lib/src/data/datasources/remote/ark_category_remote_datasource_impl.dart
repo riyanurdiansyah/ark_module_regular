@@ -28,4 +28,23 @@ class ArkCategoryRemoteDataSourceImpl implements ArkCategoryRemoteDataSource {
       'Failed Get List Id Trending Course... Please try again',
     );
   }
+
+  @override
+  Future<List<String>> getListIdCourseNewest() async {
+    List<String> listId = [];
+    final response = await dio.get(listIdNewestCourseUrl);
+    int code = response.statusCode ?? 500;
+    if (code == 200) {
+      for (var data in response.data["data"]) {
+        listId.add(data.toString());
+      }
+      return listId;
+    }
+    return ExceptionHandleResponseAPI.execute(
+      code,
+      response,
+      'Error Get List Id Trending Course... failed connect to server',
+      'Failed Get List Id Trending Course... Please try again',
+    );
+  }
 }

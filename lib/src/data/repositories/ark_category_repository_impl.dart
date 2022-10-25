@@ -20,4 +20,15 @@ class ArkCategoryRepositoryImpl implements ArkCategoryRepository {
       return ExceptionHandleResponse.execute(e);
     }
   }
+
+  @override
+  Future<Either<Failure, List<String>>> getListIdCourseNewest() async {
+    try {
+      final course = await dataSource.getListIdCourseNewest();
+      return Right(course);
+    } catch (e) {
+      log("ERROR CATEGORY REPO GET LIST ID COURSE: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
 }

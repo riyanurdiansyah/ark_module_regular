@@ -105,10 +105,6 @@ class ArkHomePage extends StatelessWidget {
                       color: kPrimaryColorNew,
                       child: GestureDetector(
                         onTap: () {
-                          // _dC.firstInit.value = true;
-                          // Get.to(() => SearchPage(),
-                          //     transition: Transition.downToUp);
-
                           Get.toNamed(
                             AppRouteName.search,
                             arguments: [
@@ -196,6 +192,10 @@ class ArkHomePage extends StatelessWidget {
                   title: "Kelas Terbaru",
                   listCourse: _homeC.newestCourse,
                   isLoading: _homeC.isLoadingNewestCourse.value,
+                  isMore: true,
+                  more: () {
+                    Get.toNamed(AppRouteName.arkCategoryResult);
+                  },
                 ),
               ),
               const SizedBox(height: 20),
@@ -204,6 +204,13 @@ class ArkHomePage extends StatelessWidget {
                   title: "Bisnis",
                   listCourse: _homeC.businessCourse,
                   isLoading: _homeC.isLoadingBusinessCourse.value,
+                  isMore: true,
+                  more: () {
+                    Get.toNamed(
+                      AppRouteName.arkCategoryResult,
+                      arguments: 562,
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 20),
@@ -212,6 +219,13 @@ class ArkHomePage extends StatelessWidget {
                   title: "Pengembangan Diri",
                   listCourse: _homeC.pengembanganKarirCourse,
                   isLoading: _homeC.isLoadingPengembanganKarirCourse.value,
+                  isMore: true,
+                  more: () {
+                    Get.toNamed(
+                      AppRouteName.arkCategoryResult,
+                      arguments: 1733,
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 26),

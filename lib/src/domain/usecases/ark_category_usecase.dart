@@ -9,4 +9,7 @@ class ArkCategoryUseCase {
 
   Future<Either<Failure, List<String>>> getListIdCourse(int categoryId) async =>
       await repository.getListIdCourse(categoryId);
+
+  Future<Either<Failure, List<String>>> getListIdCourseNewest() async =>
+      await repository.getListIdCourseNewest();
 }

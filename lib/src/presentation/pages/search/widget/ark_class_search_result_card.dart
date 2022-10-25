@@ -43,7 +43,7 @@ class ArkClassSearchResultCard extends StatelessWidget {
                     ),
                     width: 96,
                     height: 96,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),

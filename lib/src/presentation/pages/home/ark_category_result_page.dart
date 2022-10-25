@@ -49,7 +49,7 @@ class ArkCategoryResultPage extends StatelessWidget {
               () => ArkBannerCategoryTop(
                 categories: _ctgC.categories,
                 selectedCategory: _ctgC.selectedCategory.value,
-                isLoading: _ctgC.isLoading.value,
+                isLoading: _ctgC.isLoadingCategory.value,
                 isHome: false,
               ),
             ),
@@ -63,7 +63,9 @@ class ArkCategoryResultPage extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      _ctgC.categories[_ctgC.selectedCategory.value].name,
+                      _ctgC.isLoadingCategory.value
+                          ? "..."
+                          : _ctgC.categories[_ctgC.selectedCategory.value].name,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w800),
                     ),

@@ -33,6 +33,9 @@ class ArkCategoryController extends GetxController {
   final Rx<bool> _isLoadingCourses = true.obs;
   Rx<bool> get isLoadingCourses => _isLoadingCourses;
 
+  final Rx<bool> _isLoadingCategory = true.obs;
+  Rx<bool> get isLoadingCategory => _isLoadingCategory;
+
   final RxList<CourseParseEntity> _courses = <CourseParseEntity>[].obs;
   RxList<CourseParseEntity> get courses => _courses;
 
@@ -57,15 +60,48 @@ class ArkCategoryController extends GetxController {
     _isLoadingCourses.value = val;
   }
 
+  Future _changeLoadingCategory(bool val) async {
+    _isLoadingCategory.value = val;
+  }
+
   Future _setup() async {
     ///ADD DATA FROM BEFORE PAGE
     if (Get.arguments != null) {
-      _categories.value = Get.arguments[0] ?? [];
-      _selectedCategory.value = Get.arguments[1] ?? 0;
+      if (Get.arguments is List) {
+        _categories.value = Get.arguments[0];
+        _selectedCategory.value = Get.arguments[1];
+        _changeLoadingCategory(false);
+      }
+
+      if (Get.arguments is int) {
+        await _getCategory();
+        _getListIdCourse(Get.arguments);
+        _selectedCategory.value =
+            _categories.indexWhere((e) => e.id == Get.arguments);
+      }
     }
-    // _scrollListener();
+
+    if (Get.arguments == null) {
+      await _getCategory();
+      _getListIdCourseNewest();
+    }
     _controllerList.addListener(_scrollListener);
     _getListIdCourse(_categories[_selectedCategory.value].id);
+  }
+
+  Future _getCategory() async {
+    _changeLoadingCategory(true);
+    final response = await _useCaseHome.getCategory();
+    response.fold(
+
+        ///IF RESPONSE IS ERROR
+        (fail) => ExceptionHandle.execute(fail),
+
+        ///IF RESPONSE SUCCESS
+        (data) {
+      _categories.value = data.data;
+    });
+    await _changeLoadingCategory(false);
   }
 
   void _scrollListener() {
@@ -81,6 +117,19 @@ class ArkCategoryController extends GetxController {
   Future _getListIdCourse(int categoryId) async {
     _changeLoadingCourses(true);
     final response = await _useCase.getListIdCourse(categoryId);
+
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) => _getCoursesByListId(data),
+    );
+  }
+
+  Future _getListIdCourseNewest() async {
+    _changeLoadingCourses(true);
+    final response = await _useCase.getListIdCourseNewest();
 
     response.fold(
       ///IF RESPONSE IS ERROR
