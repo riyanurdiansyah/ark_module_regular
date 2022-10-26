@@ -15,6 +15,7 @@ export 'src/presentation/pages/wishlist/ark_wishlist_page.dart';
 export 'src/presentation/pages/minicourse/ark_gamebase_page.dart';
 export 'src/presentation/pages/minicourse/ark_minicourse_webview_page.dart';
 export 'src/presentation/pages/minicourse/ark_minicourse_page.dart';
+export 'src/presentation/pages/notif/ark_notification_page.dart';
 export 'src/presentation/pages/profile/face_recog/change_face_recognition_page.dart';
 
 export 'src/presentation/controllers/ark_dashboard_controller.dart';
@@ -28,6 +29,7 @@ export 'src/presentation/controllers/ark_search_controller.dart';
 export 'src/presentation/controllers/ark_course_controller.dart';
 export 'src/presentation/controllers/ark_wishlist_controller.dart';
 export 'src/presentation/controllers/ark_category_controller.dart';
+export 'src/presentation/controllers/ark_notification_controller.dart';
 
 export 'src/presentation/pages/profile/ark_edit_profile_page.dart';
 export 'src/presentation/pages/profile/ark_profile_page.dart';

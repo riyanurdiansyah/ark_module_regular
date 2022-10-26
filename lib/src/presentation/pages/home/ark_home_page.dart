@@ -20,7 +20,6 @@ import 'widget/ark_banner_text_with_grid_class.dart';
 class ArkHomePage extends StatelessWidget {
   ArkHomePage({Key? key}) : super(key: key);
 
-  final _spfC = Get.find<ArkSpfController>();
   final _homeC = Get.find<ArkHomeController>();
 
   @override
@@ -67,7 +66,7 @@ class ArkHomePage extends StatelessWidget {
                           height: 30,
                         ),
                         const Spacer(),
-                        if (_spfC.isLogin.value)
+                        if (_homeC.isLogin.value)
                           Row(
                             children: [
                               GestureDetector(
