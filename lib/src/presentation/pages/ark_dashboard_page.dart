@@ -1,3 +1,4 @@
+import 'package:ark_module_profile/ark_module_profile.dart';
 import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/ark_my_course_page.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';

@@ -11,6 +11,9 @@ dependencies:
   ark_module_setup:
     path: ../ark_module_setup
 
+  ark_module_profile:
+    path: ../ark_module_profile
+
   # ark_module_setup:
   #   git:
   #     url: https://github.com/riyanurdiansyah/ark_module_setup.git
