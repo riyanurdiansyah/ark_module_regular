@@ -97,4 +97,16 @@ class ArkHomeRepositoryImpl implements ArkHomeRepository {
       return ExceptionHandleResponse.execute(e);
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> postGameBase(
+      String email, String cardbase) async {
+    try {
+      final gamee = await dataSource.postGameBase(email, cardbase);
+      return Right(gamee);
+    } catch (e) {
+      log("ERROR HOME REPO POST GAMEE: ${e.toString()}");
+      return ExceptionHandleResponse.execute(e);
+    }
+  }
 }

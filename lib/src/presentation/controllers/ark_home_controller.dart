@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
@@ -92,6 +93,9 @@ class ArkHomeController extends GetxController {
   final Rx<bool> _isLogin = false.obs;
   Rx<bool> get isLogin => _isLogin;
 
+  final Rx<String> _email = "".obs;
+  Rx<String> get email => _email;
+
   @override
   void onInit() async {
     await _setup();
@@ -125,6 +129,8 @@ class ArkHomeController extends GetxController {
   Future _setup() async {
     _prefs = await SharedPreferences.getInstance();
     _isLogin.value = _prefs.getBool('user_login') ?? false;
+    _email.value = _prefs.getString('user_email') ?? "";
+    log("EMAIL SPF : ${_email.value}");
   }
 
   Future _changeLoading(bool val) async {
@@ -419,5 +425,26 @@ class ArkHomeController extends GetxController {
       },
     );
     await _changeLoadingImageSlider(false);
+  }
+
+  void postGameBase(
+    String cardbase, {
+    String? cardbaseUrl,
+  }) async {
+    final response = await _useCase.postGameBase(_email.value, cardbase);
+    response.fold(
+      ///IF RESPONSE IS ERROR
+      (fail) => ExceptionHandle.execute(fail),
+
+      ///IF RESPONSE SUCCESS
+      (data) {
+        if (cardbase == "gamee") {
+          Get.toNamed(AppRouteName.gamee);
+        } else {
+          Get.toNamed(AppRouteName.minicourseDetail,
+              arguments: cardbaseUrl ?? "");
+        }
+      },
+    );
   }
 }

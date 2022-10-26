@@ -181,7 +181,7 @@ class ArkActiveCourseCard extends StatelessWidget {
                         ),
                         LinearPercentIndicator(
                           padding: EdgeInsets.zero,
-                          linearStrokeCap: LinearStrokeCap.butt,
+                          barRadius: const Radius.circular(2),
                           leading: Text(
                             "${double.parse(course.userProgress.toString()).floor()}%    ",
                             style: TextStyle(
@@ -200,7 +200,6 @@ class ArkActiveCourseCard extends StatelessWidget {
                               : const Color(0xff1B91D9),
                           backgroundColor:
                               const Color.fromRGBO(229, 230, 233, 1),
-                          barRadius: const Radius.circular(2),
                         ),
                         // const SizedBox(height: 2),
                       ],

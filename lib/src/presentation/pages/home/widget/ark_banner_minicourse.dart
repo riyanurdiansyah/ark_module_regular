@@ -1,9 +1,12 @@
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ArkMiniCourse extends StatelessWidget {
-  const ArkMiniCourse({Key? key}) : super(key: key);
+class ArkBannerMiniCourse extends StatelessWidget {
+  ArkBannerMiniCourse({Key? key}) : super(key: key);
+
+  final _homeC = Get.find<ArkHomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class ArkMiniCourse extends StatelessWidget {
               ),
               const Spacer(),
               GestureDetector(
-                onTap: () {},
+                onTap: () => Get.toNamed(AppRouteName.minicourse),
                 child: Text(
                   'Lihat Semua',
                   style: TextStyle(
@@ -56,19 +59,7 @@ class ArkMiniCourse extends StatelessWidget {
           height: 10,
         ),
         GestureDetector(
-          onTap: () {
-            // SystemChrome.setPreferredOrientations([
-            //   DeviceOrientation.landscapeRight,
-            //   DeviceOrientation.landscapeLeft,
-            // ]);
-            // http.post(Uri.parse(
-            //     'https://us-central1-arkademi-flutter-v201.cloudfunctions.net/app/cardbase/?cardbase=gamee&email=${_aC.email.value}'));
-            // Future.delayed(
-            //     const Duration(seconds: 1),
-            //     () => Get.to(
-            //           () => GameBasedWebView('https://game.arkd.me'),
-            //         ));
-          },
+          onTap: () => _homeC.postGameBase("gamee"),
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 18),
             elevation: 3,
@@ -90,7 +81,8 @@ class ArkMiniCourse extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 18),
             itemBuilder: (ctx, i) {
               return GestureDetector(
-                onTap: () {},
+                onTap: () => _homeC.postGameBase(cardBase[i]['subtitle']!,
+                    cardbaseUrl: cardBase[i]['link']),
                 child: Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),

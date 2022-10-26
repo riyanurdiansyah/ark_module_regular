@@ -32,4 +32,8 @@ class ArkHomeUseCase {
 
   Future<Either<Failure, List<BlogEntity>>> getBlogs(int page) async =>
       await repository.getBlogs(page);
+
+  Future<Either<Failure, bool>> postGameBase(
+          String email, String cardbase) async =>
+      await repository.postGameBase(email, cardbase);
 }

@@ -12,6 +12,9 @@ export 'src/presentation/pages/search/ark_search_page.dart';
 export 'src/presentation/pages/course/ark_course_jrc_page.dart';
 export 'src/presentation/pages/course/ark_course_page.dart';
 export 'src/presentation/pages/wishlist/ark_wishlist_page.dart';
+export 'src/presentation/pages/minicourse/ark_gamebase_page.dart';
+export 'src/presentation/pages/minicourse/ark_minicourse_webview_page.dart';
+export 'src/presentation/pages/minicourse/ark_minicourse_page.dart';
 export 'src/presentation/pages/profile/face_recog/change_face_recognition_page.dart';
 
 export 'src/presentation/controllers/ark_dashboard_controller.dart';

@@ -158,7 +158,6 @@ class ArkFinishedCourseCard extends StatelessWidget {
                           ),
                           LinearPercentIndicator(
                             padding: EdgeInsets.zero,
-                            linearStrokeCap: LinearStrokeCap.butt,
                             leading: Text(
                               "100%    ",
                               style: TextStyle(

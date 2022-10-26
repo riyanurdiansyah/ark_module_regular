@@ -64,7 +64,7 @@ class ArkBlogDetailPage extends StatelessWidget {
                             ' • ${DateFormat('MMM d, yyyy', "id_ID").format(blog.date)}')
                   ])),
             ),
-            blog.featuredImg != null
+            blog.featuredImg.isNotEmpty
                 ? Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: ClipRRect(

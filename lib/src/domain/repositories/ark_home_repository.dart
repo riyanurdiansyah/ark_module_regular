@@ -19,4 +19,6 @@ abstract class ArkHomeRepository {
       String urlKategori);
 
   Future<Either<Failure, List<BlogEntity>>> getBlogs(int page);
+
+  Future<Either<Failure, bool>> postGameBase(String email, String cardbase);
 }

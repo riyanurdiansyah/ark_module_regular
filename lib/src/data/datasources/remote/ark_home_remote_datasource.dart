@@ -16,4 +16,6 @@ abstract class ArkHomeRemoteDataSource {
   Future<List<String>> getListIdCourseByKategori(String urlKategori);
 
   Future<List<BlogDTO>> getBlogs(int page);
+
+  Future<bool> postGameBase(String email, String cardbase);
 }

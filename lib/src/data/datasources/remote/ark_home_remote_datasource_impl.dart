@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:dio/dio.dart';
 
@@ -149,5 +151,21 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
     }
 
     return blogs;
+  }
+
+  @override
+  Future<bool> postGameBase(String email, String cardbase) async {
+    final response = await dio.post(
+      gamebaseUrl,
+      queryParameters: {
+        "cardbase": "gamee",
+        "email": email,
+      },
+    );
+    log("CHECK GAMEE : ${response.data}");
+    if (response.data['status'] == "success") {
+      return true;
+    }
+    return false;
   }
 }

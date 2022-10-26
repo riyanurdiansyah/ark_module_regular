@@ -178,7 +178,7 @@ class ArkHomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25),
-              const ArkMiniCourse(),
+              ArkBannerMiniCourse(),
               const SizedBox(height: 20),
               Obx(
                 () => ArkBannerCategory(
@@ -192,10 +192,10 @@ class ArkHomePage extends StatelessWidget {
                   title: "Kelas Terbaru",
                   listCourse: _homeC.newestCourse,
                   isLoading: _homeC.isLoadingNewestCourse.value,
-                  isMore: true,
-                  more: () {
-                    Get.toNamed(AppRouteName.arkCategoryResult);
-                  },
+                  // isMore: true,
+                  // more: () {
+                  //   Get.toNamed(AppRouteName.arkCategoryResult);
+                  // },
                 ),
               ),
               const SizedBox(height: 20),
