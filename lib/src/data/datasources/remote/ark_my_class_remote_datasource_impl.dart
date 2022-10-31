@@ -24,7 +24,6 @@ class ArkMyClassRemoteDataSourceImpl implements ArkMyClassRemoteDataSource {
       code,
       response,
       'Error Get My Course... failed connect to server',
-      'Failed Get My Course... Please try again',
     );
   }
 }
