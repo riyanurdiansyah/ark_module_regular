@@ -8,13 +8,21 @@ class ArkDashboardController extends GetxController {
 
   late SharedPreferences _prefs;
 
-  final Rx<int> _selectedIndex = 0.obs;
+  final Rx<int> _selectedIndex = 1.obs;
   Rx<int> get selectedIndex => _selectedIndex;
+
+  final Rx<bool> _isLogin = false.obs;
+  Rx<bool> get isLogin => _isLogin;
 
   @override
   void onInit() async {
-    _prefs = await SharedPreferences.getInstance();
+    _setup();
     super.onInit();
+  }
+
+  void _setup() async {
+    _prefs = await SharedPreferences.getInstance();
+    _isLogin.value = _prefs.getBool('user_login') ?? false;
   }
 
   Future<bool> onWillPop() async => await AppDialog.dialogOnWillPop() ?? false;
