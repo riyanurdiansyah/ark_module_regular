@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
@@ -130,7 +129,6 @@ class ArkHomeController extends GetxController {
     _prefs = await SharedPreferences.getInstance();
     _isLogin.value = _prefs.getBool('user_login') ?? false;
     _email.value = _prefs.getString('user_email') ?? "";
-    log("EMAIL SPF : ${_email.value}");
   }
 
   Future _changeLoading(bool val) async {

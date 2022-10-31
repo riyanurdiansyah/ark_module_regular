@@ -6,7 +6,6 @@ import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_minicourse.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_prakerja.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_preparation_test.dart';
-import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_text_with_class.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_version.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_slider_home.dart';
 import 'package:ark_module_setup/ark_module_setup.dart';

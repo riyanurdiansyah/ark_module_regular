@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:dio/dio.dart';
 
@@ -162,7 +160,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
         "email": email,
       },
     );
-    log("CHECK GAMEE : ${response.data}");
     if (response.data['status'] == "success") {
       return true;
     }

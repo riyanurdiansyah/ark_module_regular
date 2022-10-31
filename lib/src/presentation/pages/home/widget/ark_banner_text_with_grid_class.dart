@@ -3,8 +3,6 @@ import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'ark_class_card.dart';
-
 class ArkBannerTextWithGridClass extends StatelessWidget {
   const ArkBannerTextWithGridClass({
     Key? key,
@@ -92,7 +90,7 @@ class ArkBannerTextWithGridClass extends StatelessWidget {
               runSpacing: 4,
               children: List.generate(
                 listCourse.length < 6 ? listCourse.length : 6,
-                (index) => ClassCard(
+                (index) => ArkClassCard(
                   course: listCourse[index].course,
                 ),
               ),

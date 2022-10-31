@@ -244,14 +244,10 @@ class ArkActiveCourseCard extends StatelessWidget {
                           : ButtonReusableWidget(
                               isOutlinedButton: true,
                               onPressed: () async {
-                                // _lCC.isLoadingDetailClass.value = true;
-                                // loadingAuthDismissableDialog();
-                                // await _lCC
-                                //     .fetchDetailClass(course.id);
-                                // Get.back();
-                                // expiry == true
-                                //     ? Get.to(() => const CheckoutPage())
-                                //     : Get.to(() => const ClassPage());
+                                Get.toNamed(
+                                  AppRouteName.arkCourse,
+                                  arguments: course,
+                                );
                               },
                               borderSide: MaterialStateProperty.all(
                                 const BorderSide(
