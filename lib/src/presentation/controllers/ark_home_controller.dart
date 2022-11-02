@@ -9,9 +9,6 @@ import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkHomeController extends GetxController {
-  final ArkHomeUseCase _useCase =
-      ArkHomeUseCase(ArkHomeRepositoryImpl(ArkHomeRemoteDataSourceImpl()));
-
   final Rx<int> _indexSlider = 0.obs;
   Rx<int> get indexSlider => _indexSlider;
 
@@ -95,6 +92,13 @@ class ArkHomeController extends GetxController {
   final Rx<String> _email = "".obs;
   Rx<String> get email => _email;
 
+  late ArkHomeUseCase _useCase;
+  late ArkHomeRepositoryImpl _repository;
+  late ArkHomeRemoteDataSourceImpl _dataSource;
+
+  // final ArkHomeUseCase _useCase =
+  //     ArkHomeUseCase(ArkHomeRepositoryImpl(ArkHomeRemoteDataSourceImpl()));
+
   @override
   void onInit() async {
     await _setup();
@@ -126,6 +130,10 @@ class ArkHomeController extends GetxController {
   }
 
   Future _setup() async {
+    _dataSource = ArkHomeRemoteDataSourceImpl();
+    _repository = ArkHomeRepositoryImpl(_dataSource);
+    _useCase = ArkHomeUseCase(_repository);
+
     _prefs = await SharedPreferences.getInstance();
     _isLogin.value = _prefs.getBool('user_login') ?? false;
     _email.value = _prefs.getString('user_email') ?? "";
