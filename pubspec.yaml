@@ -12,9 +12,11 @@ dependencies:
     git:
       url: https://github.com/riyanurdiansyah/ark_module_setup.git
       ref: master
-
+    
   ark_module_profile:
-    path: ../ark_module_profile
+    git:
+      url: https://github.com/riyanurdiansyah/ark_module_profile.git
+      ref: master
 
   # ark_module_setup:
   #   git:
