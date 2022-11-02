@@ -20,7 +20,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       code,
       response,
       'Error Get Category... failed connect to server',
-      'Failed Get Category... Please try again',
     );
   }
 
@@ -35,7 +34,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       code,
       response,
       'Error Get Image Slider... failed connect to server',
-      'Failed Get Image Slider... Please try again',
     );
   }
 
@@ -50,7 +48,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       code,
       response,
       'Error Get Course JRC... failed connect to server',
-      'Failed Get Course JRC... Please try again',
     );
   }
 
@@ -70,7 +67,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       code,
       response,
       'Error Get List Id Trending Course... failed connect to server',
-      'Failed Get List Id Trending Course... Please try again',
     );
   }
 
@@ -105,7 +101,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       code,
       response,
       'Error Get List Id Newest Course... failed connect to server',
-      'Failed Get List Id Newest Course... Please try again',
     );
   }
 
@@ -133,7 +128,6 @@ class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
       code,
       response,
       'Error Get List Id Newest Course... failed connect to server',
-      'Failed Get List Id Newest Course... Please try again',
     );
   }
 

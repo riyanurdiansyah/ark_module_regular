@@ -25,7 +25,6 @@ class ArkCategoryRemoteDataSourceImpl implements ArkCategoryRemoteDataSource {
       code,
       response,
       'Error Get List Id Trending Course... failed connect to server',
-      'Failed Get List Id Trending Course... Please try again',
     );
   }
 
@@ -44,7 +43,6 @@ class ArkCategoryRemoteDataSourceImpl implements ArkCategoryRemoteDataSource {
       code,
       response,
       'Error Get List Id Trending Course... failed connect to server',
-      'Failed Get List Id Trending Course... Please try again',
     );
   }
 }
