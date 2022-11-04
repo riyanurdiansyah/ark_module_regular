@@ -8,8 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ark_module_regular/utils/app_url.dart';
 
 class ArkSearchController extends GetxController {
-  final ArkHomeUseCase _useCase =
-      ArkHomeUseCase(ArkHomeRepositoryImpl(ArkHomeRemoteDataSourceImpl()));
+  late ArkHomeUseCase _useCase;
+  late ArkHomeRepositoryImpl _repository;
+  late ArkHomeRemoteDataSourceImpl _dataSource;
 
   final RxList<CategoryDataEntity> _categories = <CategoryDataEntity>[].obs;
   RxList<CategoryDataEntity> get categories => _categories;
@@ -55,6 +56,10 @@ class ArkSearchController extends GetxController {
   }
 
   Future _setup() async {
+    _dataSource = ArkHomeRemoteDataSourceImpl();
+    _repository = ArkHomeRepositoryImpl(_dataSource);
+    _useCase = ArkHomeUseCase(_repository);
+
     _scrollController.addListener(_scrollListener);
     _prefs = await SharedPreferences.getInstance();
 

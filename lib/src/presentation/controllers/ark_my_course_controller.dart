@@ -8,8 +8,9 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkMyCourseController extends GetxController {
-  final ArkMyClassUseCase _useCase = ArkMyClassUseCase(
-      ArkMyClassRepositoryImpl(ArkMyClassRemoteDataSourceImpl()));
+  late ArkMyClassRemoteDataSourceImpl _dataSource;
+  late ArkMyClassRepositoryImpl _repository;
+  late ArkMyClassUseCase _useCase;
 
   final Rx<bool> _isLoading = true.obs;
   Rx<bool> get isLoading => _isLoading;
@@ -57,6 +58,10 @@ class ArkMyCourseController extends GetxController {
   }
 
   Future _setup() async {
+    _dataSource = ArkMyClassRemoteDataSourceImpl();
+    _repository = ArkMyClassRepositoryImpl(_dataSource);
+    _useCase = ArkMyClassUseCase(_repository);
+
     prefs = await SharedPreferences.getInstance();
     _token.value = prefs.getString('token_access') ?? '';
     _isLogin.value = prefs.getBool('user_login') ?? false;

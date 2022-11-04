@@ -11,8 +11,9 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkWishlistController extends GetxController {
-  final ArkWishlistUseCase _useCase = ArkWishlistUseCase(
-      ArkWishlistRepositoryImpl(ArkWishlistRemoteDataSourceImpl()));
+  late ArkWishlistRemoteDataSourceImpl _dataSource;
+  late ArkWishlistRepositoryImpl _repository;
+  late ArkWishlistUseCase _useCase;
 
   final ArkHomeUseCase _useCaseHome =
       ArkHomeUseCase(ArkHomeRepositoryImpl(ArkHomeRemoteDataSourceImpl()));
@@ -30,13 +31,17 @@ class ArkWishlistController extends GetxController {
 
   @override
   void onInit() async {
-    _setup();
+    await _setup();
     _getWishlist();
     await _changeLoading(false);
     super.onInit();
   }
 
   Future _setup() async {
+    _dataSource = ArkWishlistRemoteDataSourceImpl();
+    _repository = ArkWishlistRepositoryImpl(_dataSource);
+    _useCase = ArkWishlistUseCase(_repository);
+
     _prefs = await SharedPreferences.getInstance();
     _token.value = _prefs.getString('token_access') ?? '';
     _getWishlist();
