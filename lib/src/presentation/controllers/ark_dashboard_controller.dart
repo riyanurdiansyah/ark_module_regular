@@ -1,4 +1,5 @@
 import 'package:ark_module_regular/utils/app_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +12,9 @@ class ArkDashboardController extends GetxController {
   final Rx<bool> _isLogin = false.obs;
   Rx<bool> get isLogin => _isLogin;
 
+  final Rx<bool> _isLoading = false.obs;
+  Rx<bool> get isLoading => _isLoading;
+
   @override
   void onInit() async {
     await _setup();
@@ -20,6 +24,20 @@ class ArkDashboardController extends GetxController {
   Future _setup() async {
     _prefs = await SharedPreferences.getInstance();
     _isLogin.value = _prefs.getBool('user_login') ?? false;
+
+    /*
+      BISA BUAT DYNAMIC LINK 
+      ATAU
+      BISA BUAT MELAKUKAN KONDISI JIKA KE HOME PAGE
+    */
+    if (Get.arguments != null) {
+      _isLoading.value = true;
+      Fluttertoast.showToast(msg: "ADA ARGUMENT");
+
+      Future.delayed(const Duration(seconds: 2), () {
+        _isLoading.value = false;
+      });
+    }
   }
 
   Future<bool> onWillPop() async => await AppDialog.dialogOnWillPop() ?? false;
