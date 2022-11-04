@@ -1,7 +1,10 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
-import 'package:ark_module_setup/utils/app_shimmer.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
+import 'package:ark_module_regular/widgets/ark_class_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_shimmer.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 
 class ArkBannerTextWithGridClass extends StatelessWidget {
   const ArkBannerTextWithGridClass({

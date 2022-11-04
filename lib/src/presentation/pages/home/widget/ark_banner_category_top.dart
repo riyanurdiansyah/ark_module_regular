@@ -1,9 +1,9 @@
 import 'package:ark_module_regular/ark_module_regular.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
-import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_shimmer.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 import 'ark_category_widget.dart';
 
 class ArkBannerCategoryTop extends StatelessWidget {
@@ -125,9 +125,9 @@ class ArkBannerCategoryTop extends StatelessWidget {
                                   )),
                               child: Text(
                                 categories[i].name,
-                                style: AppStyleText.styleMontserrat(
+                                style: const TextStyle(
                                   fontSize: 11.5,
-                                  color: const Color(0xFF333539),
+                                  color: Color(0xFF333539),
                                   fontWeight: FontWeight.w700,
                                 ),
                               )),

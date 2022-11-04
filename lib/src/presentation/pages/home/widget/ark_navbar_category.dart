@@ -1,4 +1,4 @@
-// import 'package:ark_module_setup/ark_module_setup.dart';
+// import 'package:ark_module_profile/ark_module_profile.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 

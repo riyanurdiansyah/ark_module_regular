@@ -1,9 +1,8 @@
 import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/widget/ark_tab_course_finished.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:ark_module_regular/utils/app_color.dart';
 import 'widget/ark_tab_course_active.dart';
 
 class ArkMyCoursePage extends StatelessWidget {
@@ -18,9 +17,9 @@ class ArkMyCoursePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'Kelas Saya',
-          style: AppStyleText.styleMontserrat(
+          style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 14,
             color: Colors.white,

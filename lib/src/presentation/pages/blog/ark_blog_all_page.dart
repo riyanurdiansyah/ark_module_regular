@@ -1,8 +1,8 @@
-import 'package:ark_module_regular/src/presentation/controllers/ark_blog_controller.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_blog_card.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 
 class ArkBlogAllPage extends StatelessWidget {
   ArkBlogAllPage({Key? key}) : super(key: key);

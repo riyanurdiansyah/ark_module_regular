@@ -8,12 +8,12 @@ import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_preparation_test.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_banner_version.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_slider_home.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 import 'widget/ark_banner_text_with_grid_class.dart';
 
 class ArkHomePage extends StatelessWidget {

@@ -1,8 +1,10 @@
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/home/widget/ark_blog_card.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
-import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_shimmer.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 
 class ArkBannerBlog extends StatelessWidget {
   const ArkBannerBlog({

@@ -1,11 +1,13 @@
 import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/widget/ark_empty_course.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
-import 'package:ark_module_setup/utils/app_shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_shimmer.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
+import 'package:ark_module_regular/utils/app_constanta.dart';
 
 class ArkWishlistPage extends StatelessWidget {
   ArkWishlistPage({Key? key}) : super(key: key);

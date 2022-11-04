@@ -1,10 +1,5 @@
-import 'package:ark_module_regular/src/data/datasources/remote/ark_category_remote_datasource_impl.dart';
-import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
-import 'package:ark_module_regular/src/data/repositories/ark_category_repository_impl.dart';
-import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
-import 'package:ark_module_regular/src/domain/usecases/ark_category_usecase.dart';
-import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

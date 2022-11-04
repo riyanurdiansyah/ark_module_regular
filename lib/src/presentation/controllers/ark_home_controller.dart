@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'package:ark_module_regular/src/data/datasources/remote/ark_home_remote_datasource_impl.dart';
-import 'package:ark_module_regular/src/data/repositories/ark_home_repository_impl.dart';
-import 'package:ark_module_regular/src/domain/usecases/ark_home_usecase.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/data/dto/course_dto.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_url.dart';
 
 class ArkHomeController extends GetxController {
   final Rx<int> _indexSlider = 0.obs;

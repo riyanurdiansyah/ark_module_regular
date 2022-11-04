@@ -1,9 +1,11 @@
+import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/widget/ark_empty_course.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 import 'ark_active_course_card.dart';
 
 class ArkTabCourseActive extends StatelessWidget {
@@ -67,7 +69,7 @@ class ArkTabCourseActive extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: "Peserta Prakerja? ",
-                                style: AppStyleText.styleMontserrat(
+                                style: TextStyle(
                                   fontSize: Get.size.height < 600 ? 10 : 12,
                                   fontWeight: FontWeight.w700,
                                   color: const Color(0xff121315),
@@ -75,7 +77,7 @@ class ArkTabCourseActive extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: "Cek pelatihanmu di sini!",
-                                style: AppStyleText.styleMontserrat(
+                                style: TextStyle(
                                   fontSize: Get.size.height < 600 ? 10 : 12,
                                   fontWeight: FontWeight.w500,
                                   color: const Color(0xff333539),
