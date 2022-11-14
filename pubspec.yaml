@@ -9,7 +9,8 @@ environment:
 
 dependencies:
   ark_module_profile:
-    path: ../ark_module_profile
+     url: https://github.com/riyanurdiansyah/ark_module_profile.git
+     ref: dev
 
   # ark_module_setup:
   #   git:
