@@ -1,7 +1,8 @@
-import 'package:ark_module_regular/src/presentation/controllers/ark_notification_controller.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_constanta_list.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 
 class ArkNotificationPage extends StatelessWidget {
   ArkNotificationPage({Key? key}) : super(key: key);

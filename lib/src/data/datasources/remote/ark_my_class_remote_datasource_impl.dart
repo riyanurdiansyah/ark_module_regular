@@ -1,6 +1,6 @@
-import 'package:ark_module_regular/src/data/datasources/remote/ark_my_class_remote_datasource.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:dio/dio.dart';
+import 'package:ark_module_regular/utils/app_url.dart';
 
 class ArkMyClassRemoteDataSourceImpl implements ArkMyClassRemoteDataSource {
   late Dio dio;

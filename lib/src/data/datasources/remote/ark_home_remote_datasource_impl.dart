@@ -1,7 +1,7 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/data/dto/course_dto.dart';
+import 'package:ark_module_regular/utils/app_url.dart';
 import 'package:dio/dio.dart';
-
-import 'ark_home_remote_datasource.dart';
 
 class ArkHomeRemoteDataSourceImpl implements ArkHomeRemoteDataSource {
   late Dio dio;

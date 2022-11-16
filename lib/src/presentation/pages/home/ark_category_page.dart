@@ -1,8 +1,9 @@
 import 'package:ark_module_regular/ark_module_regular.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 
 class ArkCategoryPage extends StatelessWidget {
   const ArkCategoryPage({
@@ -19,9 +20,9 @@ class ArkCategoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text(
+        title: const Text(
           'Kategori',
-          style: AppStyleText.styleMontserrat(
+          style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 14,
             color: Colors.white,
@@ -88,9 +89,9 @@ class ArkCategoryPage extends StatelessWidget {
                           color: const Color(0xFF4DD2F9),
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Baru',
-                          style: AppStyleText.styleMontserrat(
+                          style: TextStyle(
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
                             fontSize: 10,

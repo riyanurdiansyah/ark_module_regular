@@ -1,11 +1,9 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
-import 'package:ark_module_setup/helper/app_print.dart';
+import 'package:ark_module_regular/utils/app_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkDashboardController extends GetxController {
-  final _spfC = Get.find<ArkSpfController>();
-
   late SharedPreferences _prefs;
 
   final Rx<int> _selectedIndex = 1.obs;
@@ -14,21 +12,37 @@ class ArkDashboardController extends GetxController {
   final Rx<bool> _isLogin = false.obs;
   Rx<bool> get isLogin => _isLogin;
 
+  final Rx<bool> _isLoading = false.obs;
+  Rx<bool> get isLoading => _isLoading;
+
   @override
   void onInit() async {
-    _setup();
+    await _setup();
     super.onInit();
   }
 
-  void _setup() async {
+  Future _setup() async {
     _prefs = await SharedPreferences.getInstance();
     _isLogin.value = _prefs.getBool('user_login') ?? false;
+
+    /*
+      BISA BUAT DYNAMIC LINK 
+      ATAU
+      BISA BUAT MELAKUKAN KONDISI JIKA KE HOME PAGE
+    */
+    if (Get.arguments != null) {
+      _isLoading.value = true;
+      Fluttertoast.showToast(msg: "ADA ARGUMENT");
+
+      Future.delayed(const Duration(seconds: 2), () {
+        _isLoading.value = false;
+      });
+    }
   }
 
   Future<bool> onWillPop() async => await AppDialog.dialogOnWillPop() ?? false;
 
   void onTapNavbar(int i) {
-    AppPrint.debugPrint("CHECK TAP");
     _selectedIndex.value = i;
 
     if (_prefs.getBool('show_dialog_job_course') == null) {
@@ -40,7 +54,7 @@ class ArkDashboardController extends GetxController {
 
     if (DateTime.now().weekday == DateTime.monday) {
       if (selectedIndex.value == 0) {
-        if (_spfC.isLogin.value) {
+        if (_isLogin.value) {
           if (!_prefs.getBool('show_dialog_job_course')!) {
             if (_prefs.getBool('once_click_dialog_job') == true) {
               AppDialog.dialogJRC();
@@ -52,7 +66,6 @@ class ArkDashboardController extends GetxController {
                 AppDialog.dialogJRC();
               }
             } else {
-              AppPrint.debugPrint('another day of monday');
               _prefs.setBool('once_click_dialog_job_weekday', false);
             }
           }

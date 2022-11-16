@@ -1,8 +1,9 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
-import 'package:ark_module_setup/utils/app_shimmer.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_shimmer.dart';
 
 class ArkBannerCategory extends StatelessWidget {
   const ArkBannerCategory({
@@ -19,11 +20,11 @@ class ArkBannerCategory extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Kategori Terpopular',
-            style: AppStyleText.styleMontserrat(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w800,
               color: Colors.black,

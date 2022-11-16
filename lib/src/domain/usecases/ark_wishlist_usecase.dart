@@ -1,5 +1,5 @@
+import 'package:ark_module_regular/src/core/failures.dart';
 import 'package:ark_module_regular/src/domain/repositories/ark_wishlist_repository.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:dartz/dartz.dart';
 
 class ArkWishlistUseCase {

@@ -1,7 +1,9 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
+import 'package:ark_module_regular/utils/app_constanta.dart';
 
 class ArkClassSearchResultCard extends StatelessWidget {
   const ArkClassSearchResultCard({

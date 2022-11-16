@@ -1,7 +1,9 @@
 import 'package:ark_module_profile/ark_module_profile.dart';
 import 'package:ark_module_regular/ark_module_regular.dart';
 import 'package:ark_module_regular/src/presentation/pages/my_class/ark_my_course_page.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/utils/app_constanta_list.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
+import 'package:ark_module_regular/utils/app_color.dart';
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +21,7 @@ class ArkDashboardPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: ConnectivityWidgetWrapper(
           message: 'Tidak ada connection',
-          messageStyle: AppStyleText.styleMontserrat(
+          messageStyle: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -79,7 +81,7 @@ class ArkDashboardPage extends StatelessWidget {
                                 const SizedBox(height: 8),
                                 Text(
                                   navbarItems[i]['text']!,
-                                  style: AppStyleText.styleMontserrat(
+                                  style: TextStyle(
                                     fontSize: 9,
                                     color: _dashboardC.selectedIndex.value == i
                                         ? const Color(0xff1C1D20)
@@ -97,21 +99,22 @@ class ArkDashboardPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () => _dashboardC.selectedIndex.value = 1,
                         child: Align(
-                            alignment: Alignment.topCenter,
-                            child: ClipOval(
-                              child: Container(
-                                width: 53,
-                                height: 53,
-                                color: const Color(0xffFF8017),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(14),
-                                  child: Image.asset(
-                                    'assets/images/kelas_saya_icon.png',
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                          alignment: Alignment.topCenter,
+                          child: ClipOval(
+                            child: Container(
+                              width: 53,
+                              height: 53,
+                              color: const Color(0xffFF8017),
+                              child: Padding(
+                                padding: const EdgeInsets.all(14),
+                                child: Image.asset(
+                                  'assets/images/kelas_saya_icon.png',
+                                  fit: BoxFit.fitWidth,
                                 ),
                               ),
-                            )),
+                            ),
+                          ),
+                        ),
                       ),
                     )
                   ],

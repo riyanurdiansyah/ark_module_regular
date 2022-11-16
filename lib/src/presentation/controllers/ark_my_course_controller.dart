@@ -1,13 +1,16 @@
+import 'package:ark_module_regular/src/core/exception_handling.dart';
 import 'package:ark_module_regular/src/data/datasources/remote/ark_my_class_remote_datasource_impl.dart';
+import 'package:ark_module_regular/src/data/dto/my_course_dto.dart';
 import 'package:ark_module_regular/src/data/repositories/ark_my_class_repository_impl.dart';
+import 'package:ark_module_regular/src/domain/entities/my_course_entity.dart';
 import 'package:ark_module_regular/src/domain/usecases/ark_my_class_usecase.dart';
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ArkMyCourseController extends GetxController {
-  final ArkMyClassUseCase _useCase = ArkMyClassUseCase(
-      ArkMyClassRepositoryImpl(ArkMyClassRemoteDataSourceImpl()));
+  late ArkMyClassRemoteDataSourceImpl _dataSource;
+  late ArkMyClassRepositoryImpl _repository;
+  late ArkMyClassUseCase _useCase;
 
   final Rx<bool> _isLoading = true.obs;
   Rx<bool> get isLoading => _isLoading;
@@ -55,6 +58,10 @@ class ArkMyCourseController extends GetxController {
   }
 
   Future _setup() async {
+    _dataSource = ArkMyClassRemoteDataSourceImpl();
+    _repository = ArkMyClassRepositoryImpl(_dataSource);
+    _useCase = ArkMyClassUseCase(_repository);
+
     prefs = await SharedPreferences.getInstance();
     _token.value = prefs.getString('token_access') ?? '';
     _isLogin.value = prefs.getBool('user_login') ?? false;

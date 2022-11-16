@@ -1,4 +1,5 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
+import 'package:ark_module_regular/widgets/ark_class_card.dart';
 import 'package:flutter/material.dart';
 
 class ArkBannerJRC extends StatelessWidget {
@@ -41,11 +42,11 @@ class ArkBannerJRC extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 4.0),
                   child: Text(
                     "Job Ready Course",
-                    style: AppStyleText.styleMontserrat(
+                    style: TextStyle(
                       fontSize: 17,
                       color: Colors.black,
                       fontWeight: FontWeight.w800,
@@ -62,9 +63,9 @@ class ArkBannerJRC extends StatelessWidget {
                     color: const Color(0xFF4DD2F9),
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Baru",
-                    style: AppStyleText.styleMontserrat(
+                    style: TextStyle(
                       fontSize: 10,
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -77,16 +78,17 @@ class ArkBannerJRC extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 16,
             ),
             child: Text(
               'Kursus online yang siap membantu kamu dalam\nmeningkatkan skill dan mengembangkan karier profesional',
               maxLines: 2,
-              style: AppStyleText.styleSourceSansPro(
+              style: TextStyle(
+                fontFamily: 'SourceSansPro',
                 fontSize: 11,
-                color: const Color(0xFF333539),
+                color: Color(0xFF333539),
                 fontWeight: FontWeight.w400,
                 height: 1.4,
               ),
@@ -102,20 +104,21 @@ class ArkBannerJRC extends StatelessWidget {
             child: InkWell(
               onTap: () => onTapShowAll(),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     'Lihat Semua Kursus',
                     maxLines: 2,
-                    style: AppStyleText.styleSourceSansPro(
+                    style: TextStyle(
+                      fontFamily: 'SourceSansPro',
                       fontSize: 12,
-                      color: const Color(0xFF1B91D9),
+                      color: Color(0xFF1B91D9),
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 6,
                   ),
-                  const Icon(
+                  Icon(
                     Icons.arrow_forward_rounded,
                     size: 12,
                     color: Color(0xFF1B91D9),

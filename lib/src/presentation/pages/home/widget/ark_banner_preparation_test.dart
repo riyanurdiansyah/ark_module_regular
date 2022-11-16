@@ -1,6 +1,6 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ark_module_regular/utils/app_route_name.dart';
 
 class ArkBannerPreparationTest extends StatelessWidget {
   const ArkBannerPreparationTest({Key? key}) : super(key: key);

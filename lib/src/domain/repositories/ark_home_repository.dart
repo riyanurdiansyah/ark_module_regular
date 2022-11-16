@@ -1,4 +1,5 @@
-import 'package:ark_module_setup/ark_module_setup.dart';
+import 'package:ark_module_regular/ark_module_regular.dart';
+import 'package:ark_module_regular/src/domain/entities/course_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ArkHomeRepository {
