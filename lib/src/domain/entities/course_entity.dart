@@ -68,6 +68,7 @@ class CourseDataEntity extends Equatable {
     required this.ratingCount,
     required this.lowongan,
     required this.ygAkanDipelajariWeb,
+    required this.productId,
   });
 
   final String averageRating;
@@ -94,6 +95,7 @@ class CourseDataEntity extends Equatable {
   final String ratingCount;
   final LowonganEntity lowongan;
   final List<String> ygAkanDipelajariWeb;
+  final String productId;
 
   CourseDataEntity copyWith({
     String? averageRating,
@@ -120,6 +122,7 @@ class CourseDataEntity extends Equatable {
     String? ratingCount,
     LowonganEntity? lowongan,
     List<String>? ygAkanDipelajariWeb,
+    String? productId,
   }) =>
       CourseDataEntity(
         averageRating: averageRating ?? this.averageRating,
@@ -147,6 +150,7 @@ class CourseDataEntity extends Equatable {
         ratingCount: ratingCount ?? this.ratingCount,
         lowongan: lowongan ?? this.lowongan,
         ygAkanDipelajariWeb: ygAkanDipelajariWeb ?? this.ygAkanDipelajariWeb,
+        productId: productId ?? this.productId,
       );
 
   Map<String, dynamic> toJson() => {
@@ -172,6 +176,7 @@ class CourseDataEntity extends Equatable {
         "rating_count": ratingCount,
         "lowongan": lowongan.toJson(),
         "yg_akan_dipelajari_web": ygAkanDipelajariWeb,
+        "product_id": productId,
       };
 
   @override
@@ -194,5 +199,6 @@ class CourseDataEntity extends Equatable {
         status,
         categories,
         ratingCount,
+        productId,
       ];
 }

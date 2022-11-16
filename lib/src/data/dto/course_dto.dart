@@ -61,6 +61,7 @@ class CourseDataDTO extends CourseDataEntity {
     required super.ratingCount,
     required super.lowongan,
     required super.ygAkanDipelajariWeb,
+    required super.productId,
   });
 
   factory CourseDataDTO.fromJson(Map<String, dynamic> json) => CourseDataDTO(
@@ -147,5 +148,6 @@ class CourseDataDTO extends CourseDataEntity {
                 json["yg_akan_dipelajari_web"] == null
             ? []
             : List<String>.from(json["yg_akan_dipelajari_web"].map((x) => x)),
+        productId: json["product_id"],
       );
 }
